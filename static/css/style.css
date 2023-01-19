@@ -1,0 +1,13 @@
+
+.my-nav {
+    background-color: blueviolet;
+    
+}
+
+.my-nav-text a {
+    color:azure;
+}
+
+.navbar-nav > .active > a {
+    color: yellow ;
+}
