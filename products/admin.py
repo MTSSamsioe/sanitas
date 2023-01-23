@@ -3,6 +3,19 @@ from .models import Pt_sessions, Subscriptions
 
 
 # Register your models here.
+class Pt_sessionsAdmin(admin.ModelAdmin):
+    list_display =(
+        'user',
+        'name',
+    )
+ordering = ('user,')
 
-admin.site.register(Pt_sessions)
-admin.site.register(Subscriptions)
+class SubscriptionsAdmin(admin.ModelAdmin):
+    list_display =(
+        'user',
+        'name',
+    )
+ordering = ('user,')
+
+admin.site.register(Pt_sessions, Pt_sessionsAdmin)
+admin.site.register(Subscriptions, SubscriptionsAdmin)

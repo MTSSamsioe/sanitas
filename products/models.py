@@ -4,6 +4,10 @@ from django.contrib.auth.models import User
 # Create your models here.
 
 class Pt_sessions(models.Model):
+
+    class Meta:
+        verbose_name_plural = 'Pt_sessions'
+
     user = models.ForeignKey(User,null=True ,on_delete=models.SET_NULL)
     name = models.CharField(max_length=254)
     friendly_name = models.CharField(max_length=254, null= True, blank= True)
@@ -17,6 +21,10 @@ class Pt_sessions(models.Model):
         return self.friendly_name
 
 class Subscriptions(models.Model):
+
+    class Meta:
+        verbose_name_plural = 'Subscriptions'
+
     user = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
     name = models.CharField(max_length=254)
     friendly_name = models.CharField(max_length=254, null= True, blank= True)
