@@ -9,7 +9,7 @@ def subscriptions(request):
     subscriptions = Subscriptions.objects.all()
 
     context = {
-        'subscriptios': subscriptions,
+        'subscriptions': subscriptions,
     }
 
-    return render(request, 'products/subscriptions.html')
+    return render(request, 'products/subscriptions.html', context)

@@ -1,6 +1,6 @@
 
 .my-nav {
-    background-color: blueviolet;
+    background-color: violet;
     
 }
 
@@ -10,4 +10,10 @@
 
 .navbar-nav > .active > a {
     color: yellow ;
+}
+
+/* Css for the subscriptions page */
+
+.card-background {
+    background-image: linear-gradient(to bottom right, rgba(243, 83, 247, 0.74), rgba(243, 83, 247, 0.44));
 }

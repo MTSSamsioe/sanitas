@@ -3,5 +3,23 @@
 
 {% block content %}
 <h1 class="text-info"> Subscription options</h1>
-{{ subscriptions }}
+<div class="container">
+    <div class="row gy-3 ">
+        {% for subscription in subscriptions %}
+        <div class="card border-success mb-3 card-background" style="max-width: 18rem;">
+          <div class="card-header bg-transparent border-success">{{subscription.name}}</div>
+            <div class="card-body text-success">
+              <h5 class="card-title">{{subscription.description}}</h5>
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item"> {{subscription.description}}</li>
+                <li class="list-group-item"> {{subscription.include_1}}</li>
+                <li class="list-group-item"> {{subscription.include_2}}</li>
+                <li class="list-group-item"> {{subscription.include_3}}</li>
+                
+              </ul>
+            </div>
+            <div class="card-footer bg-transparent border-success">Footer</div>
+          </div>
+          {% endfor %}
+    </div>       
 {% endblock %}

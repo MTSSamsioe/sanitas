@@ -5,14 +5,14 @@ from .models import Pt_sessions, Subscriptions
 # Register your models here.
 class Pt_sessionsAdmin(admin.ModelAdmin):
     list_display =(
-        'user',
+        
         'name',
     )
 ordering = ('user,')
 
 class SubscriptionsAdmin(admin.ModelAdmin):
     list_display =(
-        'user',
+        
         'name',
     )
 ordering = ('user,')
