@@ -1,6 +1,10 @@
+.my-nav-top {
+    background-color: rgba(50, 41, 255, 1);
+    
+}
 
 .my-nav {
-    background-image: linear-gradient(to bottom right, rgba(50, 41, 255, 1), rgba(50, 41, 255, 0.63));
+    background-image: linear-gradient( rgba(50, 41, 255, 1), rgba(50, 41, 255, 0.63));
     
 }
 
