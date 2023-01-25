@@ -27,34 +27,38 @@
 
 <body>
   <header class="">
-  <div class="container-fluid p-0 m-0 my-nav-text">
-    <div class="row d-flex">
-      <div class="col mr-auto pt-3 fs-3 my-nav-top ">
-        <a class="navbar-brand px-4" href="{% url 'home' %}">SANITAS GYM</a>
-      </div>
-      <div class="col-3 pt-3 fs-4 my-nav-top" style="color: azure;">
-        <i class="fa-solid fa-cart-shopping ">{% if grand_total %}
-          ${{ grand_total|floatformat:2 }}
-      {% else %}
-          $0.00
-      {% endif %}</i>
-        
+  <div class="container-fluid p-0 m-0 my-nav-text ">
+    <div class="row">
+      <div class="col-12 d-flex">
+
+        <div class=" pt-3 fs-3 my-nav-top ">
+          <a class="navbar-brand px-4" href="{% url 'home' %}">SANITAS GYM</a>
+        </div>
+
+        <div class=" pt-3 px-4 fs-4 my-nav-top d-flex flex-grow-1 justify-content-end" style="color: azure;">
+          <i class="fa-solid fa-cart-shopping nav-icon">{% if grand_total %}
+            ${{ grand_total|floatformat:2 }}
+        {% else %}
+            0.00 $
+        {% endif %} </i> 
+        </div>
+
       </div>
     </div>
   </div>
-  <div class="container-fluid p-0">
+  <div class="container-fluid p-0 ">
     <div class="row">
       <div class="col-md-12 fs-5">
 
         <nav class="navbar navbar-expand-lg bg-body-tertiary pt-0">
-          <div class="container-fluid my-nav py-3 py-lg-3">
+          <div class="container-fluid my-nav py-3 py-lg-3 ">
             
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
               aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse px-1" id="navbarNavAltMarkup">
-              <div class="navbar-nav my-nav-text d-flex">
+            <div class="collapse navbar-collapse px-1 w-100" id="navbarNavAltMarkup ">
+              <div class="navbar-nav my-nav-text w-100 d-flex ">
                 <a class="nav-link" href="{% url 'home' %}">Home</a>
                 <a class="nav-link" href="#">Find us</a>
                 <a class="nav-link" href="{% url 'subscriptions' %}">Gym subscriptions</a>
@@ -62,8 +66,9 @@
 
                 {% if user.is_authenticated %}
                 <a class="nav-link " href="{% url 'account_logout' %}">Logout</a>
-                <a class="nav-link " href="#">membersship area</a>
-
+                
+                <a class="nav-link d-flex flex-grow-1 justify-content-end align-items-center" href="#"><i class="fa-solid fa-user nav-icon"></i>Members</a>
+                
                 {% else %}
                 <a class="nav-link" href="{% url 'account_signup' %}">Register</a>
                 <a class="nav-link" href="{% url 'account_login' %}">Login</a>

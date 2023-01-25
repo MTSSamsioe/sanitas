@@ -3,6 +3,10 @@
     
 }
 
+.nav-icon{
+    padding-right: 1%;
+}
+
 .my-nav {
     background-image: linear-gradient( rgba(50, 41, 255, 1), rgba(50, 41, 255, 0.63));
     
@@ -12,9 +16,7 @@
     color:azure;
 }
 
-.navbar-nav > .active > a {
-    color: yellow ;
-}
+
 
 /* Css for the subscriptions page */
 
