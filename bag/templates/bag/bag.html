@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load static % }
+
+{% block content %}
+<div class="overlay">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <hr>
+                <h2 class="h2 p-3">Your shopping bag</h2>
+                <hr>
+            </div>
+            <div class="row">
+                <div class="col">
+                    {% if bag_items %}
+                        <div class="table-responsive"></div>
+                    {% else %}
+                        <p>There is nothing in your shopping bag at the moment</p>
+                    {% endif %}
+                </div>
+                <div>
+                    <a class="navlink" href="{% url 'home' %}">Back to home page</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</div>
+{% endblock %}
