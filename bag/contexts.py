@@ -5,7 +5,7 @@ def bag_products(request):
 
 
 
-    cotext = {
+    context = {
         'bag_items': bag_items,
         'total': total,
         'product_count': product_count,

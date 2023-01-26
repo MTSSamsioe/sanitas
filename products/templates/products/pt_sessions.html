@@ -7,7 +7,7 @@
   <div class="row gy-3 justify-content-center mr-3">
 
     {% for pt_session in pt_sessions %}
-    <div class="card p-0 ml-3 mr-3" style="width: 30rem;">
+    <div class="card p-0 m-3" style="width: 30rem;">
       <img class="card-img-top"
         src="https://res.cloudinary.com/dy2uthyxz/image/upload/v1674558081/personal_trainer_qypixl.jpg"
         class="img-fluid rounded-start" alt="..." alt="Card image cap">
@@ -17,7 +17,40 @@
         <p class="card-text">{{pt_session.price}} $</p>
       </div>
       <div class="card-text text-center">
-        <a href="#" class="btn btn-success mb-3">Add to cart</a>
+        <form class="form" action="{% url 'add_bag_item' pt_session.id %}" method="POST">
+          {% csrf_token %}
+          <div class="row">
+            <div class="col text-center ">
+              <p class="mt-3">Number of hours:</p>
+              <div class="form-group w-50 m-auto">
+                <div class="input-group ">
+                  <div class="input-group-prepend">
+                    <button class="decrement-qty btn " data-item_id="{{pt_session.id}}"
+                      id="decrement-qty_{{ pt_session.id }}">
+                      <span class="icon">
+                        <i class="fas fa-minus"></i>
+                      </span>
+                    </button>
+                  </div>
+                  <input class="form-control qty_input text-center" type="number" name="quantity" value="1" min="1" max="99"
+                    data-item_id="{{ pt_session.id }}" id="id_qty_{{ pt_session.id }}">
+                  <div class="input-group-append">
+                    <button class="increment-qty btn" data-item_id="{{ pt_session.id }}"
+                      id="increment-qty_{{ pt_session.id }}">
+                      <span class="icon">
+                        <i class="fas fa-plus"></i>
+                      </span>
+                    </button>
+                    <input type="hidden" name="redirect_url" value="{{ request.path }}">
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+          <input type="submit" class="btn btn-success mb-3 text-uppercase mt-5" value="add to cart">
+        </form>
+        
       </div>
     </div>
 
