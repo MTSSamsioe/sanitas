@@ -1,21 +1,23 @@
 from django.contrib import admin
-from .models import Pt_sessions, Subscriptions
+from .models import Products, Categories
 
 
 # Register your models here.
-class Pt_sessionsAdmin(admin.ModelAdmin):
-    list_display =(
-        
+
+class CategoriesAdmin(admin.ModelAdmin):
+   list_display =(
         'name',
     )
-ordering = ('user,')
+ordering = ('name,')
 
-class SubscriptionsAdmin(admin.ModelAdmin):
-    list_display =(
-        
+
+class ProductsAdmin(admin.ModelAdmin):
+   list_display =(
         'name',
+        'category',
     )
-ordering = ('user,')
+ordering = ('category,')
 
-admin.site.register(Pt_sessions, Pt_sessionsAdmin)
-admin.site.register(Subscriptions, SubscriptionsAdmin)
+admin.site.register(Categories, CategoriesAdmin)
+
+admin.site.register(Products, ProductsAdmin)
