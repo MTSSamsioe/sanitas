@@ -13,7 +13,9 @@
             <div class="row">
                 <div class="col">
                     {% if bag_items %}
-                        <div class="table-responsive"></div>
+                        <div class="table-responsive">
+                            {{ bag_items }}
+                        </div>
                     {% else %}
                         <p>There is nothing in your shopping bag at the moment</p>
                     {% endif %}
