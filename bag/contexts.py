@@ -20,8 +20,6 @@ def bag_products(request):
             'product': product,
         })
 
-    
-
 
     context = {
         'bag_items': bag_items,
