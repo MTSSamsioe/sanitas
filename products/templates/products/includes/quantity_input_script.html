@@ -41,5 +41,11 @@
        $(closestInput).val(currentValue - 1);
        var itemId = $(this).data('item_id');
        handleEnableDisable(itemId);
+
+       $.post(url, data)
+         .done(function() {
+             location.reload();
+         });
+
     });
 </script>

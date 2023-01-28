@@ -12,9 +12,7 @@
             </div>
             <div class="row">
                 <div class="col">
-                    {{ bag_items}}
-                    <hr>
-                    {{ request.session.bag }}
+                    
                     {% if bag_items %}
                         <div class="table-responsive">
                             <table class="table table-sm">
@@ -32,7 +30,38 @@
                                             <p>{{ item.product.friendly_name}}</p>
                                         </td>
                                         <td class="p-3">
-                                            <p>{{ item.quantity}}</p>
+                                            <form method="POST">
+                                                {%csrf_token%}
+                                                <div class="form-group ">
+
+                                                    <div class="input-group ">
+                                    
+                                                      <div class="input-group-prepend">
+                                                        <button type="button" class="decrement-qty btn btn-sm " data-item_id="{{item.item_id}}"
+                                                          id="decrement-qty_{{ item.item_id }}">
+                                                          <span class="icon">
+                                                            <i class="fas fa-minus"></i>
+                                                          </span>
+                                                        </button>
+                                                      </div>
+                                    
+                                                      <input class="form-control form-control-sm qty_input text-center " type="number" name="quantity" value="{{ item.quantity }}" min="1"
+                                                        max="99" data-item_id="{{ item.item_id }}" id="id_qty_{{ item.item_id }}">
+                                    
+                                                      <div class="input-group-append">
+                                                        <button type="button" class="increment-qty btn btn-sm" data-item_id="{{ item.item_id }}"
+                                                          id="increment-qty_{{ item.item_id }}">
+                                                          <span class="icon">
+                                                            <i class="fas fa-plus"></i>
+                                                          </span>
+                                                        </button>
+                                                      </div>
+                                    
+                                                    </div>
+                                                  </div>
+                                            </form>
+                                            <a class="text-info update cursor-arrow" href="">Update bag</a>
+                                            <a class="text-danger remove cursor-arrow" href="" id="remove_{{ item.item_id }}">Delete from bag</a>
                                         </td>
                                         <td class="p-3">
                                             <p>{{ item.product.price}}</p>
@@ -57,4 +86,35 @@
     </div>
     
 </div>
+
+{% block postloadjs %}
+{{ block.super }}
+{% include 'products/includes/quantity_input_script.html' %}
+
+<script type="text/javascript">
+     // update bad line
+     $('.update').click(function(e){
+        var form = $(this).prev('.update');
+        form.submit();
+    })
+
+    // Delete bag line
+    
+    $('.remove').click(function(e) {
+        var csrfToken = "{{ csrf_token }}";
+        var itemId = $(this).attr('id').split('remove_')[1];
+        var url = `/bag/remove/${itemId}/`;
+        var data = {'csrfmiddlewaretoken': csrfToken};
+
+        $.post(url, data)
+         .done(function() {
+             location.reload();
+         });
+    })
+</script>
+
+
+{% endblock %}
+
+
 {% endblock %}
