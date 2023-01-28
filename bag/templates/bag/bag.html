@@ -30,7 +30,7 @@
                                             <p>{{ item.product.friendly_name}}</p>
                                         </td>
                                         <td class="p-3">
-                                            <form method="POST">
+                                            <form method="POST" action="{% url 'update_bag' item.item_id %}">
                                                 {%csrf_token%}
                                                 <div class="form-group ">
 
@@ -71,6 +71,14 @@
                                         </td>
                                     </tr>
                                     {% endfor %}
+                                    <tr >
+                                        <td colspan="3" class="p-3">
+                                            
+                                        </td>
+                                        <td class="p-3">
+                                            <h3>Total: ${{ total|floatformat:2 }}</h3>
+                                        </td>
+                                    </tr>
                             </table>
 
                         </div>
