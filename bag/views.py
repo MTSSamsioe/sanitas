@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, reverse, HttpResponse, get_object_or_404
 
 def view_bag(request):
     """ A view that renders the shopping bag """
