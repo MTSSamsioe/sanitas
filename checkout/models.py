@@ -27,10 +27,10 @@ class Order(models.Model):
     def new_total(self):
 
         """ Update total each time a order item is added """
-        self.total = self.Order_item.aggregate(Sum('order_item_total'))['order_item_total__sum']
+        self.total = self.lineitems.aggregate(Sum('order_item_total'))['order_item_total__sum'] or 0
         self.save()
 
-    def save(sself, *args, **kwargs):
+    def save(self, *args, **kwargs):
 
         """ Overide save method to set the order number """
         if not self.order_number: 
@@ -42,16 +42,16 @@ class Order(models.Model):
 
 class Order_item(models.Model):
 
-    order = models.ForeignKey(Order, on_delete=models.CASCADE, null=False, blank=False, related_name= 'orderitems')
+    order = models.ForeignKey(Order, on_delete=models.CASCADE, null=False, blank=False, related_name='lineitems')
     product = models.ForeignKey(Products, on_delete=models.CASCADE, null=False, blank=False)
-    quantity = models.IntegerField(null=False, blank=False, editable=False)
+    quantity = models.IntegerField(null=False, blank=False, default=0)
     order_item_total = models.DecimalField(max_digits=10, decimal_places=2, null=False, blank=False, editable=False)
 
-    def save(sself, *args, **kwargs):
+    def save(self, *args, **kwargs):
 
         """ Overide save method to set the order number """
-        self.order_item_total = self.products.price * self.quantity
+        self.order_item_total = self.product.price * self.quantity
         super().save(*args, **kwargs)
     
     def __str__(self):
-        return f'{self.products.name} on order {self.order.order_number}'
+        return f'{self.product.name} on order {self.order.order_number}'
