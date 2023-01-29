@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, reverse, HttpResponse, get_object_or_404
-from django.contrib import messages
+
 
 def view_bag(request):
     """ A view that renders the shopping bag """
@@ -19,30 +19,34 @@ def add_bag_item(request, item_id):
         bag_session[item_id] = quantity
 
     request.session['bag'] = bag_session
-    
-
     return  redirect(redirect_url)
 
 
-def update_bag(request, item_id):
+def adjust_bag(request, item_id):
     """ A View the updates products in shopping bag"""
 
-    product = get_object_or_404(Product, pk=item_id)
     quantity = int(request.POST.get('quantity'))
     
     bag = request.session.get('bag', {})
 
-    
-    
     if quantity > 0:
         bag[item_id] = quantity
-        messages.success(request, f'Updated {product.name} quantity to {bag[item_id]}')
+        
     else:
         bag.pop(item_id)
-        messages.success(request, f'Removed {product.name} from your bag')
-
     request.session['bag'] = bag
     return redirect(reverse('view_bag'))
 
 
-    
+def remove_from_bag(request, item_id):
+    """ A View that removes products from shopping bag"""
+
+    try:
+        bag = request.session.get('bag', {})
+        bag.pop(item_id)
+            
+
+        request.session['bag'] = bag
+        return HttpResponse(status=200)
+    except Exception as e:
+        return HttpResponse(status=500)
