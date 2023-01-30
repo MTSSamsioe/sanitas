@@ -79,6 +79,11 @@
                                             <h3>Total: ${{ total|floatformat:2 }}</h3>
                                         </td>
                                     </tr>
+                                    <tr>
+                                        <td>
+                                            <a href="{% url 'checkout' %}" class="btn btn-success">Go To Checkout</a>
+                                        </td>
+                                    </tr>
                             </table>
 
                         </div>
@@ -89,7 +94,9 @@
                 <div>
                     <a class="navlink" href="{% url 'home' %}">Back to home page</a>
                 </div>
+
             </div>
+
         </div>
     </div>
     
