@@ -5,12 +5,12 @@
 
 
 
-
 {% block content %}
 
 {% block extra_css %}
     <link rel="stylesheet" href="{% static 'checkout/css/checkout.css' %}">
 {% endblock %}
+
 
 
 <div class="overlay">
@@ -93,6 +93,8 @@
     </div>
     
 </div>
+
+
 {% block postloadjs %}
     {{ block.super }}
     {{ stripe_public_key|json_script:"id_stripe_public_key" }}
@@ -100,6 +102,4 @@
     <script src="{% static 'checkout/js/stripe_elements.js' %}"></script>
 {% endblock %}
 
-
 {% endblock %}
-
