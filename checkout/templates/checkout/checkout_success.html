@@ -8,9 +8,7 @@
 
 {% block content %}
 
-{% block extra_css %}
-    <link rel="stylesheet" href="{% static 'checkout/css/checkout.css' %}">
-{% endblock %}
+
 
 
 <div class="overlay">
@@ -21,13 +19,71 @@
             <hr>
         </div>
         
-        <dic>
+        <div>
             <div class="row">
-                <div class="col-12 col-lg-6">
-
+                <div class="col-12 col-lg-6 mb-3">
+                    <p>Thank you for your purchase a confirmation email will be sent to <strong>{{ order.email }}</strong></p>
+                    <table class="table table-sm mt-3">
+                        <thead>
+                            <tr>
+                                <th scope="col">Product</th>
+                                <th scope="col">Quantity</th>
+                                <th scope="col">Price</th>
+                                
+                            </tr>
+                        </thead>
+                    {% for item in order.lineitems.all %}
+                    <div class="row">
+                        <div class="col-12">
+                            <tr>
+                                <td class="p-3">
+                                    <p>{{ item.product.friendly_name}}</p>
+                                </td>
+                                <td class="p-3">
+                                    <p>{{ item.quantity }}</p>
+                                </td>
+                                <td class="p-3">
+                                    <p>{{ item.product.price}} each</p>
+                                </td>
+                    
+                            </tr>
+                            <hr class="my-0">
+                            {% endfor %}
+                        </div>
+                    </table>
+                    
+                    
                 </div>
             </div>
-        </dic>
+        </div>
+        <div>
+            <div class="row">
+                <div class="col-12 col-lg-6 mt-3">
+                    <table >
+                        <tr >
+                            <td><strong>Order number:</strong></td>
+                            <td>{{ order.order_number}}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Total amount</strong></td>
+                            <td> {{ order.total }}</td>
+                        </tr>
+
+                    </table>
+                        
+                    
+                </div>
+            </div>
+        </div>
+        <div>
+            <div class="row">
+                <div class="col-12 col-lg-6 mt-3">
+                    
+                        <a class="navlink" href="{% url 'home' %}">Back to home page</a>
+                    
+                </div>
+            </div>
+        </div>
             
         
             
