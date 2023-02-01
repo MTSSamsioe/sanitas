@@ -14,8 +14,14 @@ class OrderForm(forms.ModelForm):
         placeholders = {
             'full_name': 'Full Name',
             'email': 'Email Address',
-            'address': 'Street Address',
+            'adress': 'Street Address',
             'post_code': 'Post Code',
             'city': 'City',
             
         }
+
+        #self.fields['full_name'].widget.attrs['autofocus'] = True
+        
+        #self.fields[field].widget.attrs['placeholder'] = placeholder
+        #self.fields[field].widget.attrs['class'] = 'stripe-style-input'
+        #self.fields[field].label = False

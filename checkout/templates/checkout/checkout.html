@@ -1,8 +1,18 @@
 {% extends "base.html" %}
-{% load static % }
+{% load static %}
 {% load bag_tools %}
 
+
+
+
+
 {% block content %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'checkout/css/checkout.css' %}">
+{% endblock %}
+
+
 <div class="overlay">
     <div class="container">
         <div class="col">
@@ -49,32 +59,47 @@
                     <form class="d-grid" action="{% url 'checkout' %}" method="POST" id="payment-form">
                         {% csrf_token%}
                         {{ order_form }}
+                        <hr>
+                        <p>Enter card information below</p>
+                        <!-- A Stripe card element will go here -->
+                        <div class="mb-3 border-3" id="card-element"></div>
+
+                        <!-- Used to display form errors -->
+                        <div class="mb-3 text-danger" id="card-errors" role="alert"></div>
+                        <div class="submit-button text-right mt-5 mb-2">                    
+                            <a href="{% url 'view_bag' %}" class="btn btn-warning ">
+                                <span class="font-weight-bold">See shopping bag</span>
+                            </a>
+                            <button id="submit-button" class="btn btn-success">
+                                <span class="font-weight-bold">Submit order</span>
+                                <span class="icon">
+                                    <i class="fas fa-lock"></i>
+                                </span>
+                            </button>
+                            <p class="text-danger my-0">
+                                <span>Your card will be charged <strong>${{ total|floatformat:2 }}</strong></span>
+                            </p>
+                        </div>
+                        <div>
+                            <a class="navlink" href="{% url 'home' %}">Back to home page</a>
+                        </div>
                     </form>
                     
             </div>
-            <div class="submit-button text-right mt-5 mb-2">                    
-                <a href="{% url 'view_bag' %}" class="btn btn-warning ">
-                    <span class="font-weight-bold">See shopping bag</span>
-                </a>
-                <button id="submit-button" class="btn btn-success">
-                    <span class="font-weight-bold">Submit order</span>
-                    <span class="icon">
-                        <i class="fas fa-lock"></i>
-                    </span>
-                </button>
-                <p class="text-danger my-0">
-                    <span>Your card will be charged <strong>${{ total|floatformat:2 }}</strong></span>
-                </p>
-            </div>
-            <div>
-                <a class="navlink" href="{% url 'home' %}">Back to home page</a>
-            </div>
+            
         
             
         
     </div>
     
 </div>
+{% block postloadjs %}
+    {{ block.super }}
+    {{ stripe_public_key|json_script:"id_stripe_public_key" }}
+    {{ client_secret|json_script:"id_client_secret" }}
+    <script src="{% static 'checkout/js/stripe_elements.js' %}"></script>
+{% endblock %}
 
 
 {% endblock %}
+
