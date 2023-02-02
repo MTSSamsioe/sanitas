@@ -42,7 +42,7 @@
           </div>
 
           <div class=" pt-3 px-4 fs-4 my-nav-top d-flex flex-grow-1 justify-content-end" style="color: azure;">
-            <a class="nav-link d-flex align-items-center nav-icon " href="#"><i class="fa-solid fa-user nav-icon"></i>Members</a>
+            <a class="nav-link d-flex align-items-center nav-icon " href="{% url 'profile' %}"><i class="fa-solid fa-user nav-icon"></i>Members</a>
             <a class="nav-link d-flex align-items-center nav-icon" href="{% url 'view_bag' %}"><i class="fa-solid fa-cart-shopping nav-icon"></i></a>
             {% if total %}
               ${{ total|floatformat:2 }}
