@@ -15,10 +15,26 @@
 
 <div class="overlay">
     <div class="container">
-        <div class="col">
-            <hr>
-            <h2 class="h2 p-3">My User Profile</h2>
-            <hr>
+        <div class="row">
+            <div class="col">
+                <hr>
+                <h2 class="h2 p-3">My User Profile</h2>
+                <hr>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <h5>Your customer information:</h5>
+                <form class=" m-3 d-grid" action="{% url 'profile' %}" id="profile-update-form">
+                    {% csrf_token %}
+                    {{ form }}
+                    <button class="btn btn-success mt-3">Update</button>
+                </form>
+            </div>
+            <div class="col">
+                <h5>Order history:</h5>
+                {{ orders }}
+            </div>
         </div>
     </div>
 </div>
