@@ -7,11 +7,14 @@ from django.db.models import Sum
 from django.conf import settings
 
 from products.models import Products
+from profiles.models import Profile
 
 
 class Order(models.Model):
     
-    order_number = models.CharField(max_length= 50, null=False, editable=False)
+    order_number = models.CharField(max_length=50, null=False, editable=False)
+    user_profile = models.ForeignKey(Profile, on_delete=models.CASCADE, 
+                                     null=True, related_name='orders')
     full_name = models.CharField(max_length=100, null=False, blank=False)
     email = models.EmailField(max_length=254, null=False, blank=False)
     adress = models.CharField(max_length=100, null=False, blank=False)
