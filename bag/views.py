@@ -10,20 +10,27 @@ def view_bag(request):
 
 def add_bag_item(request, item_id):
     """ A View that adds products to shopping bag"""
-    product = get_object_or_404(Products, pk=item_id)
-    quantity = int(request.POST.get('quantity'))
-    bag_session = request.session.get('bag', {})
     redirect_url = request.POST.get('redirect_url')
 
-    if item_id in list(bag_session.keys()):
-        bag_session[item_id] += quantity
-        messages.success(request, f'Updated {product.friendly_name} quantity to {bag_session[item_id]}')
-    else:
-        bag_session[item_id] = quantity
-        messages.success(request, f'Added {product.friendly_name} to your bag')
+    if request.user.is_authenticated:
+        product = get_object_or_404(Products, pk=item_id)
+        quantity = int(request.POST.get('quantity'))
+        bag_session = request.session.get('bag', {})
+        
+        if item_id in list(bag_session.keys()):
+            bag_session[item_id] += quantity
+            messages.success(request, f'Updated {product.friendly_name} quantity to {bag_session[item_id]}')
+        else:
+            bag_session[item_id] = quantity
+            messages.success(request, f'Added {product.friendly_name} to your bag')
 
-    request.session['bag'] = bag_session
-    return  redirect(redirect_url)
+        request.session['bag'] = bag_session
+        return redirect(redirect_url)
+    else:
+        messages.error(request, ''' You must be logged in to add to shopping bag 
+                        please log i or create an account''')
+        return redirect('/accounts/login/')
+        
 
 
 def adjust_bag(request, item_id):
