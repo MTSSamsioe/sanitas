@@ -17,7 +17,7 @@ def profile(request):
         else:
             messages.error(request, 'Something went wrrong please try again')
     else:
-        form = UserProfileForm(instance=profile)
+        form = ProfileForm(instance=profile)
     
     context = {
         'form': form,

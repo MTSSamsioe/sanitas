@@ -9,6 +9,9 @@ from .models import Order, Order_item
 from products.models import Products
 from bag.contexts import bag_products
 
+from profiles.models import Profile
+from profiles.forms import ProfileForm
+
 import stripe
 import json
 
@@ -87,8 +90,20 @@ def checkout(request):
             amount=stripe_total,
             currency=settings.STRIPE_CURRENCY,
         )
-    
-        order_form = OrderForm()
+        if request.user.is_authenticated:
+            try:
+                profile = Profile.objects.get(user=request.user)
+                order_form = OrderForm(initial={
+                    'full_name': profile.user.get_full_name(),
+                    'email': profile.user.email,
+                    'post_code': profile.preset_post_code,
+                    'city': profile.preset_city,
+                    'adress': profile.preset_adress,
+                })
+            except Profile.DoesNotExist:
+                order_form = OrderForm()
+        else:
+            order_form = OrderForm()
 
     if not stripe_public_key:
         messages.warning(request, ('Stripe public key is missing. '
@@ -111,6 +126,26 @@ def checkout_success(request, order_number):
 
     save_info = request.session.get('save_info')
     order = get_object_or_404(Order, order_number=order_number)
+
+    profile = Profile.objects.get(user=request.user)
+    # Attach the user's profile to the order
+    order.user_profile = profile
+    order.save()
+
+    # Save the users info
+    if save_info:
+
+        profile_data = {
+            'preset_full_name': order.full_name,
+            'preset_email': order.email,
+            'preset_post_code': order.post_code,
+            'preset_city': order.city,
+            'preset_adress': order.adress,
+        }
+        user_profile_form = ProfileForm(profile_data, instance=profile)
+        if user_profile_form.is_valid():
+            user_profile_form.save()
+
     messages.success(request, f'Order was successful \
         Your order number is {order_number}. A confirmation \
         email will be sent to {order.email}.')

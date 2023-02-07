@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load static % }
+{% load static %}
 {% load bag_tools %}
 
 {% block content %}
@@ -60,8 +60,8 @@
                                                 </div>
                                                 
                                             </form>
-                                            <a class="text-info update-link cursor-arrow" href="">Update bag</a>
-                                            <a class="text-danger remove-link cursor-arrow" href="" id="remove_{{ item.item_id }}">Delete from bag</a>   
+                                            <a class="text-info update-link cursor-arrow" href="#">Update bag</a>
+                                            <a class="text-danger remove-link cursor-arrow" href="#" id="remove_{{ item.item_id }}">Delete from bag</a>   
                                         </td>
                                         <td class="p-3">
                                             <p>{{ item.product.price}}</p>
