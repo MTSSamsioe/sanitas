@@ -20,7 +20,7 @@
               
             </div>
             <div class="card-footer bg-transparent text-center ">
-              <h4 class="h4">{{subscription.metadata.price}} $ / Month</h4>
+              <h4 class="h4">{{subscription.metadata.price}}0 $ / Month</h4>
               <form class="form" action="{% url 'add_subscription' subscription.id %}" method="POST">
                 {% csrf_token %}
                 <input type="hidden" name="redirect_url" value="{{ request.path }}">

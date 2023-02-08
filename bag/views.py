@@ -31,6 +31,7 @@ def add_bag_item(request, item_id):
         messages.error(request, 'You must be logged in to add to shopping bag please log in or create an account')
         return redirect('/accounts/login/')
 
+
  ### STRIPE SUBSCRIPTION ###       
 def add_subscription(request, item_id):
     """ A View that adds products to shopping bag"""
@@ -48,11 +49,14 @@ def add_subscription(request, item_id):
             messages.success(request, f'Added {product.name} to your bag')
 
         request.session['bag'] = bag_session
+        print(request.session['bag'])
         return redirect(redirect_url)
     else:
         messages.error(request, 'You must be logged in to add to shopping bag please log in or create an account')
         return redirect('/accounts/login/')
 #____________________________________________   
+
+
 
 def adjust_bag(request, item_id):
     """ A View the updates products in shopping bag"""
