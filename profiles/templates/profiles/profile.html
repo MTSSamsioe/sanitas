@@ -25,7 +25,7 @@
         <div class="row">
             <div class="col">
                 <h5>Your customer information:</h5>
-                <form class=" m-3 d-grid" action="{% url 'profile' %}" id="profile-update-form">
+                <form class=" m-3 d-grid" method="POST" action="{% url 'profile' %}" id="profile-update-form">
                     {% csrf_token %}
                     {{ form }}
                     <button class="btn btn-success mt-3">Update</button>

@@ -65,7 +65,7 @@
           <div class="navbar-nav my-nav-text w-100 d-flex ">
             <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a>
             <a class="nav-link" href="#">Find us</a>
-            <a class="nav-link" href="{% url 'subscriptions' %}">Gym subscriptions</a>
+            <a class="nav-link" href="{% url 'stripe_subscriptions' %}">Gym subscriptions</a>
             <a class="nav-link" href="{% url 'pt_sessions' %}">Personal trainer</a>
 
             {% if user.is_authenticated %}

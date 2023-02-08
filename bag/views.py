@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, reverse, HttpResponse, get_object_or_404
 from django.contrib import messages
 from products.models import Products
+from djstripe.models import Product
 
 def view_bag(request):
     """ A view that renders the shopping bag """
@@ -27,11 +28,31 @@ def add_bag_item(request, item_id):
         request.session['bag'] = bag_session
         return redirect(redirect_url)
     else:
-        messages.error(request, ''' You must be logged in to add to shopping bag 
-                        please log i or create an account''')
+        messages.error(request, 'You must be logged in to add to shopping bag please log in or create an account')
         return redirect('/accounts/login/')
-        
 
+ ### STRIPE SUBSCRIPTION ###       
+def add_subscription(request, item_id):
+    """ A View that adds products to shopping bag"""
+    redirect_url = request.POST.get('redirect_url')
+
+    if request.user.is_authenticated:
+        product = get_object_or_404(Product, id=item_id)
+        quantity = int(request.POST.get('quantity')) # ta bort
+        bag_session = request.session.get('bag', {})
+        
+        if item_id in list(bag_session.keys()):
+            messages.success(request, 'A subscription is alreadyin your bag, please remove before adding a new one')
+        else:
+            bag_session[item_id] = quantity
+            messages.success(request, f'Added {product.name} to your bag')
+
+        request.session['bag'] = bag_session
+        return redirect(redirect_url)
+    else:
+        messages.error(request, 'You must be logged in to add to shopping bag please log in or create an account')
+        return redirect('/accounts/login/')
+#____________________________________________   
 
 def adjust_bag(request, item_id):
     """ A View the updates products in shopping bag"""
