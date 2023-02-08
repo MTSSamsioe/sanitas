@@ -40,15 +40,15 @@ def add_subscription(request, item_id):
     if request.user.is_authenticated:
         product = get_object_or_404(Product, id=item_id)
         quantity = int(request.POST.get('quantity')) # ta bort
-        bag_session_subs = request.session.get('bag_subs', {})
+        bag_session = request.session.get('bag_subs', {})
         
-        if item_id in list(bag_session_subs.keys()):
+        if item_id in list(bag_session.keys()):
             messages.success(request, 'A subscription is alreadyin your bag, please remove before adding a new one')
         else:
-            bag_session_subs[item_id] = quantity
+            bag_session[item_id] = quantity
             messages.success(request, f'Added {product.name} to your bag')
 
-        request.session['bag_subs'] = bag_session_subs
+        request.session['bag'] = bag_session
         
         return redirect(redirect_url)
     else:
