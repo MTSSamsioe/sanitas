@@ -77,7 +77,7 @@ def adjust_bag(request, item_id):
 
 def remove_from_bag(request, item_id):
     """ A View that removes products from shopping bag"""
-    if isinstance(item_id, int):
+    if len(item_id) < 3:
         try:
             product = get_object_or_404(Products, pk=item_id)
             bag = request.session.get('bag', {})
@@ -89,7 +89,7 @@ def remove_from_bag(request, item_id):
         except Exception as e:
             messages.error(request, f'Error removing item from bag: {e}')
             return HttpResponse(status=500)
-    else:
+    if len(item_id) > 3:
         try:
             product = get_object_or_404(Product, id=item_id)
             bag_subs = request.session.get('bag_subs', {})

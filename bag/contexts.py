@@ -20,7 +20,9 @@ def bag_products(request):
 
     
     for item_id, quantity in bag.items():
-        if isinstance(item_id, int):
+        print(item_id)
+        if len(item_id) < 3:
+
             product = get_object_or_404(Products, pk=item_id)
             total += quantity * product.price
             product_count += quantity
@@ -29,18 +31,20 @@ def bag_products(request):
                 'quantity': quantity,
                 'product': product,
             })
+        
 
 
-        else:
-            for item_id, quantity in bag_subs.items():
-                product = get_object_or_404(Product, id=item_id)
-                total += quantity * round(product.metadata["price"], 2)
-                product_count_subs += quantity
-                bag_items_subs.append ({
-                    'item_id': item_id,
-                    'quantity': quantity,
-                    'product': product,
-                })
+    
+    for item_id, quantity in bag_subs.items():
+        if len(item_id) > 3:
+            product = get_object_or_404(Product, id=item_id)
+            total += quantity * round(product.metadata["price"], 2)
+            product_count_subs += quantity
+            bag_items_subs.append ({
+                'item_id': item_id,
+                'quantity': quantity,
+                'product': product,
+            })
 
 
     context = {
