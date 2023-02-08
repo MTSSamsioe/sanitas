@@ -26,8 +26,8 @@
                                     </tr>
                                 </thead>
 
-                                    {% for item in bag_items %}
-                                    
+                                {% for item in bag_items %}
+                                        
                                     <tr>
                                         <td class="p-3">
                                             <p>{{ item.product.friendly_name}}</p>
@@ -72,7 +72,7 @@
                                             <p>${{ item.product.price | calc_subtotal:item.quantity }}
                                         </td>
                                     </tr>
-                                    {% endfor %}
+                                {% endfor %}
                                     <tr >
                                         <td colspan="3" class="p-3">
                                             
@@ -89,6 +89,55 @@
                             </table>
 
                         </div>
+                    
+
+                    {% elif bag_items_subs %}
+                        <div class="table-responsive">
+                            <table class="table table-sm">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Product</th>
+                                        <th scope="col">Quantity</th>
+                                        <th scope="col">Price</th>
+                                        <th scope="col">Total</th>
+                                    </tr>
+                                </thead>
+
+                                {% for item in bag_items_subs %}
+                                        
+                                    <tr>
+                                        <td class="p-3">
+                                            <p>{{ item.product.name}}</p>
+                                        </td>
+                                        <td class="p-3">
+                                            <p> {{item.quantity}} </p>
+                                            <a class="text-danger remove-link cursor-arrow" href="#" id="remove_{{ item.item_id }}">Delete from bag</a>   
+                                        </td>
+                                        <td class="p-3">
+                                            <p>${{ item.product.metadata.price}}0</p>
+                                        </td>
+                                        <td class="p-3">
+                                            <p>${{ item.product.metadata.price | calc_subtotal:item.quantity }}0</p>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                    <tr >
+                                        <td colspan="3" class="p-3">
+                                            
+                                        </td>
+                                        <td class="p-3">
+                                            <h3>Total: ${{ total|floatformat:2 }}</h3>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <a href="{% url 'checkout' %}" class="btn btn-success">Go To Checkout</a>
+                                        </td>
+                                    </tr>
+                            </table>
+
+                        </div>
+                            
                     {% else %}
                         <p>There is nothing in your shopping bag at the moment</p>
                     {% endif %}

@@ -40,16 +40,16 @@ def add_subscription(request, item_id):
     if request.user.is_authenticated:
         product = get_object_or_404(Product, id=item_id)
         quantity = int(request.POST.get('quantity')) # ta bort
-        bag_session = request.session.get('bag', {})
+        bag_session_subs = request.session.get('bag_subs', {})
         
-        if item_id in list(bag_session.keys()):
+        if item_id in list(bag_session_subs.keys()):
             messages.success(request, 'A subscription is alreadyin your bag, please remove before adding a new one')
         else:
-            bag_session[item_id] = quantity
+            bag_session_subs[item_id] = quantity
             messages.success(request, f'Added {product.name} to your bag')
 
-        request.session['bag'] = bag_session
-        print(request.session['bag'])
+        request.session['bag_subs'] = bag_session_subs
+        
         return redirect(redirect_url)
     else:
         messages.error(request, 'You must be logged in to add to shopping bag please log in or create an account')
@@ -77,15 +77,26 @@ def adjust_bag(request, item_id):
 
 def remove_from_bag(request, item_id):
     """ A View that removes products from shopping bag"""
-    
-    try:
-        product = get_object_or_404(Products, pk=item_id)
-        bag = request.session.get('bag', {})
-        bag.pop(item_id)
-        messages.success(request, f'Removed {product.friendly_name} from your bag')
+    if isinstance(item_id, int):
+        try:
+            product = get_object_or_404(Products, pk=item_id)
+            bag = request.session.get('bag', {})
+            bag.pop(item_id)
+            messages.success(request, f'Removed {product.friendly_name} from your bag')
 
-        request.session['bag'] = bag
-        return HttpResponse(status=200)
-    except Exception as e:
-        messages.error(request, f'Error removing item from bag: {e}')
-        return HttpResponse(status=500)
+            request.session['bag'] = bag
+            return HttpResponse(status=200)
+        except Exception as e:
+            messages.error(request, f'Error removing item from bag: {e}')
+            return HttpResponse(status=500)
+    else:
+        try:
+            product = get_object_or_404(Product, id=item_id)
+            bag_subs = request.session.get('bag_subs', {})
+            bag_subs.pop(item_id)
+            messages.success(request, f'Removed {product.name} from your bag')
+            request.session['bag_subs'] = bag_subs
+            return HttpResponse(status=200)
+        except Exception as e:
+            messages.error(request, f'Error removing item from bag: {e}')
+            return HttpResponse(status=500)
