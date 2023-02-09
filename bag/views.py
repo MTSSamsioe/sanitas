@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, reverse, HttpResponse, get_object_or_404
 from django.contrib import messages
 from products.models import Products
-from djstripe.models import Product
+from djstripe.models import Product, Plan
 
 def view_bag(request):
     """ A view that renders the shopping bag """
@@ -38,15 +38,15 @@ def add_subscription(request, item_id):
     redirect_url = request.POST.get('redirect_url')
 
     if request.user.is_authenticated:
-        product = get_object_or_404(Product, id=item_id)
+        product = get_object_or_404(Plan, id=item_id)
         quantity = int(request.POST.get('quantity')) # ta bort
-        bag_session = request.session.get('bag_subs', {})
+        bag_session = request.session.get('bag', {})
         
         if item_id in list(bag_session.keys()):
             messages.success(request, 'A subscription is alreadyin your bag, please remove before adding a new one')
         else:
             bag_session[item_id] = quantity
-            messages.success(request, f'Added {product.name} to your bag')
+            messages.success(request, f'Added subscription to your bag')
 
         request.session['bag'] = bag_session
         
@@ -91,11 +91,11 @@ def remove_from_bag(request, item_id):
             return HttpResponse(status=500)
     if len(item_id) > 3:
         try:
-            product = get_object_or_404(Product, id=item_id)
-            bag_subs = request.session.get('bag_subs', {})
-            bag_subs.pop(item_id)
-            messages.success(request, f'Removed {product.name} from your bag')
-            request.session['bag_subs'] = bag_subs
+            product = get_object_or_404(Plan, id=item_id)
+            bag = request.session.get('bag', {})
+            bag.pop(item_id)
+            messages.success(request, 'Removed subsciption from your bag')
+            request.session['bag'] = bag
             return HttpResponse(status=200)
         except Exception as e:
             messages.error(request, f'Error removing item from bag: {e}')

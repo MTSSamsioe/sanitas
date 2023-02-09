@@ -21,7 +21,7 @@ def bag_products(request):
         else:
             product = get_object_or_404(Plan, id=item_id)
             
-            price = plan.amount
+            price = product.amount
             total += quantity * price
         product_count += quantity
         bag_items.append ({
@@ -36,4 +36,5 @@ def bag_products(request):
         'product_count': product_count,
         
     }
+    
     return context
