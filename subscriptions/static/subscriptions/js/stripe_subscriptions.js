@@ -5,7 +5,8 @@ document.getElementById("submit").disabled = true;
 stripeElements();
 
 function stripeElements() {
-  stripe = Stripe('pk_test_E52Nh0gTCRpJ7h4JhuEX7BIO006LVew6GG');
+  
+  stripe = Stripe("pk_test_51M8nSSBxdi5CQaAbFzfDVl6pXNeAZzmuCuOJ6ys8BQ0ror4gN6e5Mbkgb0up0St8AnNY3pqHkUJtpKEfi8hdbT5V00BG4WFEAY");
 
   if (document.getElementById('card-element')) {
     let elements = stripe.elements();

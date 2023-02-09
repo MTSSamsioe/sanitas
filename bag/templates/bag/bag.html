@@ -28,7 +28,7 @@
 
                                 {% for item in bag_items %}
                                     <!-- If it is a regular product in the bag -->
-                                    {% if item.item_id|length < 3 %}
+                                    
                                         <tr>
                                             <td class="p-3">
                                                 <p>{{ item.product.friendly_name}}</p>
@@ -74,25 +74,8 @@
                                                 <p>${{ item.product.price | calc_subtotal:item.quantity }}
                                             </td>
                                         </tr>
-                                    <!-- If there is a subscription in the bag -->
-                                    {% else %}
-                                        <tr>
-                                            <td class="p-3">
-                                                <p>{{ item.product.metadata.name}}</p>
-                                                
-                                            </td>
-                                            <td class="p-3">
-                                                <a class="text-danger remove-link cursor-arrow" href="#" id="remove_{{ item.item_id }}">Delete from bag</a>   
-                                            </td>
-                                            <td class="p-3">
-                                                <p>{{ item.product.amount }}</p>
-                                            </td>
-                                            <td class="p-3">
-                                                <p>${{ item.product.amount | calc_subtotal:item.quantity }}
-                                            </td>
-                                        </tr>
-                                    {% endif %}
-                                        
+                                    
+                                     
                                 {% endfor %}
                                     <tr >
                                         <td colspan="3" class="p-3">

@@ -7,7 +7,7 @@ from django.conf import settings
 from .forms import OrderForm
 from .models import Order, Order_item
 from products.models import Products
-from djstripe.models import Product, Plan
+
 
 from bag.contexts import bag_products
 
@@ -58,26 +58,15 @@ def checkout(request):
             order = order_form.save()
             for item_id, item_data in bag.items():
                 
-                if len(item_id) < 3 :
-                    product = Products.objects.get(id=item_id)
-                    order_line_item = Order_item(
-                        order=order,
-                        product=product,
-                        quantity=item_data,
-                    )
-                    order_line_item.save()
-                else:
-                    plan = Plan.objects.get(id=item_id)
-                    order_line_item = Order_item(
-                        order=order,
-                        plan=plan,
-                        quantity=item_data,
-                    )
-                    order_line_item.save()
+                product = Products.objects.get(id=item_id)
+                order_line_item = Order_item(
+                    order=order,
+                    product=product,
+                    quantity=item_data,
+                )
+                order_line_item.save()
                 
-            
-                
-                return redirect(reverse('view_bag'))
+                #return redirect(reverse('view_bag'))
 
             # Save the info to the user's profile if all is well
             request.session['save_info'] = 'save-info' in request.POST
