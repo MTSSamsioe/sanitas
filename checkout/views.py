@@ -7,7 +7,10 @@ from django.conf import settings
 from .forms import OrderForm
 from .models import Order, Order_item
 from products.models import Products
+from djstripe.models import Product, Plan
+
 from bag.contexts import bag_products
+
 
 from profiles.models import Profile
 from profiles.forms import ProfileForm
@@ -54,7 +57,8 @@ def checkout(request):
         if order_form.is_valid():
             order = order_form.save()
             for item_id, item_data in bag.items():
-                try:
+                
+                if len(item_id) < 3 :
                     product = Products.objects.get(id=item_id)
                     order_line_item = Order_item(
                         order=order,
@@ -62,14 +66,18 @@ def checkout(request):
                         quantity=item_data,
                     )
                     order_line_item.save()
-                    
-                except Products.DoesNotExist:
-                    messages.error(request, (
-                        "One of the products in your bag wasn't found in our database. "
-                        )
+                else:
+                    plan = Plan.objects.get(id=item_id)
+                    order_line_item = Order_item(
+                        order=order,
+                        plan=plan,
+                        quantity=item_data,
                     )
-                    order.delete()
-                    return redirect(reverse('view_bag'))
+                    order_line_item.save()
+                
+            
+                
+                return redirect(reverse('view_bag'))
 
             # Save the info to the user's profile if all is well
             request.session['save_info'] = 'save-info' in request.POST

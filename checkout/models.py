@@ -9,6 +9,7 @@ from django.conf import settings
 from products.models import Products
 from profiles.models import Profile
 
+from djstripe.models import Plan
 
 class Order(models.Model):
     
@@ -46,15 +47,25 @@ class Order(models.Model):
 class Order_item(models.Model):
 
     order = models.ForeignKey(Order, on_delete=models.CASCADE, null=False, blank=False, related_name='lineitems')
-    product = models.ForeignKey(Products, on_delete=models.CASCADE, null=False, blank=False)
+    product = models.ForeignKey(Products, on_delete=models.CASCADE, null=True, blank=True)
+    plan = models.ForeignKey(Plan, on_delete=models.CASCADE, null=True, blank=True)
     quantity = models.IntegerField(null=False, blank=False, default=0)
     order_item_total = models.DecimalField(max_digits=10, decimal_places=2, null=False, blank=False, editable=False)
 
     def save(self, *args, **kwargs):
 
         """ Overide save method to set the order number """
-        self.order_item_total = self.product.price * self.quantity
-        super().save(*args, **kwargs)
+        if self.product:
+            self.order_item_total = self.product.price * self.quantity
+            super().save(*args, **kwargs)
+        if self.plan:
+            self.order_item_total = self.plan.amount * self.quantity
+            super().save(*args, **kwargs)
     
     def __str__(self):
-        return f'{self.product.name} on order {self.order.order_number}'
+
+        if self.product:
+            return f'{self.product.name} on order {self.order.order_number}'
+        
+        if self.plan:
+            return f'Plan on order {self.order.order_number}'
