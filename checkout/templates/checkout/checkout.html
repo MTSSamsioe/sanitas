@@ -30,33 +30,62 @@
                 </tr>
             </thead>
         {% for item in bag_items %}
-        <div class="row">
-            <div class="col-12">
-                <tr>
-                    <td class="p-3">
-                        <p>{{ item.product.friendly_name}}</p>
-                    </td>
-                    <td class="p-3">
-                        <p>{{ item.quantity }}</p>
-                    </td>
-                    <td class="p-3">
-                        <p>{{ item.product.price}}</p>
-                    </td>
-                    <td class="p-3">
-                        <p>${{ item.product.price | calc_subtotal:item.quantity }}</p>
-                    </td>
-                </tr>
-                <hr class="my-0">
-                {% endfor %}
-            </div>
+            {% if item.item_id|length < 3 %}
+                <div class="row">
+                    <div class="col-12">
+                        <tr>
+                            <td class="p-3">
+                                <p>{{ item.product.friendly_name}}</p>
+                            </td>
+                            <td class="p-3">
+                                <p>{{ item.quantity }}</p>
+                            </td>
+                            <td class="p-3">
+                                <p>{{ item.product.price}}</p>
+                            </td>
+                            <td class="p-3">
+                                <p>${{ item.product.price | calc_subtotal:item.quantity }}</p>
+                            </td>
+                        </tr>
+                        <hr class="my-0">
+                        
+                    </div>
+                </div>
+            {% else %}
+                <div class="row">
+                    <div class="col-12">
+                        <tr>
+                            <td class="p-3">
+                                <p>{{item.product.metadata.name}}</p>
+                            </td>
+                            <td class="p-3">
+                                <p>{{ item.quantity }}</p>
+                            </td>
+                            <td class="p-3">
+                                <p>${{ item.product.amount}}</p>
+                            </td>
+                            <td class="p-3">
+                                <p>${{ item.product.amount | calc_subtotal:item.quantity }}</p>
+                            </td>
+                        </tr>
+                        <hr class="my-0">
+            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
         </table>
         
             
             <div class="row">
                 <div class="col-12 col-lg-6">
                     <p>Please fill out form below</p>
-                    
+                {% for item in bag_items %}
+                {% if item.item_id|length < 3 %}
                     <form class="d-grid" action="{% url 'checkout' %}" method="POST" id="payment-form">
+                {% else %}
+                    <form class="d-grid" action="{% url 'checkout_subscription' %}" method="POST" id="payment-form">
+                {% endif %}
+                {% endfor %}
                         {% csrf_token%}
                         {{ order_form }}
                         <hr>
