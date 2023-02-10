@@ -14,8 +14,9 @@
 </div>
 <br>
 
-<div class="find-us-container d-flex justify-content-center align-items-center">
+<div class="find-us-container d-flex justify-content-center align-items-center" id="map">
     <h2 class="find-us">Find Us</h2>
+    
 </div>
 <br>
 <div class="container-fluid">
@@ -87,7 +88,50 @@
                 var $mcj = jQuery.noConflict(true);
             </script>
             <!--End mc_embed_signup-->
+            <!-- Google maps script -->
+            <script>
+                function initMap() {
+                    var map = new google.maps.Map(document.getElementById("map"), {
+                        zoom: 17,
+                        center: {
+                            lat: 59.316707260139665,
+                            lng: 18.054762735582162
+
+                        }
+                    });
+                    var labels = "ABCDEFGHIJKLMNOPQRSTUVXYZÅÄÖ";
+                    var locations = [{lat: 59.316707260139665, lng: 18.054762735582162}]
+                    
+                    var markers = locations.map(function(location, i) {
+                        return new google.maps.Marker({
+                            position: location,
+                            label: labels[i % labels.length]
+                        });
+                    });
+                    var markerCluster = new MarkerClusterer(map, markers, { imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m' });
+                }
+            </script>
+            <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
+            <script async
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCOK4fllhsAN8jzXNzZN7i4hNJjA7UnM5M&callback=initMap">
+            </script>
         </div>
     </div>
 </div>
+<!-- Footer section -->
+<footer>
+    <div class="container-fluid my-footer">
+        <div class="row">
+            
+            <div class="d-flex justify-content-center text-center my-3">
+                <div class="col-sm-3 text-white text-cente"><h5>Visist us on facebook page:</h5></div>
+                <div class="col-sm-3 text-white"><a href="https://www.facebook.com/" target="_blank"
+                    aria-label="Opens Facebook in a new window"><i class="fa-brands fa-facebook fa-xl"></i></a></div>
+                
+                
+            </div>
+        </div>
+    </div>
+</footer>
+
 {% endblock %}

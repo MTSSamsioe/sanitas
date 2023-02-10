@@ -35,3 +35,12 @@
     color: black;
     
 } 
+
+/* Fotter css */
+
+.my-footer {
+    background-color: rgba(50, 41, 255, 1);
+}
+
+/* Google map css*/
+#map {min-height: 360px;}
