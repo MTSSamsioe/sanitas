@@ -12,13 +12,36 @@
       <h1>Fitness for all</h1>
     </div>
 </div>
-<br>
-
-<div class="find-us-container d-flex justify-content-center align-items-center" id="map">
-    <h2 class="find-us">Find Us</h2>
-    
+<hr>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-6 offset-3 text-center my-3">
+            <h2>Swedens best gym</h2>
+            <p>Everybody deserves a good gym! No matter who you are, where you are from or why you exercise.
+                We deliver a great exercise enviroment with top class personal 
+                trainers and equipment to a affordable price </p>
+        </div>
+    </div>
 </div>
-<br>
+<hr>
+<h2 class="find-us text-center my-3">Find Us</h2>
+<div class="container">
+    <div class="row ">
+        <div class="col-sm-6 d-flex justify-content-center d-flex align-items-center h3">
+            
+            <p>
+                Sanitas gym<br>
+                Samaritgränd 6<br>
+                11853 Stockholm<br>
+            </p>
+        </div>
+        <div class="col-sm-6">
+            
+            <div class="find-us-container d-flex justify-content-center align-items-center my-2" id="map"></div>
+        </div>
+    </div>
+</div>
+<hr>
 <div class="container-fluid">
     <div class="row d-flex justify-content-center">
         <div class="col-md-6 offset-3">
@@ -88,6 +111,7 @@
                 var $mcj = jQuery.noConflict(true);
             </script>
             <!--End mc_embed_signup-->
+            
             <!-- Google maps script -->
             <script>
                 function initMap() {
@@ -121,20 +145,6 @@
         </div>
     </div>
 </div>
-<!-- Footer section -->
-<footer>
-    <div class="container-fluid my-footer">
-        <div class="row">
-            
-            <div class="d-flex justify-content-center text-center my-3">
-                <div class="col-sm-3 text-white text-cente"><h5>Visist us on facebook page:</h5></div>
-                <div class="col-sm-3 text-white"><a href="https://www.facebook.com/" target="_blank"
-                    aria-label="Opens Facebook in a new window"><i class="fa-brands fa-facebook fa-xl"></i></a></div>
-                
-                
-            </div>
-        </div>
-    </div>
-</footer>
+
 
 {% endblock %}
