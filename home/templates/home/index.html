@@ -1,12 +1,26 @@
-{% extends "base.html" %}
-{% load static % }
+{% extends 'base.html' %}
+
+{% load static %}
+
+
 
 {% block content %}
-<h1 class="text-info"> TESTING TESTING</h1>
+<link rel="stylesheet" href="{% static 'home/css/home.css' %}">
 
+<div class="hero-image">
+    <div class="hero-text">
+      <h1>Fitness for all</h1>
+    </div>
+</div>
+<br>
+
+<div class="find-us-container d-flex justify-content-center align-items-center">
+    <h2 class="find-us">Find Us</h2>
+</div>
+<br>
 <div class="container-fluid">
     <div class="row d-flex justify-content-center">
-        <div class="col-md-6">
+        <div class="col-md-6 offset-3">
             <!-- Begin Mailchimp Signup Form -->
             <link href="//cdn-images.mailchimp.com/embedcode/classic-071822.css" rel="stylesheet" type="text/css">
             <style type="text/css">
