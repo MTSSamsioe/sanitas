@@ -82,16 +82,42 @@ Welcome to Sanitas Gym's site. We are a gym situated in the heart of stockholm. 
 
 - At the top of the page you will see the content of your shopping bag with individual and total price of product
 
-- The next section shows a form with the nessecary information to make a purchase. If you have made a previous 
+- The next section shows a form with the nessecary information to make a purchase. If you have made a previous made a purchase and checked "Save my information" the fields are already prepopulated from information stored in the user profile.
+
+- Form validations
+    - "Full name" is required and takes maximum 100 characters
+    - "Email" is required and takes maximum 254 characters and must have the corect email format
+    - "Adress" is required and takes maximum 100 characters
+    - "Post code" is required and takes maximum 20 characters
+    - "City" is reuired and takes maximum 100 characters
+
+- Save my personal info to my profile
+ - A checkbox that saves the form information to the members profile and is automatically entered the next time you do a purchase
+
+- Card information
+    - Here is a field that you can enter your card information
+    - Validators
+        - If the wrong card information is entered a message is shown below the input that the information is incorrect
+- Subit section
+    - "See shooping bag" button takes you back to the shopping bag page
+    - "Submit order" button tries to submit the order to stripe and creates an order instance in the databas
+     - Validators
+        - If the bag is empty an error message is shown
+        - If an card error occurs a message will be shown
+    - Under the submit buttons a text will show how much your card will be chaged
+    - In the bottom of the page you will find a link to get back to the home page
 
 #### Checkout success page
 
 #### Page not found
-
+- A custom "page not found" page is shown if a page is not found. A short message and a link back to the index page is shown
 
 #### Login Reggister and logout
 
-- 
+- Register
+    - if you don´t have an account you can create one here
+    - Validators
+        - 
 
 #### Admin Site
 

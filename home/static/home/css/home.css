@@ -36,18 +36,13 @@
     
 } 
 
-/* Fotter css */
-
-.my-footer {
-    background-color: rgba(50, 41, 255, 1);
-}
 
 /* Google map css*/
 #map {min-height: 360px;}
 
 /* Page not found css */
 
-.error-ccontainer {
+.error-container {
     background-image: linear-gradient( rgba(50, 41, 255, 1), rgba(50, 41, 255, 0.63));
     color: white;
     font-size: xx-large;

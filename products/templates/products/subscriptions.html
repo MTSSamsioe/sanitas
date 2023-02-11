@@ -2,11 +2,11 @@
 {% load static % }
 
 {% block content %}
-<h1 class="text-info"> Subscription options</h1>
-<div class="container">
-    <div class="row gy-3 justify-content-center mr-3">
+
+<div class="container ">
+    <div class="row  justify-content-center ">
         {% for subscription in subscriptions %}
-        <div class="card mb-3 card-whole" style="max-width: 18rem;">
+        <div class="card card-whole" style="max-width: 18rem; ">
           <div class="card-header bg-transparent h2">{{subscription.name}}</div>
             <div class="card-body ">
               <h5 class="card-title">{{subscsubscription.description}}</h5>
