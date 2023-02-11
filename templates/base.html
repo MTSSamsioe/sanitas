@@ -63,8 +63,8 @@
         </button>
         <div class="collapse navbar-collapse px-1 w-100" id="navbarNavAltMarkup">
           <div class="navbar-nav my-nav-text w-100 d-flex ">
-            <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a>
-            <a class="nav-link" id="find_us">Find us</a>
+            <a class="nav-link active" aria-current="page" href="{% url 'home' %}"><strong>Home</strong></a>
+            <a class="nav-link" href="#find_us">Find us</a>
             <a class="nav-link" href="{% url 'stripe_subscriptions' %}">Gym subscriptions</a>
             <a class="nav-link" href="{% url 'pt_sessions' %}">Personal trainer</a>
 
@@ -119,11 +119,8 @@
       <div class="row">
           
           <div class="d-flex justify-content-center text-center my-3">
-              <div class="col-sm-2 text-white text-cente"><h5>Visist us on our facebook page:</h5></div>
-              <div class="col-sm-1 text-white"><a href="https://www.facebook.com/" target="_blank"
-                  aria-label="Opens Facebook in a new window"><i class="fa-brands fa-facebook fa-xl text-white"></i></a></div>
-              
-              
+              <div class="col-sm-6 text-white text-cente"><span><h5>Visist us on our facebook page:</h5></span><a href="https://www.facebook.com/" target="_blank"
+                aria-label="Opens Facebook in a new window"><i class="fa-brands fa-facebook fa-xl text-white"></i></a></div>
           </div>
       </div>
   </div>
