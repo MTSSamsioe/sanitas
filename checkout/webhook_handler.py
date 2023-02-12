@@ -1,3 +1,4 @@
+# All code below is taken from Code institute project lessons Boutique ado
 from django.http import HttpResponse
 
 

@@ -1,3 +1,5 @@
+# All code below is taken from Code institute project lessons Boutique ado
+
 from django.db.models.signals import post_save, post_delete
 from django.dispatch import receiver
 

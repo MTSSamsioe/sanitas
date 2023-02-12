@@ -109,45 +109,114 @@ Welcome to Sanitas Gym's site. We are a gym situated in the heart of stockholm. 
 
 #### Checkout success page
 
+- When a purchase has gone through a checkout success page is shown. It includes order details and ordernumber
+
 #### Page not found
 - A custom "page not found" page is shown if a page is not found. A short message and a link back to the index page is shown
 
 #### Login Reggister and logout
 
 - Register
-    - if you don´t have an account you can create one here
+    - if you don´t have an account you can create one here. The Link will be visible in the navbar if you are not logged in
     - Validators
-        - 
+        - All fields email are required
+        - Email fields must have an email format and the confirmation field must match the first email field
+        - Password confirm field must match the first pasford field
+
+- Login 
+    - Sign in page requires login name and password
+    - "Remember me" checkbox is optional if you want the username and password to be saved
+    - "Forgot password" link kan be used to reset password if you forget it.
+    - You must be logged in to visit members page, add items to shopping bag and subscribe to a gymsubscription
+
+- Logout
+    - Before logging out a message will be promted and asks if you are sure if you want to sign out
 
 #### Admin Site
-
-#### ModM 
+    - Here an admin user can logg in to see an alter orders, users, memberrships, products and categories
 
 ### Features left to implement
 
--   
+-  
 
 ## Testing
 
 ### Manual testing
 
-- 
+- Login / Logout and register
+    - A message is shown when successfully logging in and out
+    - A validation error is shown if email has the wrong format
+    - A validation error is shown if email and confirm email field does not match
+    - A validation error is shown if password is to similar to username
+    - A validation error is shown if the password and passwod conifmation field don´t match
 
+- User is authenticated
+
+    - If you redirected to login page if you try to add an item to cart or try to enter members page if you are not logged in
+
+- Shopping bag
+
+    - Messages show when an item is deleted or updated in the shopping bag
+
+- Checkout 
+
+    - A validation error is shown if any of the fields "Full name", "Adress", "Post code", "City" is left empty
+    - A validation error is shown if the email field has the wrong format.
+    - If checkobox "Save my info to my members page" is unchecked the members page don´t get updated
+    - If an invalig card number is entered an error message is shown below
+    - If you press the "Submit" button an order is created in the database and the a purchase is added to stripe 
 
 ### Validator testing
 
 ### Unfixed bugs
 
+- Affter installing stripe the confirm email function on all auth stopped working. The link for the confirm email page was not apperaring in the console.
+
 ### Fixed bugs
+- Update cart button did not work.
+    - Fix: the session seamed to have something to to with it because when I deleted the session the button started working again.
 
 ## Deployment
 
 ## Credits
 ---
 
+
 ### Borrowed code
 
-- CI 
+#### Bag app
+
+- Context.py 
+    - All of the strucutre, logic, function and variable names are taken from Code institute project lessons Boutique ado
+- views.py 
+    - Most of the logic and function, variable names are taken from Code institute project lessons Boutique ado
+
+
+
+#### Checkout app
+- stripe_elements.js
+    - all code is taken from stripe documentation and Code institute project lessons Boutique ado
+
+- checkout.css
+    - Most of the code is taken from Code institute project lessons Boutique ado
+- webhooks.py
+    - All code is taken from Code institute project lessons Boutique ado
+- webhook_handler.py
+    - All code is taken from Code institute project lessons Boutique ado
+- Signals.py in checkout app
+    - All code is taken from Code institute project lessons Boutique ado
+- admin.py in checkout app
+    - Most of the structure and variable and class names is from Code institute project lessons Boutique ado
+- apps.py in checkout app
+    - One line of code is taken from Code institute project lessons Boutique ado
+- views.py in checkout app
+    - Most of the code structure, logic , class names, variable names and logic is taken from Code institute project lessons Boutique ado
+
+#### Profile app
+- 
+
+## Content
+
 
 ### Media
 

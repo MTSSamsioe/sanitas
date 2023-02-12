@@ -5,7 +5,7 @@
 
 
 <div class="container">
-  <div class="row gy-3 justify-content-center mr-3">
+  <div class="row gy-3 justify-content-center mr-3 my-5">
 
     {% for pt_session in pt_sessions %}
     <div class="card p-0 m-3" style="width: 30rem;">
@@ -15,7 +15,7 @@
       <div class="card-body">
         <h5 class="card-title">{{pt_session.friendly_name}}</h5>
         <p class="card-text">{{pt_session.description}}</p>
-        <p class="card-text">{{pt_session.price}} $</p>
+        <p class="card-text h4 text-center">{{pt_session.price}} $ / h</p>
       </div>
      
       <div class="card-text text-center">

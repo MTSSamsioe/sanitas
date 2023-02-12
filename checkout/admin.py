@@ -1,3 +1,4 @@
+# Class names and structure is taken from Code institute project lessons Boutique ado
 from django.contrib import admin
 from .models import Order, Order_item
 

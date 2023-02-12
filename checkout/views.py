@@ -1,3 +1,4 @@
+# Most of the code structure, logic , class names, variable names and logic is taken from Code institute project lessons Boutique ado
 from django.shortcuts import render, reverse, redirect, get_object_or_404, HttpResponse
 from django.views.decorators.http import require_POST
 
