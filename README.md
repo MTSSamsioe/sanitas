@@ -166,6 +166,10 @@ Welcome to Sanitas Gym's site. We are a gym situated in the heart of stockholm. 
     - If an invalig card number is entered an error message is shown below
     - If you press the "Submit" button an order is created in the database and the a purchase is added to stripe 
 
+- Newsletter sign up
+    - Signup form from mailchimp has been tested that it stores the mail adress on our mailchimp account
+
+
 ### Validator testing
 
 ### Unfixed bugs
@@ -245,5 +249,47 @@ Welcome to Sanitas Gym's site. We are a gym situated in the heart of stockholm. 
 
 # Business plan 
 
+- Business goals
+    - Even thou we have a physical location for our gym we see the importance of incorporating e-commerce in our business model. We have a B2C strategy and focuses on customers in södermalm part of Stockholm Sweden. To be able to reach our customers and offer extra services from our gym such as classes and personal trainer sessions. We also want our customers to be able to manage their gym subscriptions from our web application. It is easier to reach customers and et them to convert in the comfort of their own home. 
 
 ## Marketing
+
+- Social media
+
+    - Facebook
+        - We have a facebook page where we are hoping to grow our comunity organically. This is a solid and free marketing option.
+
+    - Social media ads
+       - We are using paid soccial media ads that is shown mainly on instagram and facebook. The ads have teritory restrictions so they only target potential customers in the vicinety of our location
+
+    - Newsletter 
+        - On our main page there is a section for leaving your email adress to stay up to date with new offers, classes and subscriptions. This is also a free and great way to stay in contact with your members and create customer retention.
+
+- Googgle seo
+    - Efforts have been made to optimize our landing page to match key words of our choice to create organic trafic.
+    This is also a great and free way to get new customers 
+
+### Seo 
+
+#### Key words
+    - Short tail keywords
+        - Gym
+        - Affordable gym
+    - Longtail keywords
+        - Gym södermalm
+        - Best gym södermalm
+        - Gym with fitness classes
+        - Personal trainer
+        - Gym with sauna
+        - Gym with pool
+
+    - Choice of keywords:
+        - For short tail keywords I have choosen a general term "Gym" and "Affordable gym". But i think it still works since we only have one gymlocation and google knows where you are so the results felt relevat anyway . Googel will present you with the closest options. An auto complete option that google presented me with was "Affordable gym" which had less searches on it and felt mor competative.
+
+        - For long tail key words i have choosen two key words that includes södermalm which is the part of stockholm where the gym i situated. Another suggestion by google where "best gym södermalm". To be more competative the rest of the keywords focus on our services and facileties. Local competitors does not offer the same services. "Gym with fitness classes" and "gym with sauna and pool" have ok search volume and are more competative than broader search terms.
+
+        - In my analysis I have taken in to consideration relevance authority and volume aswell as competition.
+        I wanted to use a service like wordtracker.com but Sweden was not an option for teritory unfortunately.
+
+### Site map
+
