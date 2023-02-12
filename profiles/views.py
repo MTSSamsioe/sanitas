@@ -1,3 +1,4 @@
+# Structure and logic is taken from Code institute project lessons Boutique ado
 from django.shortcuts import render, get_object_or_404, reverse, redirect, HttpResponseRedirect
 from .models import Profile
 from .forms import ProfileForm

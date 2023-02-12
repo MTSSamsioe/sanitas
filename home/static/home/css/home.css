@@ -1,5 +1,5 @@
 /* Css for heroimage*/
-
+/* Code is taken from https://www.w3schools.com/howto/howto_css_hero_image.asp*/
 .hero-image {
 
     
@@ -23,6 +23,8 @@
     left: 50%;
     transform: translate(-50%, -50%);
 }
+
+/* Css for find us section*/
 
 .find-us-container {
     height: 40vh;

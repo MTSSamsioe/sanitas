@@ -1,7 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-# Most of the structure, logic function and variable names are taken from Code institute project lessons Boutique ado
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
@@ -21,6 +20,7 @@ class Profile(models.Model):
     def __str__(self):
         return self.user.username
 
+# Most of the structure, logic are taken from Code institute project lessons Boutique ado
 @receiver(post_save, sender=User)
 def create_or_update_profile(sender, instance, created, **kwargs):
     """

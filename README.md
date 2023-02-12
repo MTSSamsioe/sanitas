@@ -213,15 +213,35 @@ Welcome to Sanitas Gym's site. We are a gym situated in the heart of stockholm. 
     - Most of the code structure, logic , class names, variable names and logic is taken from Code institute project lessons Boutique ado
 
 #### Profile app
-- 
+- models.py 
+    - Last part of document rows 10 - 20 are heavily influenced by Code institute project lessons Boutique ado
+- Views.py
+    - Structure and logic are taken from Code institute project lessons Boutique ado
+
+#### Misc
+- index.html
+    - Hero image is taken from https://www.w3schools.com/howto/howto_css_hero_image.asp
+- Home.css
+    - Css for hero image and text is taken from https://www.w3schools.com/howto/howto_css_hero_image.asp
+- Google maps section
+    - code is taken from Code institute lessons on apis
+- Mailchimp newsletter sugnup section is taken from https://mailchimp.com
 
 ## Content
 
+- The site is styled with bootstrap and css
+
+- Icons are taken from fonawsome
+
+- Google maps section is provided by google
+
+- Newsletter signup is provided by mailchimp
+
+- Images are hosted on cloudinary.com
 
 ### Media
 
-## User stories
-
+- Images are taken from pexels.com
 
 # Business plan 
 

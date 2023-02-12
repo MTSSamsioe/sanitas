@@ -6,12 +6,13 @@
 
 {% block content %}
 <link rel="stylesheet" href="{% static 'home/css/home.css' %}">
-
+<!-- Section is taken from https://www.w3schools.com/howto/howto_css_hero_image.asp -->
 <div class="hero-image">
     <div class="hero-text">
       <h1>Fitness for all</h1>
     </div>
 </div>
+<!-- End of section -->
 <hr>
 <div class="container">
     <div class="row">
@@ -45,7 +46,9 @@
 <div class="container-fluid">
     <div class="row d-flex justify-content-center my-5">
         <div class="col-md-6 offset-3">
+
             <!-- Begin Mailchimp Signup Form -->
+            <!-- Code below is taken from Mailchimp.com -->
             <link href="//cdn-images.mailchimp.com/embedcode/classic-071822.css" rel="stylesheet" type="text/css">
             <style type="text/css">
                 #mc_embed_signup {
@@ -113,6 +116,7 @@
             <!--End mc_embed_signup-->
             
             <!-- Google maps script -->
+            <!-- Code in this section is taken from Code institute lesson on Google maps api -->
             <script>
                 function initMap() {
                     var map = new google.maps.Map(document.getElementById("map"), {
@@ -142,6 +146,7 @@
             
             
             </script>
+            <!-- End of section -->
         </div>
     </div>
 </div>
