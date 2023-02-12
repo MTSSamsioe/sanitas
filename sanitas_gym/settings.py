@@ -166,10 +166,10 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_URL = 'static/'
 STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 
-MEDIA_URL = '/media/'
+MEDIA_URL = 'media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Default primary key field type
@@ -179,7 +179,12 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Stripe
 
+#stripe price id night plan
+STRIPE_PRICE_ID = 'price_1MZ9fSBxdi5CQaAbGdvl4twB'
+
+#stripe keys
 STRIPE_CURRENCY = 'usd'
+STRIPE_PUBLISHABLE_KEY = os.environ.get('STRIPE_PUBLIC_KEY', '')
 STRIPE_PUBLIC_KEY = os.environ.get('STRIPE_PUBLIC_KEY', '')
 STRIPE_SECRET_KEY = os.environ.get('STRIPE_SECRET_KEY', '')
 STRIPE_TEST_PUBLIC_KEY = os.environ.get('STRIPE_PUBLIC_KEY', '')

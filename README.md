@@ -272,24 +272,24 @@ Welcome to Sanitas Gym's site. We are a gym situated in the heart of stockholm. 
 ### Seo 
 
 #### Key words
-    - Short tail keywords
-        - Gym
-        - Affordable gym
-    - Longtail keywords
-        - Gym södermalm
-        - Best gym södermalm
-        - Gym with fitness classes
-        - Personal trainer
-        - Gym with sauna
-        - Gym with pool
+- Short tail keywords
+    - Gym
+    - Affordable gym
+- Longtail keywords
+    - Gym södermalm
+    - Best gym södermalm
+    - Gym with fitness classes
+    - Personal trainer
+    - Gym with sauna
+    - Gym with pool
 
-    - Choice of keywords:
-        - For short tail keywords I have choosen a general term "Gym" and "Affordable gym". But i think it still works since we only have one gymlocation and google knows where you are so the results felt relevat anyway . Googel will present you with the closest options. An auto complete option that google presented me with was "Affordable gym" which had less searches on it and felt mor competative.
+- Choice of keywords:
+    - For short tail keywords I have choosen a general term "Gym" and "Affordable gym". But i think it still works since we only have one gymlocation and google knows where you are so the results felt relevat anyway . Googel will present you with the closest options. An auto complete option that google presented me with was "Affordable gym" which had less searches on it and felt mor competative.
 
-        - For long tail key words i have choosen two key words that includes södermalm which is the part of stockholm where the gym i situated. Another suggestion by google where "best gym södermalm". To be more competative the rest of the keywords focus on our services and facileties. Local competitors does not offer the same services. "Gym with fitness classes" and "gym with sauna and pool" have ok search volume and are more competative than broader search terms.
+    - For long tail key words i have choosen two key words that includes södermalm which is the part of stockholm where the gym i situated. Another suggestion by google where "best gym södermalm". To be more competative the rest of the keywords focus on our services and facileties. Local competitors does not offer the same services. "Gym with fitness classes" and "gym with sauna and pool" have ok search volume and are more competative than broader search terms.
 
-        - In my analysis I have taken in to consideration relevance authority and volume aswell as competition.
-        I wanted to use a service like wordtracker.com but Sweden was not an option for teritory unfortunately.
+    - In my analysis I have taken in to consideration relevance authority and volume aswell as competition.
+    I wanted to use a service like wordtracker.com but Sweden was not an option for teritory unfortunately.
 
 ### Site map
 
