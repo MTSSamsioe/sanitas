@@ -5,7 +5,7 @@
     
     height: 40vh;
     background-color: white;
-    background-image: url('https://res.cloudinary.com/dy2uthyxz/image/upload/v1676016299/pexels-victor-freitas-841130_lkv76d.jpg');
+    background-image: url('/media/sanitas_exercise.jpg');
     background-repeat: no-repeat;
     position: relative;
     background-size: cover;

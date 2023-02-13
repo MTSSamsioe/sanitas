@@ -64,8 +64,9 @@ def cancel_sub(request):
         except:
             print('Subscription delete failed')
             messages.warning(request, 'Unable to cancel subscription from stripe')
-        try:    
-            subscription_django = StripeCustomer.objects.all()
+        try:
+            user = request.user    
+            subscription_django = StripeCustomer.objects.filter(user=user)
             subscription_django.delete()
             print("Delete from database succesful")
             messages.success(request, 'Your subscription is deleted from database')
@@ -150,30 +151,26 @@ def stripe_webhook(request):
         return HttpResponse(status=400)
 
     # Handle the checkout.session.completed event
-    #if event['type'] == 'checkout.session.completed': #payment_intent.succeeded
-    session = event['data']['object']
-    
-        # Fetch all the required data from session
-    client_reference_id = session.get('client_reference_id')
-    
-    stripe_customer_id = session.get('customer')
-    
-    stripe_subscription_id = session.get('subscription')
-    
+    if event['type'] == 'checkout.session.completed': #payment_intent.succeeded
+        session = event['data']['object']
+        
+            # Fetch all the required data from session
+        client_reference_id = session.get('client_reference_id')
+        
+        stripe_customer_id = session.get('customer')
+        
+        stripe_subscription_id = session.get('subscription')
+        
 
-    # Get the user and create a new StripeCustomer
-    user = User.objects.get(id=client_reference_id)
-    
-    StripeCustomer.objects.create(
-        user=user,
-        stripeCustomerId=stripe_customer_id,
-        stripeSubscriptionId=stripe_subscription_id,
-    )
-    StripeCustomer.objects.create(
-        user=user,
-        stripeCustomerId=stripe_customer_id,
-        stripeSubscriptionId=stripe_subscription_id,
-    )
-    print(user.username + ' just subscribed.')
+        # Get the user and create a new StripeCustomer
+        user = User.objects.get(id=client_reference_id)
+        
+        StripeCustomer.objects.create(
+            user=user,
+            stripeCustomerId=stripe_customer_id,
+            stripeSubscriptionId=stripe_subscription_id,
+        )
+        
+        print(user.username + ' just subscribed.')
 
     return HttpResponse(status=200)

@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load static % }
+{% load static %}
 
 {% block content %}
 
@@ -10,7 +10,7 @@
     {% for pt_session in pt_sessions %}
     <div class="card p-0 m-3" style="width: 30rem;">
       <img class="card-img-top"
-        src="https://res.cloudinary.com/dy2uthyxz/image/upload/v1674558081/personal_trainer_qypixl.jpg"
+        src="/media/personal_trainer_gym.jpg"
         class="img-fluid rounded-start" alt="..." alt="Card image cap">
       <div class="card-body">
         <h5 class="card-title">{{pt_session.friendly_name}}</h5>
