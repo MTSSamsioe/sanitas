@@ -179,8 +179,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Stripe
 
-#stripe price id night plan
-STRIPE_PRICE_ID = 'price_1MZ9fSBxdi5CQaAbGdvl4twB'
+#stripe price id Sanitas gym subscription
+STRIPE_PRICE_ID = 'price_1Mb1sHBxdi5CQaAbbUy6yLH8'
 
 #stripe keys
 STRIPE_CURRENCY = 'usd'
@@ -189,7 +189,8 @@ STRIPE_PUBLIC_KEY = os.environ.get('STRIPE_PUBLIC_KEY', '')
 STRIPE_SECRET_KEY = os.environ.get('STRIPE_SECRET_KEY', '')
 STRIPE_TEST_PUBLIC_KEY = os.environ.get('STRIPE_PUBLIC_KEY', '')
 STRIPE_TEST_SECRET_KEY = os.environ.get('STRIPE_SECRET_KEY', '')
-STRIPE_WH_SECRET = os.getenv('STRIPE_WH_SECRET', '')
+STRIPE_WH_SECRET = os.environ.get('STRIPE_WH_SECRET', '')
+STRIPE_WH_SECRET_SUB = os.environ.get('STRIPE_WH_SECRET_SUB', '')
 STRIPE_LIVE_MODE = False  # Change to True in production
 DJSTRIPE_WEBHOOK_SECRET = "whsec_xxx"
 DJSTRIPE_FOREIGN_KEY_TO_FIELD = "id"
