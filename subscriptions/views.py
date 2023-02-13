@@ -1,12 +1,16 @@
 from django.conf import settings
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 import stripe
 import json
-from django.http import JsonResponse
+from django.contrib.auth.models import User
+from django.http import JsonResponse, HttpResponse
 from .models import StripeCustomer
 from djstripe.models import Product, Plan
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
+from subscriptions.models import StripeCustomer
+
+
 
 @login_required
 def stripe_subscriptions(request):
@@ -31,6 +35,7 @@ def stripe_config(request):
 
 @csrf_exempt
 def create_checkout_session(request):
+    
     if request.method == 'GET':
         domain_url = 'http://localhost:8000/'
         stripe.api_key = settings.STRIPE_SECRET_KEY
@@ -52,3 +57,52 @@ def create_checkout_session(request):
             return JsonResponse({'sessionId': checkout_session['id']})
         except Exception as e:
             return JsonResponse({'error': str(e)})
+
+@login_required
+def success(request):
+    return render(request, 'subscriptions/success.html')
+
+
+@login_required
+def cancel(request):
+    return render(request, 'subscriptions/cancel.html')
+
+
+@csrf_exempt
+def stripe_webhook(request):
+    stripe.api_key = settings.STRIPE_SECRET_KEY
+    endpoint_secret = settings.STRIPE_ENDPOINT_SECRET
+    payload = request.body
+    sig_header = request.META['HTTP_STRIPE_SIGNATURE']
+    event = None
+
+    try:
+        event = stripe.Webhook.construct_event(
+            payload, sig_header, endpoint_secret
+        )
+    except ValueError as e:
+        # Invalid payload
+        return HttpResponse(status=400)
+    except stripe.error.SignatureVerificationError as e:
+        # Invalid signature
+        return HttpResponse(status=400)
+
+    # Handle the checkout.session.completed event
+    if event['type'] == 'checkout.session.completed':
+        session = event['data']['object']
+
+        # Fetch all the required data from session
+        client_reference_id = session.get('client_reference_id')
+        stripe_customer_id = session.get('customer')
+        stripe_subscription_id = session.get('subscription')
+
+        # Get the user and create a new StripeCustomer
+        user = User.objects.get(id=client_reference_id)
+        StripeCustomer.objects.create(
+            user=user,
+            stripeCustomerId=stripe_customer_id,
+            stripeSubscriptionId=stripe_subscription_id,
+        )
+        print(user.username + ' just subscribed.')
+
+    return HttpResponse(status=200)

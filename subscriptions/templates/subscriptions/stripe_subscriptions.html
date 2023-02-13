@@ -27,16 +27,25 @@
                 {% csrf_token %}
                 <input type="hidden" name="redirect_url" value="{{ request.path }}">
                 <input type="hidden" name="quantity" value="1">
-                <input type="submit" class="btn btn-success mb-3 text-uppercase mt-5" id="submitBtn" value="Subscribe">
+                <input type="submit" class="btn btn-success mb-3 text-uppercase mt-5 " id="submitBtn" value="Subscribe">
+                  
               </form> -->
+              <input type="checkbox" name="{{plan.metadata.name}}" value="{{plan.id}}" onclick="planSelect('{{plan.metadata.name}}' ,'{{plan.amount}}', '{{plan.id}}')">
               <h4>Sign up today</h4>
-              <div class="container mt-5">
-                <button type="submit" class="btn btn-primary" id="submitBtn">Subscribe2</button>
-              </div>
               
             </div>
           </div>
           {% endfor %}
-         
+          <div>
+            <div class="col-6 text-right">
+              <p id="plan"></p>
+              <p id="price"></p>
+              <p hidden id="priceId"></p>
+            </div>
+            <div class="container mt-5">
+              <button type="submit" class="btn btn-primary" id="submitBtn">Subscribe</button>
+            </div>
+            
+         </div>
     </div>       
 {% endblock %}
