@@ -85,7 +85,7 @@ def stripe_config(request):
 def create_checkout_session(request):
     
     if request.method == 'GET':
-        domain_url = 'https://8000-mtssamsioe-sanitas-4vmeom2cqnk.ws-eu86.gitpod.io/subscriptions/'
+        domain_url = 'https://sanitas-gym.herokuapp.com/subscriptions/'
         stripe.api_key = settings.STRIPE_SECRET_KEY
         
         try:
