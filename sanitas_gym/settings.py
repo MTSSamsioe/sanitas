@@ -33,7 +33,7 @@ GOOGLEMAPS_KEY = os.environ.get('GOOGLEMAPS_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = 'DEVELOPMENT' in os.environ
 
-ALLOWED_HOSTS = ['sanitas-gym.heroku.app.com', 'localhost']
+ALLOWED_HOSTS = ['sanitas-gym.herokuapp.com', 'localhost']
 
 
 # Application definition
