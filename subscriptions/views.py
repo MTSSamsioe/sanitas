@@ -15,7 +15,7 @@ from django.contrib import messages
 
 
 from subscriptions.webhook_handler import StripeWH_Handler
-
+# Some variable names is taken from https://testdriven.io/blog/django-stripe-subscriptions/
 @login_required
 def stripe_subscriptions(request):
     """ A view to show all stripe gym subscriptions"""
@@ -46,7 +46,7 @@ def stripe_subscriptions(request):
 
 
 
-
+# Some variable names and structure are taken from https://testdriven.io/blog/django-stripe-subscriptions/
 @csrf_exempt
 def cancel_sub(request):
     if request.user.is_authenticated:
@@ -73,6 +73,7 @@ def cancel_sub(request):
     else:
         return redirect('/accounts/login/')
 
+# Function below is taken from https://testdriven.io/blog/django-stripe-subscriptions/
 @csrf_exempt
 def stripe_config(request):
     if request.method == 'GET':
@@ -80,7 +81,7 @@ def stripe_config(request):
         print(JsonResponse(stripe_config, safe=False))
         return JsonResponse(stripe_config, safe=False)
 
-
+# Function below is taken from https://testdriven.io/blog/django-stripe-subscriptions/
 @csrf_exempt
 def create_checkout_session(request):
     
@@ -105,17 +106,17 @@ def create_checkout_session(request):
             return JsonResponse({'sessionId': checkout_session['id']})
         except Exception as e:
             return JsonResponse({'error': str(e)})
-
+# Function below is taken from https://testdriven.io/blog/django-stripe-subscriptions/
 @login_required
 def success(request):
     return render(request, 'subscriptions/success.html')
 
-
+# Function below is taken from https://testdriven.io/blog/django-stripe-subscriptions/
 @login_required
 def cancel(request):
     return render(request, 'subscriptions/cancel.html')
 
-
+# Function below is taken from https://testdriven.io/blog/django-stripe-subscriptions/
 @csrf_exempt
 def stripe_webhook(request):
     

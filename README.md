@@ -204,7 +204,8 @@ Welcome to Sanitas Gym's site. We are a gym situated in the heart of stockholm. 
 - Update cart button did not work.
     - Fix: the session seamed to have something to to with it because when I deleted the session the button started working again.
 
-## Deployment
+- Webhooks did not work
+    - Fix: ports where set to private instead of public
 
 ## Credits
 ---
@@ -246,6 +247,10 @@ Welcome to Sanitas Gym's site. We are a gym situated in the heart of stockholm. 
 - Views.py
     - Structure and logic are taken from Code institute project lessons Boutique ado
 
+#### Subscriptions app
+    - models code is taken from https://testdriven.io/blog/django-stripe-subscriptions/
+    - 
+
 #### Misc
 - index.html
     - Hero image is taken from https://www.w3schools.com/howto/howto_css_hero_image.asp
@@ -254,6 +259,8 @@ Welcome to Sanitas Gym's site. We are a gym situated in the heart of stockholm. 
 - Google maps section
     - code is taken from Code institute lessons on apis
 - Mailchimp newsletter sugnup section is taken from https://mailchimp.com
+
+- timer java script function in base.html is taken from a Code institute lesson
 
 ## Content
 
@@ -281,6 +288,7 @@ Welcome to Sanitas Gym's site. We are a gym situated in the heart of stockholm. 
 
     - Facebook
         - We have a facebook page where we are hoping to grow our comunity organically. This is a solid and free marketing option.
+        You can see som imagges below
     ![picture of facebook page](media/sanitas_facebook.png)
     ![picture of facebook page](media/sanitas_facebook2.png)
 
@@ -316,5 +324,5 @@ Welcome to Sanitas Gym's site. We are a gym situated in the heart of stockholm. 
     - In my analysis I have taken in to consideration relevance authority and volume aswell as competition.
     I wanted to use a service like wordtracker.com but Sweden was not an option for teritory unfortunately.
 
-### Site map
+
 

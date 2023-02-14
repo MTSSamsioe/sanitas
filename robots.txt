@@ -1,0 +1,9 @@
+User-agent: *
+Disallow /accounts/
+Disallow /bag/
+Disallow /checkout/
+Disallow /subscriptions/
+Disallow /products/
+Disallow /profiles/
+
+sitemap: https://sanitas-gym.herokuapp.com/sitemap.xml

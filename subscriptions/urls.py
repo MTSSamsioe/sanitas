@@ -3,7 +3,7 @@ from . import views
 from django.http import JsonResponse
 
 
-
+# code below is taken from https://testdriven.io/blog/django-stripe-subscriptions/
 urlpatterns = [
     path('', views.stripe_subscriptions, name='stripe_subscriptions'),
     path('config/', views.stripe_config),
