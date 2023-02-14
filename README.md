@@ -140,12 +140,28 @@ Welcome to Sanitas Gym's site. We are a gym situated in the heart of stockholm. 
 ![picture of logout](media/sign_out.png)
 ![picture of register](media/register.png)
 
-#### Admin Site
-    - Here an admin user can logg in to see an alter orders, users, memberrships, products and categories
+#### Admin Site and models
+- Here an admin user can logg in to see an alter orders, prodile, users, memberrships, products and categories
+
+    - Products page is tha page that handles the personal trainer session
+
+    - Orders handles previous orders when purchasing a single payment such as personal trainer session
+
+    - Stripe Customers handles active subscription. And stores the stripe plan and cusstomer id in our database
+
+    - Profile stores saved customer information from previous purchases
+
+    - Categories handles different product categories if other product types is added in the future 
+![picture of product admin](media/products_admin.png)
+![picture of order admin](media/order_admin.png)
+![picture of subscriptions](media/subscriptions_admin.png)
 
 ### Features left to implement
 
--  
+- Schedule an personal trainer appointment after purchasing hours. And choose which trainer you want to train with
+
+- Add more tiers on the subscriptions to cater to all customers specific needs
+
 
 ## Testing
 
@@ -249,7 +265,6 @@ Welcome to Sanitas Gym's site. We are a gym situated in the heart of stockholm. 
 
 - Newsletter signup is provided by mailchimp
 
-- Images are hosted on cloudinary.com
 
 ### Media
 
@@ -266,6 +281,8 @@ Welcome to Sanitas Gym's site. We are a gym situated in the heart of stockholm. 
 
     - Facebook
         - We have a facebook page where we are hoping to grow our comunity organically. This is a solid and free marketing option.
+    ![picture of facebook page](media/sanitas_facebook.png)
+    ![picture of facebook page](media/sanitas_facebook2.png)
 
     - Social media ads
        - We are using paid soccial media ads that is shown mainly on instagram and facebook. The ads have teritory restrictions so they only target potential customers in the vicinety of our location

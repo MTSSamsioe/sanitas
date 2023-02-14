@@ -1,0 +1,1 @@
+web: gunicorn sanitas_gym.wsgi:application

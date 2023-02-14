@@ -48,7 +48,6 @@ class Order_item(models.Model):
 
     order = models.ForeignKey(Order, on_delete=models.CASCADE, null=False, blank=False, related_name='lineitems')
     product = models.ForeignKey(Products, on_delete=models.CASCADE, null=True, blank=True)
-    plan = models.ForeignKey(Plan, on_delete=models.CASCADE, null=True, blank=True)
     quantity = models.IntegerField(null=False, blank=False, default=0)
     order_item_total = models.DecimalField(max_digits=10, decimal_places=2, null=False, blank=False, editable=False)
 

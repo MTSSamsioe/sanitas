@@ -50,32 +50,26 @@ def stripe_subscriptions(request):
 @csrf_exempt
 def cancel_sub(request):
     if request.user.is_authenticated:
-        cus_id = StripeCustomer.objects.values_list('stripeCustomerId')[0][0]
-        print(cus_id)
-        
-        subscription = StripeCustomer.objects.values_list('stripeSubscriptionId')[0][0]
-        print(subscription)
         stripe.api_key = settings.STRIPE_SECRET_KEY
         
         try:
+            subscription = StripeCustomer.objects.values_list('stripeSubscriptionId')[0][0]
             stripe.Subscription.delete(subscription,)
-            print('Stripe sub canceled')
             messages.success(request, 'Your subscription is canceled')
         except:
-            print('Subscription delete failed')
-            messages.warning(request, 'Unable to cancel subscription from stripe')
+            
+            messages.warning(request, 'Unable to cancel subscription from stripe, please try again')
+            return redirect('/')
         try:
             user = request.user    
             subscription_django = StripeCustomer.objects.filter(user=user)
             subscription_django.delete()
-            print("Delete from database succesful")
             messages.success(request, 'Your subscription is deleted from database')
         except:
-            messages.warning(request, 'Unable to cancel subscription from database')
-            print("Delete from database failed")
-        #print(subscription_django = get_object_or_404(StripeCustomer, id=sub_id))
+            messages.warning(request, 'Unable to cancel subscription from database, please try again')
+            return redirect('/')
+        return redirect('/')
         
-        return redirect('subscriptions/')
     else:
         return redirect('/accounts/login/')
 
