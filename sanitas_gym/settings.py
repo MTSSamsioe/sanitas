@@ -137,7 +137,9 @@ else:
         }
     }
 
-
+# DATABASES = {
+#      'default': dj_database_url.parse(' postgres url here ')
+#  }
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
