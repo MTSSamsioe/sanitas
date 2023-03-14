@@ -60,7 +60,6 @@ INSTALLED_APPS = [
     'checkout',
     'profiles',
     'subscriptions.apps.SubscriptionsConfig',
-    'djstripe',
     'storages'
 ]
 
@@ -238,8 +237,8 @@ STRIPE_TEST_PUBLIC_KEY = os.environ.get('STRIPE_PUBLIC_KEY', '')
 STRIPE_WH_SECRET = os.environ.get('STRIPE_WH_SECRET', '')
 STRIPE_WH_SECRET_SUB = os.environ.get('STRIPE_WH_SECRET_SUB', '')
 STRIPE_LIVE_MODE = False  # Change to True in production
-DJSTRIPE_WEBHOOK_SECRET = "whsec_xxx"
-DJSTRIPE_FOREIGN_KEY_TO_FIELD = "id"
+#DJSTRIPE_WEBHOOK_SECRET = "whsec_xxx"
+#DJSTRIPE_FOREIGN_KEY_TO_FIELD = "id"
 
 
 if 'DEVELOPMENT' in os.environ:

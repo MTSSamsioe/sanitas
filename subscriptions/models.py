@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-from djstripe.models import Customer, Subscription
+
 
 
 class StripeCustomer(models.Model):

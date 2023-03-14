@@ -9,7 +9,6 @@ from django.conf import settings
 from products.models import Products
 from profiles.models import Profile
 
-from djstripe.models import Plan
 
 class Order(models.Model):
     

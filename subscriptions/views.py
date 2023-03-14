@@ -1,13 +1,12 @@
 from django.conf import settings
 from django.shortcuts import render, redirect, get_object_or_404
 import stripe
-import djstripe
+
 
 import json
 from django.contrib.auth.models import User
 from django.http import JsonResponse, HttpResponse
 from .models import StripeCustomer
-from djstripe.models import Product, Plan, Subscription
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 from subscriptions.models import StripeCustomer
@@ -30,10 +29,13 @@ def stripe_subscriptions(request):
     try:
         # Retrieve the subscription & product
         stripe_customer = StripeCustomer.objects.get(user=request.user)
+        print(stripe_customer)
         stripe.api_key = settings.STRIPE_SECRET_KEY
+        print(stripe.api_key)
         subscription = stripe.Subscription.retrieve(stripe_customer.stripeSubscriptionId)
+        print(subscription)
         product = stripe.Product.retrieve(subscription.plan.product)
-       
+        print(product)
         context = {
            # 'plans': plans,
             'subscription': subscription,
@@ -43,7 +45,7 @@ def stripe_subscriptions(request):
         return render(request, 'subscriptions/stripe_subscriptions.html', context)
 
     except:
-        
+        context = {}
         messages.error(request, 'There are no availeble subscriptions')
         
 

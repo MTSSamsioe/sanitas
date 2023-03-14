@@ -30,7 +30,7 @@ urlpatterns = [
     path('checkout/', include('checkout.urls')),
     path('profiles/', include('profiles.urls')),
     path('subscriptions/', include('subscriptions.urls')),
-    path('stripe/', include('djstripe.urls', namespace='djstripe')),
+    
     
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
