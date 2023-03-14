@@ -14,12 +14,18 @@ from subscriptions.models import StripeCustomer
 from django.contrib import messages
 
 
-from subscriptions.webhook_handler import StripeWH_Handler
+#from subscriptions.webhook_handler import StripeWH_Handler
+
+import os
+
+if os.path.exists("env.py"):
+  import env 
+
 # Some variable names is taken from https://testdriven.io/blog/django-stripe-subscriptions/
 @login_required
 def stripe_subscriptions(request):
     """ A view to show all stripe gym subscriptions"""
-    plans = Plan.objects.all()
+    #plans = Plan.objects.all()
     
     try:
         # Retrieve the subscription & product
@@ -27,19 +33,18 @@ def stripe_subscriptions(request):
         stripe.api_key = settings.STRIPE_SECRET_KEY
         subscription = stripe.Subscription.retrieve(stripe_customer.stripeSubscriptionId)
         product = stripe.Product.retrieve(subscription.plan.product)
+       
         context = {
-            'plans': plans,
+           # 'plans': plans,
             'subscription': subscription,
             'product': product,
+            
         } 
         return render(request, 'subscriptions/stripe_subscriptions.html', context)
 
     except:
         
-        context = {
-            'plans': plans,
-            
-        } 
+        messages.error(request, 'There are no availeble subscriptions')
         
 
     return render(request, 'subscriptions/stripe_subscriptions.html', context)
@@ -86,7 +91,11 @@ def stripe_config(request):
 def create_checkout_session(request):
     
     if request.method == 'GET':
-        domain_url = 'https://sanitas-gym.herokuapp.com/subscriptions/'
+        # if os.environ.get('DEVELOPMENT'):
+        #     domain_url = 'https://8000-mtssamsioe-sanitas-4vmeom2cqnk.ws-eu90.gitpod.io/subscriptions/'
+        # else:
+        #     domain_url = 'https://sanitas-gym.herokuapp.com/subscriptions/'
+        domain_url = 'https://8000-mtssamsioe-sanitas-4vmeom2cqnk.ws-eu90.gitpod.io/subscriptions/'
         stripe.api_key = settings.STRIPE_SECRET_KEY
         
         try:

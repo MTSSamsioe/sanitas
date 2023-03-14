@@ -11,8 +11,8 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 from django.contrib.messages import constants as messages
 from pathlib import Path
-import os
 import dj_database_url
+import os
 
 if os.path.exists("env.py"):
   import env 
@@ -143,7 +143,7 @@ else:
     }
 
 # DATABASES = {
-#      'default': dj_database_url.parse(' postgres url here ')
+#      'default': dj_database_url.parse(' Postgres here')
 #  }
 
 # Password validation
