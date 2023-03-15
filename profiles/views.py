@@ -26,16 +26,15 @@ def profile(request):
         else:
             form = ProfileForm(instance=profile)
 
-        # Retrieve the subscription & product
-        stripe_customer = StripeCustomer.objects.get(user=request.user)
-        stripe.api_key = settings.STRIPE_SECRET_KEY
-        subscription = stripe.Subscription.retrieve(stripe_customer.stripeSubscriptionId)
-        product = stripe.Product.retrieve(subscription.plan.product)
+        # Display available pt_session hours
+        #account_quantity = get_object_or_404(Order_item, user=request.user)
+        quantity = Order_item.objects.values_list('quantity')
         
         context = {
             'form': form,
-            'subscription': subscription,
-            'product': product,
+            'quantity': quantity,
+            #'account_quantity': account_quantity,
+            
             
            
         }

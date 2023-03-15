@@ -8,7 +8,7 @@ from django.conf import settings
 
 from products.models import Products
 from profiles.models import Profile
-
+from django.contrib.auth.models import User
 
 class Order(models.Model):
     
@@ -44,7 +44,7 @@ class Order(models.Model):
         return self.order_number
 
 class Order_item(models.Model):
-
+    user = models.ForeignKey(User, on_delete=models.DO_NOTHING, null=False, blank=True)
     order = models.ForeignKey(Order, on_delete=models.CASCADE, null=False, blank=False, related_name='lineitems')
     product = models.ForeignKey(Products, on_delete=models.CASCADE, null=True, blank=True)
     quantity = models.IntegerField(null=False, blank=False, default=0)
@@ -56,14 +56,14 @@ class Order_item(models.Model):
         if self.product:
             self.order_item_total = self.product.price * self.quantity
             super().save(*args, **kwargs)
-        if self.plan:
-            self.order_item_total = self.plan.amount * self.quantity
-            super().save(*args, **kwargs)
+        # if self.plan:
+        #    self.order_item_total = self.plan.amount * self.quantity
+        #    super().save(*args, **kwargs)
     
     def __str__(self):
 
         if self.product:
             return f'{self.product.name} on order {self.order.order_number}'
         
-        if self.plan:
-            return f'Plan on order {self.order.order_number}'
+        # if self.plan:
+        #    return f'Plan on order {self.order.order_number}'
