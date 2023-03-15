@@ -4,32 +4,31 @@
 {% block content %}
 
 <script src="{% static 'subscriptions/js/stripe_subscriptions.js' %}"></script>
-{{product}}
 
 <div class="container">
   <div class="row gy-3 justify-content-center mr-3">
       <div class="card mb-3 card-whole" style="max-width: 18rem;">
-        <div class="card-header bg-transparent h2">{{product.name}}</div>
+        <div class="card-header bg-transparent h2">{{products_stripe.name}}</div>
           <div class="card-body ">
-            <h5 class="card-title">{{product.description}}</h5>
+            <h5 class="card-title">{{products_stripe.description}}</h5>
             <ul class="list-group list-group-flush card-center rounded">
               <!-- <li class="list-group-item"> {{plan.description}}</li> -->
-              <li class="list-group-item"> {{product.metadata.include_1}}</li>
-              <li class="list-group-item"> {{product.metadata.include_2}}</li>
-              <li class="list-group-item"> {{product.metadata.include_3}}</li>
+              <li class="list-group-item"> {{products_stripe.metadata.include_1}}</li>
+              <li class="list-group-item"> {{products_stripe.metadata.include_2}}</li>
+              <li class="list-group-item"> {{products_stripe.metadata.include_3}}</li>
               
             </ul>
             
           </div>
           <div class="card-footer bg-transparent text-center ">
-            <h4 class="h4">{{product.metadata.price}} $ / Month</h4>
+            <h4 class="h4">{{products_stripe.metadata.price}} $ / Month</h4>
             <h4>Sign up today</h4>
             {% if subscription.status == "active" %}
             
             <form method="POST" action="{% url 'cancel_sub' %}">
               {%csrf_token%}
               <div class="container mt-5">
-                <button type="submit" class="btn btn-primary" >Cancel Subsscription</button>
+                <button type="submit" class="btn btn-danger" >Cancel Subsscription</button>
               </div>
             </form>
             {% else %}

@@ -26,27 +26,25 @@ def stripe_subscriptions(request):
     """ A view to show all stripe gym subscriptions"""
     #plans = Plan.objects.all()
     
+    stripe.api_key = settings.STRIPE_SECRET_KEY
+    products_stripe = stripe.Product.retrieve("prod_NLjKTgOcUEexGY")
     try:
         # Retrieve the subscription & product
         stripe_customer = StripeCustomer.objects.get(user=request.user)
-        print(stripe_customer)
-        stripe.api_key = settings.STRIPE_SECRET_KEY
-        print(stripe.api_key)
         subscription = stripe.Subscription.retrieve(stripe_customer.stripeSubscriptionId)
-        print(subscription)
-        product = stripe.Product.retrieve(subscription.plan.product)
-        print(product)
+        # product = stripe.Product.retrieve(subscription.plan.product)
+        
         context = {
-           # 'plans': plans,
+            'products_stripe': products_stripe,
             'subscription': subscription,
-            'product': product,
+            # 'product': product,
             
         } 
         return render(request, 'subscriptions/stripe_subscriptions.html', context)
 
     except:
-        context = {}
-        messages.error(request, 'There are no availeble subscriptions')
+        context = {'products_stripe': products_stripe,}
+        #messages.error(request, 'There are no availeble subscriptions')
         
 
     return render(request, 'subscriptions/stripe_subscriptions.html', context)
