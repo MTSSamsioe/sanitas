@@ -47,5 +47,7 @@ class Appointments(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     date_time = models.DateTimeField(null=True, blank=False)
     
+    
+
     def __str__(self):
         return 'Appointments'
