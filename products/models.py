@@ -37,3 +37,15 @@ class Products(models.Model):
 
     def get_friendly_name(self):
         return self.friendly_name
+
+
+class Appointments(models.Model):
+
+    class Meta:
+        verbose_name_plural = 'Appointments'
+
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    date_time = models.DateTimeField(null=True, blank=False)
+    
+    def __str__(self):
+        return 'Appointments'

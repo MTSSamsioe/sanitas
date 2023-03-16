@@ -6,6 +6,16 @@
 <div><h1>{{quantity}}</h1></div>
 <div class="container">
   <div class="row gy-3 justify-content-center mr-3 my-5">
+    <div class="col">
+      <form method="POST" action="create">
+        <h1> Pick a date for reservation</h1>
+        {% csrf_token %}
+        {{ form }}
+        <button type="submit" >Create Appointment</button>
+      </form>
+    </div>
+  </div>
+  <div class="row gy-3 justify-content-center mr-3 my-5">
 
     {% for pt_session in pt_sessions %}
     <div class="card p-0 m-3" style="width: 30rem;">
