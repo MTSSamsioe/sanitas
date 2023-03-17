@@ -39,6 +39,7 @@ class AppointmentsForm(forms.ModelForm):
 
     def clean_date_time(self, *args, **kwargs):
         date_time = self.cleaned_data.get('date_time')
+        date_time_end = date_time + timedelta(minutes=60)
         # Validation not to reserv a time before current time plus one hour
         
         if not date_time >= timezone.now() + timedelta(minutes=60):
@@ -53,8 +54,20 @@ class AppointmentsForm(forms.ModelForm):
         print(user)
         if user:
             if Appointment_amount > purchased_hours:
-                raise ValidationError('No availeble sessions')
+                raise ValidationError('No available personal trainer sessions, please purchase more and try again')
 
+        # Validation to prevent making an appointment when there are already one appointment
+        print('Tid')
+        print(date_time)
+        print(date_time_end)
+        for tuple in Appointments.objects.filter(user=user).values_list('date_time'):
+            for time in tuple:
+                end_time = time + timedelta(minutes=60)
+                print(time)
+                print(end_time)
+                if date_time >= time and date_time <= end_time:
+                    raise ValidationError('You do already have an appointment at this time please pick another time')
+                    
         return date_time
    
     

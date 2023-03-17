@@ -11,7 +11,7 @@ def pt_sessions(request):
     """ A view to show all personal trainer sessions and appointments"""
     appointments = len(Appointments.objects.filter(user=request.user).values_list())
     quantity = sum(i[0] for i in Order_item.objects.filter(user=request.user).values_list('quantity'))
-    
+    appointments_time = Appointments.objects.filter(user=request.user).values_list('date_time')
     pt_sessions = Products.objects.filter(category=2)
 
     # Appoint ment form
@@ -21,6 +21,7 @@ def pt_sessions(request):
         'quantity': quantity,
         'form': form,
         'appointments': appointments,
+        'appointments_time': appointments_time,
     }
 
     return render(request, 'products/pt_sessions.html', context)
