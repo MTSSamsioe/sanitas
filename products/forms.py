@@ -49,22 +49,17 @@ class AppointmentsForm(forms.ModelForm):
         user = self.user
         purchased_hours = sum(i[0] for i in Order_item.objects.filter(user=user).values_list('quantity'))
         Appointment_amount = len(Appointments.objects.filter(user=user).values_list())
-        print(purchased_hours)
-        print(Appointment_amount)
-        print(user)
+        
         if user:
             if Appointment_amount > purchased_hours:
                 raise ValidationError('No available personal trainer sessions, please purchase more and try again')
 
         # Validation to prevent making an appointment when there are already one appointment
-        print('Tid')
-        print(date_time)
-        print(date_time_end)
+        
         for tuple in Appointments.objects.filter(user=user).values_list('date_time'):
             for time in tuple:
                 end_time = time + timedelta(minutes=60)
-                print(time)
-                print(end_time)
+                
                 if date_time >= time and date_time <= end_time:
                     raise ValidationError('You do already have an appointment at this time please pick another time')
                     
