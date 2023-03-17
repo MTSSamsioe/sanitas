@@ -9,10 +9,12 @@ from .forms import AppointmentsForm
 
 def pt_sessions(request):
     """ A view to show all personal trainer sessions and appointments"""
-    appointments = len(Appointments.objects.filter(user=request.user).values_list())
+    scheduled_sessions = len(Appointments.objects.filter(user=request.user).values_list())
     quantity = sum(i[0] for i in Order_item.objects.filter(user=request.user).values_list('quantity'))
     appointments_time = Appointments.objects.filter(user=request.user).values_list('date_time')
     pt_sessions = Products.objects.filter(category=2)
+    # Appointment
+    appointments = Appointments.objects.filter(user=request.user)
 
     # Appoint ment form
     form = AppointmentsForm()
@@ -21,6 +23,7 @@ def pt_sessions(request):
         'quantity': quantity,
         'form': form,
         'appointments': appointments,
+        'scheduled_sessions': scheduled_sessions,
         'appointments_time': appointments_time,
     }
 

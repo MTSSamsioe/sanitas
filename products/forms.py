@@ -35,7 +35,7 @@ class AppointmentsForm(forms.ModelForm):
         # if user:
         # if Appointment_amount > purchased_hours:
         # raise ValidationError('testing')
-        print('Slut på init')
+        # print('Slut på init')
 
     def clean_date_time(self, *args, **kwargs):
         date_time = self.cleaned_data.get('date_time')
