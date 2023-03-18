@@ -6,10 +6,10 @@ from django.forms import ValidationError
 from django.contrib.auth.models import User
 
 # time packages
-from django.core.validators import MinValueValidator, MaxValueValidator
+# from django.core.validators import MinValueValidator, MaxValueValidator
 from datetime import datetime, timedelta
 from django.utils import timezone
-import pytz
+# import pytz
 
 
 class AppointmentsForm(forms.ModelForm):
