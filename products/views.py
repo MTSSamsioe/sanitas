@@ -77,7 +77,7 @@ def edit_appointment(request, appointment_id):
             messages.success(request, 'Your appointment was successfully changed')
             return redirect('/products/pt_sessions/')
         else:
-            messages.error(request, f'{e}')
+            messages.error(request, 'Something went wrong')
            
     form = AppointmentsForm(instance=appointment)
 
@@ -86,3 +86,11 @@ def edit_appointment(request, appointment_id):
         'appointment': appointment,
     }
     return render(request, 'products/edit_session.html', context)
+
+
+def delete_appointment(request, appointment_id):
+
+    appointment = get_object_or_404(Appointments, id=appointment_id)
+    appointment.delete()
+    messages.success(request, 'Your appointment has been canceled')
+    return redirect('/products/pt_sessions/')

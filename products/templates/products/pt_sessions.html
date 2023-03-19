@@ -101,9 +101,28 @@
             <h6 class="card-subtitle mb-2 text-muted">This is your appointment with a personal trainer</h6>
             <p class="card-text">{{appointment.date_time}}</p>
             {% if current_time >= appointment.date_time %}
-              <h2 class="h2">This a pointment can't be edited</h2>
+              <h6 class="h6">This appointment has been completed and can't be edited</h6>
             {% else%}
-              <a href="#" class="btn btn-danger">Cancel</a>
+              
+              <button class="btn btn-danger mb-1 " type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                Cancel appointment</button>
+              <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h1 class="modal-title fs-5" id="exampleModalLabel">Warning!</h1>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      Are you sure you want to cancel your appointment?
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                      <a href="/products/pt_sessions/delete/{{appointment.id}}" class=" link-light btn btn-success">Cancel</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
               <a href="/products/pt_sessions/edit/{{ appointment.id}}" class="btn btn-success">Edit</a>
             {% endif %}
           </div>
