@@ -1,4 +1,19 @@
-body {
+
+/* Css for the subscriptions page */
+
+.card-whole {
+  background-image: linear-gradient(to bottom right, rgba(42, 76, 246, 0.7), rgba(42, 76, 246, 0.5));
+  margin-right: 5%;
+  margin-top: 5%;
+}
+
+.card-center {
+  box-shadow: 3px 3px 10px;
+}
+
+
+
+/* body {
 
     div {
         background-color:  ;
@@ -82,4 +97,4 @@ body {
       background: var(--button-color);
     }
 
-}
+} */

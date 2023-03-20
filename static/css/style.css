@@ -1,4 +1,4 @@
-. {
+* {
     margin: 0;
 }
 /* Css for navbar*/
@@ -47,7 +47,7 @@
 
 
 
-/* Css for the subscriptions page */
+/* Css for cards on the site */
 
 .card-whole {
     background-image: linear-gradient(to bottom right, rgba(42, 76, 246, 0.7), rgba(42, 76, 246, 0.5));

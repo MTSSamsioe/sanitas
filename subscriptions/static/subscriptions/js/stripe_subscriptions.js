@@ -1,10 +1,4 @@
-console.log("Sanity check!");
-
-// PLAN SELECT FROM https://ordinarycoders.com/blog/article/django-stripe-monthly-subscription
-//document.getElementsByTagName("input").addEventListener ("click", console.log('test'));
-//console.log(input1)
-
-
+// all code below is from https://testdriven.io/blog/django-stripe-subscriptions/
 
 // Get Stripe publishable key
 fetch("/subscriptions/config/")
@@ -13,7 +7,7 @@ fetch("/subscriptions/config/")
   // Initialize Stripe.js
   const stripe = Stripe(data.publicKey);
   
-  console.log(stripe)
+  // console.log(stripe)
   
   
   // Event handler
@@ -45,25 +39,25 @@ fetch("/subscriptions/config/")
   }
 });
 
-function planSelect(name, price, priceId) {
-  console.log(name)
-  var inputs = document.getElementsByTagName('input');
+// function planSelect(name, price, priceId) {
+//   console.log(name)
+//   var inputs = document.getElementsByTagName('input');
 
-  for(var i = 0; i<inputs.length; i++){
-    inputs[i].checked = false;
-    if(inputs[i].name== name){
+//   for(var i = 0; i<inputs.length; i++){
+//     inputs[i].checked = false;
+//     if(inputs[i].name== name){
 
-      inputs[i].checked = true;
-    }
-  }
+//       inputs[i].checked = true;
+//     }
+//   }
 
-  var n = document.getElementById('plan');
-  var p = document.getElementById('price');
-  var pid = document.getElementById('priceId');
-  n.innerHTML = name;
-  p.innerHTML = price;
-  pid.innerHTML = priceId;
-      document.getElementById("submit").disabled = false;
+//   var n = document.getElementById('plan');
+//   var p = document.getElementById('price');
+//   var pid = document.getElementById('priceId');
+//   n.innerHTML = name;
+//   p.innerHTML = price;
+//   pid.innerHTML = priceId;
+//       document.getElementById("submit").disabled = false;
 
 
-}
+// }
