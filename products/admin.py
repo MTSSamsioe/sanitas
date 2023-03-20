@@ -5,23 +5,26 @@ from .models import Products, Categories, Appointments
 # Register your models here.
 
 class CategoriesAdmin(admin.ModelAdmin):
-   list_display =(
+    list_display = (
         'name',
     )
-ordering = ('name,')
+
+    ordering = ('name',)
 
 
 class ProductsAdmin(admin.ModelAdmin):
-   list_display =(
+    list_display = (
         'name',
         'category',
     )
-ordering = ('category,')
+
+    ordering = ('category',)
+
 
 class AppointmentsAdmin(admin.ModelAdmin):
-    list_display = ( 'user', 'date_time',)
+    list_display = ('user', 'date_time',)
 
-ordering = ('user')
+    ordering = ('user',)
 
 
 admin.site.register(Categories, CategoriesAdmin)

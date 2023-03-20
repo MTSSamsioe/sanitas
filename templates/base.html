@@ -38,22 +38,22 @@
 
 <body>
   <header class="">
-    <div class="container-fluid p-0 m-0 my-nav-text ">
-      <div class="row">
-        <div class="col-12 d-flex">
+    <div class="container-fluid p-0 m-0 ">
+      <div class="row p-0 m-0">
+        <div class="col-12 my-nav-top d-flex">
 
-          <div class=" pt-3 fs-3 my-nav-top ">
-            <a class="navbar-brand px-4" href="{% url 'home' %}">SANITAS GYM</a>
+          <div class=" py-2 fs-5 d-flex align-items-center">
+            <a class="navbar-brand px-4 my-logo " href="{% url 'home' %}">SANITAS GYM</a>
           </div>
 
-          <div class=" pt-3 px-4 fs-4 my-nav-top d-flex flex-grow-1 justify-content-end" style="color: azure;">
-            <a class="nav-link d-flex align-items-center nav-icon " aria-label="Opens members page" rel="noopener" href="{% url 'profile' %}"><i class="fa-solid fa-user nav-icon"></i>Members</a>
-            <a class="nav-link d-flex align-items-center nav-icon" aria-label="Opens shopping bag" rel="noopener" href="{% url 'view_bag' %}"><i class="fa-solid fa-cart-shopping nav-icon"></i></a>
-            {% if total %}
+          <div class=" py-2 px-4 fs-4 d-flex flex-grow-1 justify-content-end my-membersbag" >
+            <a class="nav-link d-flex align-items-center nav-icon my-membersbag" aria-label="Opens members page" rel="noopener" href="{% url 'profile' %}"><i class="fa-solid fa-user nav-icon mx-2"></i>Members</a>
+            <a class="nav-link d-flex align-items-center nav-icon my-membersbag" aria-label="Opens shopping bag" rel="noopener" href="{% url 'view_bag' %}"><i class="fa-solid fa-cart-shopping nav-icon mx-2"></i></a>
+            <span class="my-membersbag "><p class=" my-membersbag mt-3">{% if total %}
               ${{ total|floatformat:2 }}
               {% else %}
               0.00 $
-              {% endif %}
+              {% endif %}</p></span>
           </div>
 
         </div>
@@ -61,26 +61,25 @@
     </div>
     
     <nav class="navbar navbar-expand-lg bg-body-tertiary p-0">
-      <div class="container-fluid my-nav py-3 py-lg-3">
+      <div class="container-fluid pl-5 m-0 my-nav py-3">
         
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse px-1 w-100" id="navbarNavAltMarkup">
           <div class="navbar-nav my-nav-text w-100 d-flex ">
-            <a class="nav-link active" aria-current="page" href="{% url 'home' %}"><strong>Home</strong></a>
-            <a class="nav-link" href="#find_us">Find us</a>
-            <a class="nav-link" href="{% url 'stripe_subscriptions' %}" aria-label="Opens subscriptions page" rel="noopener">Gym subscriptions</a>
-            <a class="nav-link" href="{% url 'pt_sessions' %}" aria-label="Opens personal trainer page" rel="noopener">Personal trainer</a>
+            <a class="nav-link active {% if request.resolver_match.url_name == 'home' %}active text-decoration-underline{% endif %}" aria-current="page" href="{% url 'home' %}"><strong>Home</strong></a>
+            <a class="nav-link {% if request.resolver_match.url_name == 'stripe_subscriptions' %}active text-decoration-underline{% endif %}" href="{% url 'stripe_subscriptions' %}" aria-label="Opens subscriptions page" rel="noopener">Gym subscriptions</a>
+            <a class="nav-link {% if request.resolver_match.url_name == 'pt_sessions' %}active text-decoration-underline{% endif %}" href="{% url 'pt_sessions' %}" aria-label="Opens personal trainer page" rel="noopener">Personal trainer</a>
 
             {% if user.is_authenticated %}
-            <a class="nav-link " href="{% url 'account_logout' %}" aria-label="Opens log out page" rel="noopener">Logout</a>
+            <a class="nav-link {% if request.resolver_match.url_name == 'account_logout' %}active text-decoration-underline{% endif %} " href="{% url 'account_logout' %}" aria-label="Opens log out page" rel="noopener">Logout</a>
 
             
 
             {% else %}
-            <a class="nav-link" href="{% url 'account_signup' %}" aria-label="Opens signup page" rel="noopener">Register</a>
-            <a class="nav-link" href="{% url 'account_login' %}" aria-label="Opens login page" rel="noopener">Login</a>
+            <a class="nav-link {% if request.resolver_match.url_name == 'account_signup' %}active text-decoration-underline{% endif %}" href="{% url 'account_signup' %}" aria-label="Opens signup page" rel="noopener">Register</a>
+            <a class="nav-link {% if request.resolver_match.url_name == 'account_login' %}active text-decoration-underline{% endif %}" href="{% url 'account_login' %}" aria-label="Opens login page" rel="noopener">Login</a>
             {% endif %}
 
           </div>
@@ -124,9 +123,9 @@
     <div class="container-fluid my-footer mt-5">
         <div class="row">
             
-            <div class="d-flex justify-content-center text-center my-3">
-                <div class="col-sm-6 text-white text-cente"><span><h5>Visist us on our facebook page:</h5></span><a href="https://www.facebook.com/profile.php?id=100090010132752&sk=about" target="_blank"
-                  aria-label="Opens Facebook in a new window" rel="noopener"><i class="fa-brands fa-facebook fa-xl text-white"></i></a></div>
+            <div class="d-flex justify-content-center text-center my-3 ">
+                <div class="col-sm-6 text-center my-nav-text"><span><h5>Visist us on our facebook page:</h5></span><a href="https://www.facebook.com/profile.php?id=100090010132752&sk=about" target="_blank"
+                  aria-label="Opens Facebook in a new window" rel="noopener"><i class="fa-brands fa-facebook fa-xl"></i></a></div>
             </div>
         </div>
     </div>

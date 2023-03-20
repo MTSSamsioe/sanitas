@@ -2,8 +2,31 @@
     margin: 0;
 }
 /* Css for navbar*/
+
+.my-logo {
+    color: black;
+    font-size: 30px;
+}
+@media only screen and (max-width: 600px) {
+    .my-logo {
+      font-size: 25px;
+    }
+  }
+
+.my-membersbag {
+    font-size: 25px;
+    color: black;
+}
+
+@media only screen and (max-width: 600px) {
+    .my-membersbag {
+      font-size: 20px;
+    }
+  }
+
+
 .my-nav-top {
-    background-color: rgba(50, 41, 255, 1);
+    background-color: rgba(42, 76, 246, 0.7);
     
 }
 
@@ -12,12 +35,14 @@
 }
 
 .my-nav {
-    background-image: linear-gradient( rgba(50, 41, 255, 1), rgba(50, 41, 255, 0.63));
+    background-image: linear-gradient( rgba(42, 76, 246, 0.7), rgba(42, 76, 246, 0.5));
     
 }
 
 .my-nav-text a {
-    color:azure;
+
+    color: black;
+    font-size: large;
 }
 
 
@@ -25,7 +50,7 @@
 /* Css for the subscriptions page */
 
 .card-whole {
-    background-image: linear-gradient(to bottom right, rgba(42, 76, 246, 0.81), rgba(42, 76, 246, 0.54));
+    background-image: linear-gradient(to bottom right, rgba(42, 76, 246, 0.7), rgba(42, 76, 246, 0.5));
     margin-right: 5%;
     margin-top: 5%;
 }
@@ -44,5 +69,5 @@
 
 .my-footer {
     
-    background-color: rgba(50, 41, 255, 1);
+    background-color: rgba(42, 75, 246, 0.7);
 }
