@@ -27,9 +27,6 @@ class Products(models.Model):
     name = models.CharField(max_length=254)
     friendly_name = models.CharField(max_length=254, null= True, blank= True)
     description = models.TextField(max_length=500)
-    include_1 = models.TextField(max_length=254, null= True, blank= True)
-    include_2 = models.TextField(max_length=254, null= True, blank= True)
-    include_3 = models.TextField(max_length=254, null= True, blank= True)
     price = models.DecimalField(max_digits=6, decimal_places=2)
 
     def __str__(self):

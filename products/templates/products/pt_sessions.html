@@ -12,14 +12,43 @@
   <!-- {% endfor %} -->
 
 <!-- Css for personal trainers and products page -->
-<link rel="stylesheet" href="{% static 'products/css/products.css' %}">  
+<!-- <link rel="stylesheet" href="{% static 'products/css/products.css' %}">   -->
 
 <div class="container-fluid">
+  <div class="row  ">
+    <h1 class="h3 my-3 text-center"> Make an appoinment</h1>
+    <p class="card-text w-50 text-center m-auto" >Here you can make an appointment with one of our personal trainers after you purchase a session. 
+      One session lasts one hour and you can change the appointment time or cancel the appointment up to one hour before it starts. </p>
+    <hr>
+    <div class="col-lg-8 m-auto ">
+      <div class="card my-3 m-auto" style="width: 30rem;">
+        
+        <div class="card-body">
+          
+          <h5 class="card-title">Make an appoitment</h5>
+          <h6 class="card-subtitle mb-2 text-muted">You have {{available_appointments}} sessions available</h6>
+          <h6 class="card-subtitle mb-2 text-muted">You have {{scheduled_sessions}}  scheduled sessions at the moment</h6>
+          <form action="create" method="POST" class="form w-50 m-auto my-3">
+              <br>
+              {% csrf_token %}
+              {{ form }}
+              <br>
+              <button type="submit" class="btn btn-info my-3" >Make Appointment</button>
+          </form>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+  <hr>
   <div class="row ">
-    <div class="col-lg-6 d-flex justify-content-center ">
-      
-        {% for pt_session in pt_sessions %}
 
+    <div class="col-lg-6 d-flex justify-content-center ">
+      <div>
+        <h3>Available offers from our personal trainers</h3>
+        <hr>
+          {% for pt_session in pt_sessions %}
+      
           <div class="card p-0 m-3 card-whole card-center" style="width: 30rem; height: 780px;">
             <img class="card-img-top img-fluid rounded-start"
             src="/media/personal_trainer_gym.jpg"
@@ -69,11 +98,11 @@
                 </form>
               </div>
             </div>
-            
-          <!-- card v -->
+              
+            <!-- card v -->
           </div>  
           {% endfor %}
-        
+      </div> 
       
     </div>
     <!--A Col-6 slut A -->
@@ -82,21 +111,10 @@
       
       
       
-      <div >
-        {% if quantity %}
-        <h1 class="h1 mt-3 m-auto"> Create appoinment</h1>
-        <h2>Purchased sessions: {{quantity}}</h2>
-        <h2>Scheduled sessions: {{scheduled_sessions}}</h2>
-        <form method="POST" action="create" class="form w-50 m-auto my-3">
-          {% csrf_token %}
-          {{ form }}
-          <button type="submit" class="btn btn-info my-3" >Create Appointment</button>
-        </form>
-        {% else%}
-        <h3 class="h3"> Purchase a personal trainer session before schedulig</h3>
-        {% endif %}
+      <div>
         
-        {% if appointments %}
+        <h3>Scheduled appointments</h3>
+        <hr>
         {% for appointment in appointments %}
 
         <div class="card my-3 m-auto card-whole card-center" style="width: 30rem;">
@@ -104,8 +122,8 @@
             <h5 class="card-title">Personal trainer session</h5>
             <h6 class="card-subtitle mb-2 text-muted">This is your appointment with a personal trainer</h6>
             <p class="card-text">{{appointment.date_time}}</p>
-            {% if current_time >= appointment.date_time %}
-              <h6 class="h6">This appointment has been completed and can't be edited</h6>
+            {% if change_time >= appointment.date_time %}
+              <p class="h6">This appointment can't be edited becauses it has benn completed or is starting soon</p>
             {% else%}
               
               <button class="btn btn-danger mb-1 " type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
@@ -122,17 +140,17 @@
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                      <a href="/products/pt_sessions/delete/{{appointment.id}}" class=" link-light btn btn-success">Cancel</a>
+                      <a href="{% url 'delete_appointment' appointment.id %}" class=" link-light btn btn-success">Cancel</a>
                     </div>
                   </div>
                 </div>
               </div>
-              <a href="/products/pt_sessions/edit/{{ appointment.id}}" class="btn btn-success">Edit</a>
+              <a href="{% url 'edit_appointment' appointment.id %}" class="btn btn-success" aria-label="opens edit appointment page" rel="noopener">Edit</a>
             {% endif %}
           </div>
         </div>
         {% endfor%}
-        {% else %}
+        {% if not appointments %}
         <h1 class="h1">There are no scheduled appointments</h1>
         {% endif %}
       </div>

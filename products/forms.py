@@ -42,16 +42,16 @@ class AppointmentsForm(forms.ModelForm):
         date_time_end = date_time + timedelta(minutes=60)
         # Validation not to reserv a time before current time plus one hour
         
-        if not date_time >= timezone.now() + timedelta(minutes=60):
+        if date_time <= timezone.now() + timedelta(minutes=60):
             raise ValidationError('Pick a time at least 1 hour after current time')
         
         # Validation to prevent making appoint ment with to few purchased hours
         user = self.user
         purchased_hours = sum(i[0] for i in Order_item.objects.filter(user=user).values_list('quantity'))
-        Appointment_amount = len(Appointments.objects.filter(user=user).values_list())
+        appointment_amount = len(Appointments.objects.filter(user=user).values_list())
         
         if user:
-            if Appointment_amount > purchased_hours:
+            if appointment_amount > purchased_hours:
                 raise ValidationError('No available personal trainer sessions, please purchase more and try again')
 
         # Validation to prevent making an appointment when there are already one appointment

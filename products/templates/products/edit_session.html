@@ -12,9 +12,8 @@
   
 <div class="container-fluid">
   <div class="row ">
-    
     <!-- Col-6 start v -->
-    <h3 class="h3 text-center">Chane date for your reservation</h3>
+    <h3 class="h3 text-center">Change date for your reservation</h3>
     <br>
     <div class="col-md-6 offset-md-3 d-flex justify-content-center text-center" >
         {% if user.id == appointment.user.id %}
@@ -27,7 +26,8 @@
                 {% csrf_token %}
                 {{ form }}
                 <br>
-                <button type="button" class="btn btn-danger" onclick="window.history.back()">Cancel</button>
+                <a href="{% url 'pt_sessions' %}" class="btn btn-danger" aria-label="Opens appointments page" rel="noopener">Back to appointments</a>
+                <!-- <button type="button" class="btn btn-danger" onclick="window.history.back()">Cancel</button> -->
                 <button type="submit" class="btn btn-success">Save</button>
             </form>
           </div>

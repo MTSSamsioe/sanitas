@@ -38,7 +38,7 @@
     animation-name: show-hero-text;
     animation-duration: 7s;
     animation-fill-mode: forwards;
-    animation-delay: 2s;
+    
 }
 
 @keyframes show-hero-text {

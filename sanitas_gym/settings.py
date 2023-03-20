@@ -31,12 +31,12 @@ SECRET_KEY = os.environ.get('SECRET_KEY', '')
 GOOGLEMAPS_KEY = os.environ.get('GOOGLEMAPS_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-if os.environ.get('DEVELOPMENT'):
-    debug_on = True
-else:
-    debug_on = False
+# if os.environ.get('DEVELOPMENT'):
+#     debug_on = True
+# else:
+#     debug_on = False
 
-DEBUG = debug_on
+DEBUG = os.environ.get('DEVELOPMENT') == '1'
 
 ALLOWED_HOSTS = ['sanitas-gym.herokuapp.com', 'localhost']
 
