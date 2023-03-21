@@ -17,10 +17,10 @@
 <div class="container-fluid">
   <div class="row  ">
     <h1 class="h3 my-3 text-center"> Make an appoinment</h1>
-    <p class="card-text w-50 text-center m-auto" >Here you can make an appointment with one of our personal trainers after you purchase a session. 
+    <p class="card-text w-50 text-center m-auto my-3" >Here you can make an appointment with one of our personal trainers after you purchase a session. 
       One session lasts one hour and you can change the appointment time or cancel the appointment up to one hour before it starts. </p>
     <hr>
-    <div class="col-lg-8 m-auto ">
+    <div class="col-lg-8 m-auto my-3 ">
       <div class="card my-3 m-auto" style="width: 30rem;">
         
         <div class="card-body">
@@ -46,7 +46,7 @@
 
     <div class="col-lg-6 d-flex justify-content-center ">
       <div>
-        <h3>Available offers from our personal trainers</h3>
+        <h3 class="text-center">Available offers from our personal trainers</h3>
         <hr>
           {% for pt_session in pt_sessions %}
       
@@ -113,7 +113,7 @@
       
       <div>
         
-        <h3>Scheduled appointments</h3>
+        <h3 class="text-center">Scheduled appointments</h3>
         <hr>
         {% for appointment in appointments %}
 

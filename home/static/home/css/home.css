@@ -36,7 +36,7 @@
     
     /* Animation for hero text*/
     animation-name: show-hero-text;
-    animation-duration: 7s;
+    animation-duration: 13s;
     animation-fill-mode: forwards;
     
 }
@@ -100,10 +100,5 @@
 /* Google map css*/
 #map {min-height: 360px;}
 
-/* Page not found css */
 
-.error-container {
-    background-image: linear-gradient( rgba(50, 41, 255, 1), rgba(50, 41, 255, 0.63));
-    color: white;
-    font-size: xx-large;
-}
+

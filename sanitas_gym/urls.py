@@ -26,7 +26,6 @@ urlpatterns = [
     path('', include('home.urls')),
     path('products/', include('products.urls')),
     path('bag/', include('bag.urls')),
-    path('bag/', include('bag.urls')),
     path('checkout/', include('checkout.urls')),
     path('profiles/', include('profiles.urls')),
     path('subscriptions/', include('subscriptions.urls')),
@@ -35,4 +34,5 @@ urlpatterns = [
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 
-handler404 = 'home.views.page_not_found'
+handler404 = 'sanitas_gym.views.page_not_found'
+handler500 = 'sanitas_gym.views.server_error'

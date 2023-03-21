@@ -31,12 +31,12 @@ SECRET_KEY = os.environ.get('SECRET_KEY', '')
 GOOGLEMAPS_KEY = os.environ.get('GOOGLEMAPS_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# if os.environ.get('DEVELOPMENT'):
-#     debug_on = True
-# else:
-#     debug_on = False
+if os.environ.get('DEVELOPMENT'):
+    debug_on = True
+else:
+    debug_on = False
 
-DEBUG = os.environ.get('DEVELOPMENT') == '1'
+DEBUG = debug_on
 
 ALLOWED_HOSTS = ['sanitas-gym.herokuapp.com', 'localhost']
 
@@ -225,7 +225,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Stripe
 
 #stripe price id Sanitas gym subscription
-STRIPE_PRICE_ID = 'price_1Mb1sHBxdi5CQaAbbUy6yLH8'
+STRIPE_PRICE_ID = os.environ.get('STRIPE_PRICE_ID')
 
 #stripe keys
 STRIPE_CURRENCY = 'usd'
