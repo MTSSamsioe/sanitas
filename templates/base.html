@@ -47,13 +47,14 @@
           </div>
 
           <div class=" py-2 px-4 fs-4 d-flex flex-grow-1 justify-content-end my-membersbag" >
-            <a class="nav-link d-flex align-items-center nav-icon my-membersbag" aria-label="Opens members page" rel="noopener" href="{% url 'profile' %}"><i class="fa-solid fa-user nav-icon mx-2"></i>Members</a>
-            <a class="nav-link d-flex align-items-center nav-icon my-membersbag" aria-label="Opens shopping bag" rel="noopener" href="{% url 'view_bag' %}"><i class="fa-solid fa-cart-shopping nav-icon mx-2"></i></a>
-            <span class="my-membersbag "><p class=" my-membersbag mt-3">{% if total %}
+            <a class="nav-link d-flex align-items-center nav-icon my-membersbag {% if request.resolver_match.url_name == 'profile' %}active text-decoration-underline{% endif %}" aria-label="Opens members page" rel="noopener" href="{% url 'profile' %}"><i class="fa-solid fa-user nav-icon mx-2"></i>Members</a>
+            <a class="nav-link d-flex align-items-center nav-icon my-membersbag " aria-label="Opens shoppingbag" rel="noopener" href="{% url 'view_bag' %}"><i class="fa-solid fa-cart-shopping nav-icon mx-2"></i>
+            <span class="my-membersbag "></a><p class=" my-membersbag mt-3 {% if request.resolver_match.url_name == 'view_bag' %}active text-decoration-underline{% endif %}">{% if total %}
               ${{ total|floatformat:2 }}
               {% else %}
               0.00 $
               {% endif %}</p></span>
+            
           </div>
 
         </div>
