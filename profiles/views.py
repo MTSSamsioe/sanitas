@@ -28,15 +28,11 @@ def profile(request):
 
         # Display available pt_session hours
         #account_quantity = get_object_or_404(Order_item, user=request.user)
-        quantity = Order_item.objects.values_list('quantity')
-        
+        #quantity = Order_item.objects.values_list('quantity')
+        orders = profile.orders.all()
         context = {
             'form': form,
-            'quantity': quantity,
-            #'account_quantity': account_quantity,
-            
-            
-           
+            'orders': orders,
         }
 
         return render(request, 'profiles/profile.html', context)

@@ -14,44 +14,73 @@
 
 
 <div class="overlay">
-    <div class="container">
-        <div class="row">
-            <div class="col">
-                <hr>
-                <h2 class="h2 p-3">My User Profile</h2>
-                <hr>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <h5>Your customer information:</h5>
-                <form class=" m-3 d-grid" method="POST" action="{% url 'profile' %}" id="profile-update-form">
-                    {% csrf_token %}
-                    {{ form }}
-                    <button class="btn btn-success mt-3">Update</button>
-                </form>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <h5>Active subscription:</h5>
-                    <div class="container mt-5">
-                        {% if subscription.status == "active" %}
-                          <div class="card" style="width: 18rem;">
-                            <div class="card-body">
-                              <h5 class="card-title">{{ product.name }}</h5>
-                              <p class="card-text">
-                                {{ product.description }}
-                              </p>
-                              
-                            </div>
-                          </div>
-                        {% else %}
-                          <h5>There is no active subscription</h5>
-                        {% endif %}
-                </div>
-            </div>
+  <div class="container">
+    <div class="row">
+        <div class="col">
+            <hr>
+            <h2 class="h2 p-3">Your user profile </h2>
+            <hr>
         </div>
     </div>
+    <div class="row">
+        <div class="col">
+            <h5 class="h5">Your customer information:</h5>
+            <hr>
+            <form class=" m-3 d-grid" method="POST" action="{% url 'profile' %}" id="profile-update-form">
+              {% csrf_token %}
+              {{ form }}
+              <button class="btn btn-success mt-3">Update</button>
+            </form>
+          </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <h5 class="h5">Your order history:</h5>
+        <hr>
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Order number</th>
+                <th>Purchase date</th>
+                <th>Personal trainer session</th>
+                <th>Quantity</th>
+                <th>Order amount</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for order in orders %}
+                <tr>
+                  <td>
+                    <p title="{{order.order_number}}">{{order.order_number|truncatechars:3}}</p>
+                  </td>
+                  <td>
+                    {{order.date}}
+                  </td>
+                  <td>
+                      {% for item in order.lineitems.all %}
+                        {{ item.product.friendly_name }}
+                      {% endfor %}
+                  </td>
+                  <td>
+                    {% for item in order.lineitems.all %}
+                        {{ item.quantity }}
+                    {% endfor  %}
+                  </td>
+                  <td>
+                    {{ order.total }}$
+                  </td>
+                </tr>
+                {% endfor %}
+                {% if not orders %}
+                  <h5 class="h5">You have not made any orders</h5>
+                {% endif%}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-{{ profile }}
+
 {% endblock %}
