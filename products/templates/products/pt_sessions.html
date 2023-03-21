@@ -28,7 +28,8 @@
           <h5 class="card-title">Make an appoitment</h5>
           <h6 class="card-subtitle mb-2 text-muted">You have {{available_appointments}} sessions available</h6>
           <h6 class="card-subtitle mb-2 text-muted">You have {{scheduled_sessions}}  scheduled sessions at the moment</h6>
-          <form action="create" method="POST" class="form w-50 m-auto my-3">
+          <form method="POST" class="form w-50 m-auto my-3" >
+          
               <br>
               {% csrf_token %}
               {{ form }}
@@ -58,18 +59,17 @@
               <p class="card-text">{{pt_session.description}}</p>
               <p class="card-text h4 text-center">{{pt_session.price}} $ / h</p>
               <div class="card-text text-center">
-                <form class="form" action="{% url 'add_bag_item' pt_session.id %}" method="POST">
+                <form class="form" action="{% url 'add_bag_item' pt_session.id %}" method="POST" id="hours">
+                  <label for="hours">Number of hours:</label>
                   {% csrf_token %}
                   
                   
-                  <p class="">Number of hours:</p>
-                  
-                  <div class="form-group input-group w-50 d-flex justify-content-center  m-auto">
+                  <div class="form-group input-group w-50 d-flex justify-content-center  m-auto ">
                     
                     <div class="input-group-prepend ">
                       
   
-                        <button type="button" class="decrement-qty btn " data-item_id="{{pt_session.id}}"
+                        <button aria-label="decrement" type="button" class="decrement-qty btn " data-item_id="{{pt_session.id}}"
                         id="decrement-qty_{{ pt_session.id }}">
                         <span class="icon">
                           <i class="fas fa-minus"></i>
@@ -78,11 +78,11 @@
                       
                     </div>
                     
-                    <input class="form-control qty_input text-center" type="number" name="quantity" value="1" min="1"
+                    <input aria-label="input hour quantity" class="form-control qty_input text-center" type="number" name="quantity" value="1" min="1"
                     max="99" data-item_id="{{ pt_session.id }}" id="id_qty_{{ pt_session.id }}">
                     
                     <div class="input-group-append">
-                      <button type="button" class="increment-qty btn" data-item_id="{{ pt_session.id }}"
+                      <button aria-label="Increment" type="button" class="increment-qty btn" data-item_id="{{ pt_session.id }}"
                       id="increment-qty_{{ pt_session.id }}">
                       <span class="icon">
                         <i class="fas fa-plus"></i>
@@ -123,7 +123,7 @@
             <h6 class="card-subtitle mb-2 text-muted">This is your appointment with a personal trainer</h6>
             <p class="card-text">{{appointment.date_time}}</p>
             {% if change_time >= appointment.date_time %}
-              <p class="h6">This appointment can't be edited becauses it has benn completed or is starting soon</p>
+              <p class="h6">This appointment can't be edited becauses it has been completed or it is starting soon</p>
             {% else%}
               
               <button class="btn btn-danger mb-1 " type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
@@ -151,7 +151,7 @@
         </div>
         {% endfor%}
         {% if not appointments %}
-        <h1 class="h1">There are no scheduled appointments</h1>
+        <p class="h6">There are no scheduled appointments</p>
         {% endif %}
       </div>
     <!-- col v -->
