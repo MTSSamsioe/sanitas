@@ -27,7 +27,8 @@ def stripe_subscriptions(request):
     #plans = Plan.objects.all()
     
     stripe.api_key = settings.STRIPE_SECRET_KEY
-    products_stripe = stripe.Product.retrieve("prod_NLjKTgOcUEexGY")
+    stripe_product_info = settings.STRIPE_PRODUCT_INFO
+    products_stripe = stripe.Product.retrieve(stripe_product_info)
     try:
         # Retrieve the subscription & product
         stripe_customer = StripeCustomer.objects.get(user=request.user)
@@ -91,11 +92,11 @@ def stripe_config(request):
 def create_checkout_session(request):
     
     if request.method == 'GET':
-        # if os.environ.get('DEVELOPMENT'):
-        #     domain_url = 'https://8000-mtssamsioe-sanitas-4vmeom2cqnk.ws-eu90.gitpod.io/subscriptions/'
-        # else:
-        #     domain_url = 'https://sanitas-gym.herokuapp.com/subscriptions/'
-        domain_url = 'https://8000-mtssamsioe-sanitas-4vmeom2cqnk.ws-eu90.gitpod.io/subscriptions/'
+        if os.environ.get('DEVELOPMENT'):
+            domain_url = 'https://8000-mtssamsioe-sanitas-4vmeom2cqnk.ws-eu91.gitpod.io/subscriptions/'
+        else:
+            domain_url = 'https://sanitas-gym.herokuapp.com/subscriptions/'
+        #domain_url = 'https://8000-mtssamsioe-sanitas-4vmeom2cqnk.ws-eu91.gitpod.io/subscriptions/'
         stripe.api_key = settings.STRIPE_SECRET_KEY
         
         try:
@@ -175,6 +176,6 @@ def stripe_webhook(request):
             stripeSubscriptionId=stripe_subscription_id,
         )
         
-        print(user.username + ' just subscribed.')
+        # print(user.username + ' just subscribed.')
 
     return HttpResponse(status=200)

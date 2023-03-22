@@ -225,7 +225,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Stripe
 
 #stripe price id Sanitas gym subscription
-STRIPE_PRICE_ID = os.environ.get('STRIPE_PRICE_ID')
+STRIPE_PRICE_ID = os.environ.get('STRIPE_PRICE_ID', '')
+STRIPE_PRODUCT_INFO = os.environ.get('STRIPE_PRODUCT_INFO', '')
+# STRIPE_PRICE_ID = 'price_1Mb1sHBxdi5CQaAbbUy6yLH8'
 
 #stripe keys
 STRIPE_CURRENCY = 'usd'

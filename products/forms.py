@@ -51,7 +51,7 @@ class AppointmentsForm(forms.ModelForm):
         appointment_amount = len(Appointments.objects.filter(user=user).values_list())
         
         if user:
-            if appointment_amount > purchased_hours:
+            if appointment_amount >= purchased_hours:
                 raise ValidationError('No available personal trainer sessions, please purchase more and try again')
 
         # Validation to prevent making an appointment when there are already one appointment

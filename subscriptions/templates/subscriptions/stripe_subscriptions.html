@@ -16,7 +16,7 @@
       
       <div class="row gy-3 justify-content-center mr-3">
         <div class="card mb-3 card-whole" style="max-width: 18rem;">
-          <div class="card-header bg-transparent h2">{{products_stripe.name}}</div>
+          <div class="card-header bg-transparent h2 text-center">{{products_stripe.name}}</div>
           <div class="card-body ">
             <h5 class="card-title">{{products_stripe.description}}</h5>
             <ul class="list-group list-group-flush card-center rounded">
@@ -30,19 +30,19 @@
           </div>
           <div class="card-footer bg-transparent text-center ">
             <h4 class="h4">{{products_stripe.metadata.price}} $ / Month</h4>
-            <h4>Sign up today</h4>
+            <h4>Subscripe today</h4>
             {% if user.is_authenticated %}
-              {% if subscription.status == "active" %}
-              
+            {% if subscription.status == "active" %}
+            
               <form method="POST" action="{% url 'cancel_sub' %}">
                 {%csrf_token%}
                 <div class="container my-3 pb-3">
-                  <button type="submit" class="btn btn-danger" >Cancel Subsscription</button>
+                  <button type="submit" class="btn btn-danger" >CANCEL SUBSCRIPTION</button>
                 </div>
               </form>
               {% else %}
               <div class="container my-3 pb-3">
-                <button type="submit" class="btn btn-primary" id="submitBtn">Subscribe</button>
+                <button type="submit" class="btn btn-primary" id="submitBtn">SUBSCRIBE</button>
               </div>
               {% endif %}
             {% else %}
@@ -50,7 +50,7 @@
               <a href="{% url 'account_login'%}" aria-label="Opens login page" rel="noopener" class="fs-5 text-decoration-underline" >Log in to subscribe</a>
             </div>
             {% endif %}
-
+            
           </div>
         </div>
         
