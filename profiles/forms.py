@@ -6,6 +6,15 @@ class ProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
         exclude = ('user',)
+
+        labels = {
+                
+                'preset_full_name': 'Full name',
+                'preset_email': 'Email',
+                'preset_adress': 'Adres',
+                'preset_post_code': 'Post code',
+                'preset_city': 'City',
+        }
     
     def __init__(self, *args, **kwargs):
         """
