@@ -62,17 +62,25 @@ def cancel_sub(request):
             # Cancel subscription on stripe
             subscription = StripeCustomer.objects.values_list('stripeSubscriptionId')[0][0]
             stripe.Subscription.delete(subscription,)
+            messages.success(request, 'Your subscription is canceled')
+        except:
+
+            messages.error(request, 'Unable to cancel subscription from stripe, please try again')
+            return redirect('/')
+        try:
             # Delete subscription info from databases
             user = request.user    
             subscription_django = StripeCustomer.objects.filter(user=user)
             subscription_django.delete()
-            messages.success(request, 'Your subscription is canceled, and is deleted from database')
+            messages.success(request, 'Your subscription is deleted from database')
             
+
         except:
-            messages.warning(request, 'Unable to cancel subscription from stripe or database, please try again')
+            messages.error(request, 'Unable to cancel subscription from database, please try again')
+            
             return redirect('/')
         return redirect('/')
-        
+   
     else:
         return redirect('/accounts/login/')
 
@@ -90,10 +98,10 @@ def create_checkout_session(request):
     
     if request.method == 'GET':
         if os.environ.get('DEVELOPMENT'):
-            domain_url = 'https://8000-mtssamsioe-sanitas-4vmeom2cqnk.ws-eu91.gitpod.io/subscriptions/'
+            domain_url = 'https://8000-mtssamsioe-sanitas-4vmeom2cqnk.ws-eu92.gitpod.io/subscriptions/'
         else:
             domain_url = 'https://sanitas-gym.herokuapp.com/subscriptions/'
-        #domain_url = 'https://8000-mtssamsioe-sanitas-4vmeom2cqnk.ws-eu91.gitpod.io/subscriptions/'
+        #domain_url = 'https://8000-mtssamsioe-sanitas-4vmeom2cqnk.ws-eu92.gitpod.io/subscriptions/'
         stripe.api_key = settings.STRIPE_SECRET_KEY
         
         try:

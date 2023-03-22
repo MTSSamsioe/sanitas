@@ -4,11 +4,15 @@ from django.contrib import messages
 from products.models import Products
 from django.contrib.auth.decorators import login_required
 
-@login_required
 def view_bag(request):
-    """ A view that renders the shopping bag """
+    if request.user.is_authenticated:
+        """ A view that renders the shopping bag """
 
-    return render(request, 'bag/bag.html')
+        return render(request, 'bag/bag.html')
+    else:
+        messages.error(request, 'You must be logged in to see shopping bag. Please log in or create an account.')
+        return redirect('/accounts/login/')
+
 
 
 def add_bag_item(request, item_id):

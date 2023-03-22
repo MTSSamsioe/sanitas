@@ -85,8 +85,14 @@ def edit_appointment(request, appointment_id):
 
 
 def delete_appointment(request, appointment_id):
-
+    user_id = request.user.id
     appointment = get_object_or_404(Appointments, id=appointment_id)
-    appointment.delete()
-    messages.success(request, 'Your appointment has been canceled')
+    pt_sessions_id = appointment.user.id
+    
+    if user_id == pt_sessions_id:
+        appointment.delete()
+        messages.success(request, 'Your personal trainer session has been canceled')
+    else: 
+        messages.error(request, 'You are trying to delete another users session')
+
     return redirect('/products/pt_sessions/')
