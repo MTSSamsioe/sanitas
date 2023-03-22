@@ -2,8 +2,9 @@
 from django.shortcuts import render, redirect, reverse, HttpResponse, get_object_or_404
 from django.contrib import messages
 from products.models import Products
+from django.contrib.auth.decorators import login_required
 
-
+@login_required
 def view_bag(request):
     """ A view that renders the shopping bag """
 

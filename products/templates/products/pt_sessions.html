@@ -16,25 +16,33 @@
 
 <div class="container-fluid">
   <div class="row  ">
-    <h1 class="h3 my-3 text-center"> Make an appoinment</h1>
-    <p class="card-text w-50 text-center m-auto my-3" >Here you can make an appointment with one of our personal trainers after you purchase a session. 
+    <h1 class="fs-3 my-3 text-center">Personal trainer</h1>
+    <p class="card-text w-50 text-center m-auto my-3" >Here you can schedule a session with one of our personal trainers.
+      All you have to do is log in, purchase a session and then schedule it at a time that fits you. 
       One session lasts one hour and you can change the appointment time or cancel the appointment up to one hour before it starts. </p>
-    <hr>
+      <hr>
+      {% if not user.is_authenticated %}
+      
+      <p class="fs-3 my-3 text-center tex-underline text-decoration-underline">You must be logged in to purchase and schedule personal trainer sessions</p>
+    
+    {% else %}
+    
     <div class="col-lg-8 m-auto my-3 ">
       <div class="card my-3 m-auto" style="width: 30rem;">
         
         <div class="card-body">
           
-          <h5 class="card-title">Make an appoitment</h5>
+          <h5 class="card-title">Schedule a session</h5>
           <h6 class="card-subtitle mb-2 text-muted">You have {{available_appointments}} sessions available</h6>
           <h6 class="card-subtitle mb-2 text-muted">You have {{scheduled_sessions}}  scheduled sessions at the moment</h6>
-          <form method="POST" class="form w-50 m-auto my-3" >
+          <hr>
+          <form method="POST" class="form w-50 m-auto my-3 text-center" >
           
               <br>
               {% csrf_token %}
               {{ form }}
               <br>
-              <button type="submit" class="btn btn-info my-3" >Make Appointment</button>
+              <button type="submit" class="btn btn-success my-3" >SUBMIT</button>
           </form>
         </div>
         
@@ -57,7 +65,7 @@
             <div class="card-body">
               <h5 class="card-title">{{pt_session.friendly_name}}</h5>
               <p class="card-text">{{pt_session.description}}</p>
-              <p class="card-text h4 text-center">{{pt_session.price}} $ / h</p>
+              <p class="card-text h4 text-center">{{pt_session.price}} $ / Hour</p>
               <div class="card-text text-center">
                 <form class="form" action="{% url 'add_bag_item' pt_session.id %}" method="POST" id="hours">
                   <label for="hours">Number of hours:</label>
@@ -93,7 +101,7 @@
                   
                   <div>
                     <input type="hidden" name="redirect_url" value="{{ request.path }}">
-                    <input type="submit" class="btn btn-success mb-3 text-uppercase mt-5" value="add to cart">
+                    <input type="submit" class="btn btn-success mb-3 text-uppercase mt-5" value="Add to bag">
                   </div>
                 </form>
               </div>
@@ -113,21 +121,21 @@
       
       <div>
         
-        <h3 class="text-center">Scheduled appointments</h3>
+        <h3 class="text-center">Scheduled sessions</h3>
         <hr>
         {% for appointment in appointments %}
 
         <div class="card my-3 m-auto card-whole card-center" style="width: 30rem;">
           <div class="card-body">
             <h5 class="card-title">Personal trainer session</h5>
-            <h6 class="card-subtitle mb-2 text-muted">This is your appointment with a personal trainer</h6>
+            <h6 class="card-subtitle mb-2 text-muted">This is your scheduled session with a personal trainer</h6>
             <p class="card-text">{{appointment.date_time}}</p>
             {% if change_time >= appointment.date_time %}
-              <p class="h6">This appointment can't be edited becauses it has been completed or it is starting soon</p>
+              <p class="h6">This session can't be edited becauses it has been completed or it is starting soon</p>
             {% else%}
               
               <button class="btn btn-danger mb-1 " type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                Cancel appointment</button>
+                CANCEL SESSION</button>
               <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                   <div class="modal-content">
@@ -136,16 +144,16 @@
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                      Are you sure you want to cancel your appointment?
+                      Are you sure you want to cancel your session?
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                      <a href="{% url 'delete_appointment' appointment.id %}" class=" link-light btn btn-success">Cancel</a>
+                      <a href="{% url 'delete_appointment' appointment.id %}" class=" link-light btn btn-success">CANCEL</a>
                     </div>
                   </div>
                 </div>
               </div>
-              <a href="{% url 'edit_appointment' appointment.id %}" class="btn btn-success" aria-label="opens edit appointment page" rel="noopener">Edit</a>
+              <a href="{% url 'edit_appointment' appointment.id %}" class="btn btn-success mb-1" aria-label="opens edit appointment page" rel="noopener">EDIT</a>
             {% endif %}
           </div>
         </div>
@@ -158,6 +166,7 @@
     </div>
   <!-- row v -->
   </div>
+  {% endif %}
 <!-- Container v -->
 </div>
 

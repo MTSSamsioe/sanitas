@@ -21,7 +21,7 @@ if os.path.exists("env.py"):
   import env 
 
 # Some variable names is taken from https://testdriven.io/blog/django-stripe-subscriptions/
-@login_required
+
 def stripe_subscriptions(request):
     """ A view to show all stripe gym subscriptions"""
     #plans = Plan.objects.all()
