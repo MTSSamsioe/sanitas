@@ -464,11 +464,17 @@ if 'USE_AWS' in os.environ:
 
 - The site is styled with bootstrap and css
 
-- Icons are taken from fonawsome
+- Icons are taken from fontawsome
+
+- Font 'Robot condensed' is taken from google fonts 
 
 - Google maps section is provided by google
 
 - Newsletter signup is provided by mailchimp
+
+- Mockups is made with https://balsamiq.cloud/
+
+- Data base models schema is made with https://lucid.app/
 
 
 ### Media
@@ -525,7 +531,56 @@ if 'USE_AWS' in os.environ:
 
 
 # Data models schema
+- Appointments
+    - Has two fields Date_time and one foreign key to the user model. That way you can store at what time the sessions is scheduled for each user.
+- Subscriptions
+    - Has three fields with customer and subscription id and has a foreign key to the user model. To keep track of what subscription is tied to what customer and user.
+- Products
+    - products has 5 fields with standard product info such as price, name decription. It also has a foreign key to the model categories. Today there are only one category of product but in the future as more is added the setup with categories is already set.
+- Categories
+    - This is a simple model with two fields for name and friendly name with no foreign keys
+- Orders
+    - Has fields for customer info like adress, name, email etc. With one foreign key to Profile so you can connect a user profile with an order and save your customer info to your profile..
+- Order items
+    - Are all the information about the purchased items such as quantity, order total, products. It has three foreign keys:
+        - Foreignkey to "User model" to connect purchased items to a user. In this case it is neede to calculate the number of purchased personal trainer sessions for a user.
+        - Foreignkey to "Products model" to connect a product to order items instance.
+        - Foreignkey to "Order model" every order items insctance is tied to a an order so that you know which order number and date etc is connected to purchased items 
+- Profile
+    - Consists of fields that is saved customer info that is prepopulated in the checkout if it is previuosly saved.
+
+- Below you can find a schema of the all database model relationships
+![Datamodel schema](media/data_models_schema.png)
 
 # Mobile images
+- All pages are tested that they are responsive
+    - Home
+    ![picture of home page mobile](media/home_mobile_top.png)
+    ![picture of ](media/home_mobile_find_news.png)
+    - Subscriptions page
+    ![picture of subscriptions page mobiel](media/subscription_cancel.png)
+    - Personal trainer page
+    ![picture of personal trainer page mobile](media/pt_mobile_bottom.png)
+    - Shopping bag page
+    ![picture of shopping bag page mobile](media/bag_mobile.png)
+    - Chechout page
+    ![picture of checkout page mobile](media/checkout_mobile.png)
+    - Profile
+    ![picture of profile page mobile](media/profile_mobile.png)
+
+
 
 # Mockups
+- This is mockups created on balsamic.com
+    - Home
+    ![picture of mockups home page](media/mockup_home.png)
+    - Subscriptions page
+    ![picture of mockups subscription page ](media/mockup_sub.png)
+    - Personal trainer page
+    ![picture of mockups personall trainer page ](media/mockup_pt.png)
+    - Shopping bag page
+    ![picture of mockup shopping page ](media/mockup_bag.png)
+    - Chechout page
+    ![picture of mockup checkout page ](media/mockup_checkout.png)
+    - Profile
+    ![picture of mockup profile page ](media/mockup_profile.png)
