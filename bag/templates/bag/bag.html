@@ -41,7 +41,7 @@
                                                         <div class="input-group ">
                                                         <div class="input-group-prepend">
                                                             <button type="button" class="decrement-qty btn btn-sm " data-item_id="{{item.item_id}}"
-                                                            id="decrement-qty_{{ item.item_id }}">
+                                                            id="decrement-qty_{{ item.item_id }}" aria-label="decrement button">
                                                             <span class="icon">
                                                                 <i class="fas fa-minus"></i>
                                                             </span>
@@ -49,11 +49,11 @@
                                                         </div>
                                         
                                                         <input class="form-control form-control-sm qty_input text-center w-15' " type="number" name="quantity" value="{{ item.quantity }}" min="1"
-                                                            max="99" data-item_id="{{ item.item_id }}" id="id_qty_{{ item.item_id }}">
+                                                            max="99" data-item_id="{{ item.item_id }}" id="id_qty_{{ item.item_id }}" aria-label="increment button">
                                         
                                                         <div class="input-group-append">
                                                             <button type="button" class="increment-qty btn btn-sm" data-item_id="{{ item.item_id }}"
-                                                            id="increment-qty_{{ item.item_id }}">
+                                                            id="increment-qty_{{ item.item_id }}" aria-label="increment button">
                                                             <span class="icon">
                                                                 <i class="fas fa-plus"></i>
                                                             </span>
@@ -64,8 +64,8 @@
                                                     </div>
                                                     
                                                 </form>
-                                                <a class="text-success update-link cursor-arrow" href="#">Update bag</a>
-                                                <a class="text-danger remove-link cursor-arrow" href="#" id="remove_{{ item.item_id }}">Delete from bag</a>   
+                                                <a class="text-success update-link cursor-arrow" href="#" aria-label="update bag">Update bag</a>
+                                                <a class="text-danger remove-link cursor-arrow" href="#" id="remove_{{ item.item_id }}" aria-label="delete item from bag">Delete from bag</a>   
                                             </td>
                                             <td class="p-3">
                                                 <p>{{ item.product.price}}</p>

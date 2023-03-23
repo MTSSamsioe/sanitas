@@ -27,7 +27,7 @@ Welcome to Sanitas Gym's site. We are a gym situated in the heart of stockholm. 
         - "Personal trainer" takes you to our personal trainer session page. Here you can purchase sessions with one of our trainers. One session last for one hour. Just tell our staff when you need a trainer.
     - Login logout and registration
         - If you are logged in you will see a link "Logout" otherwise you will see two links "Register and "Login"
-![picture of navbar](media/Navbar_sanitas.png)
+![picture of navbar](media/nav_sanitas_gym.png)
 
 - Messages
     - Messages are shown when you takes certain tasks across the site. To give confirmation that tasks are done Successful tasks are shown in green and errors are shown in red. Such actions are:
@@ -39,13 +39,13 @@ Welcome to Sanitas Gym's site. We are a gym situated in the heart of stockholm. 
         - Checkout complete
         - Different types of errors that can occur during these actions
     - Messages are shown under the navbar on all sites
-![picture of messages](media/messages.png)
+![picture of messages](media/success_message.png)
 - Main content
     - Here is the content from our different pages loaded. The navbar and footer are shown on all pages except for error pages
 
 - Footer
     - Here you ca find a link to our facebook page. The page opens in a new tab
-![picture of footer](media/footer_sanitas.png)
+![picture of footer](media/footer_sanitas_gym.png)
 ##### Index page
 
 - Hero image
@@ -58,31 +58,31 @@ Welcome to Sanitas Gym's site. We are a gym situated in the heart of stockholm. 
 - Find Us
 
     - Here you can find a google map section that shows our location aswell as our adress
-![picture of hero image](media/hero_image_sanitas.png)
+![picture of hero image](media/home_hero_img.png)
 - Newsletter sign up
     - Here you can leave a your email adress to get our newsletter
-![picture of newsletter signup](media/newsletter.png)
+![picture of newsletter signup](media/home_newsletter.png)
 #### Find us
 
 - Here you can find a google map section that shows our location aswell as our adress. This section is located on the ondex page and uses a jump link to scroll down automatically.
-![picture of Find us section](media/find_us.png)
+![picture of Find us section](media/find_us_gym.png)
 #### Gym subscriptions
 
 - Here you can choose a gym subscription of your choice. Each subscription has different features and prices
 
-![picture of gym subscription](media/subscription.png)
+![picture of gym subscription](media/subscribe.png)
 
 #### Personal trainer sessions
 
 - Here you can purchase one hour personal trainer sessions. Add the number of sessions as you need and add them to your shopping bag
-![picture of personal trainer section](media/pt_sessions.png)
+![picture of personal trainer section](media/pt_session.png)
 #### Shopping bag page
 - Here you can see the number of products in your shopping bag. You can update the quantity by using the increment/decrement buttons and press update. If you want to delete an item from your shopping bag you can press the delete button.
 
 - If you are sattisfied with the content of your bag you can proceed to the checkout via the "Go to checkout" button
 
 - There is also a back to home page link that takes you back to the index page
-![picture of shopping bag](media/shopping_bag.png)
+![picture of shopping bag](media/bag.png)
 #### Checkout page
 
 - At the top of the page you will see the content of your shopping bag with individual and total price of product
@@ -111,11 +111,11 @@ Welcome to Sanitas Gym's site. We are a gym situated in the heart of stockholm. 
         - If an card error occurs a message will be shown
     - Under the submit buttons a text will show how much your card will be chaged
     - In the bottom of the page you will find a link to get back to the home page
-![picture of checkout page](media/ccheckout_sanitas.png)
+![picture of checkout page](media/checkout.png)
 #### Checkout success page
 
 - When a purchase has gone through a checkout success page is shown. It includes order details and ordernumber
-![picture of checkout success](media/order_success.png)
+![picture of checkout success](media/checkout_success.png)
 #### Page not found
 - A custom "page not found" page is shown if a page is not found. A short message and a link back to the index page is shown
 
@@ -136,9 +136,9 @@ Welcome to Sanitas Gym's site. We are a gym situated in the heart of stockholm. 
 
 - Logout
     - Before logging out a message will be promted and asks if you are sure if you want to sign out
-![picture of login](media/sign-in.png)
-![picture of logout](media/sign_out.png)
-![picture of register](media/register.png)
+![picture of login](media/Signin_sanitas.png)
+![picture of logout](media/sign_out_sanitas.png)
+![picture of register](media/signup_sanitas.png)
 
 #### Admin Site and models
 - Here an admin user can logg in to see an alter orders, prodile, users, memberrships, products and categories
@@ -154,7 +154,7 @@ Welcome to Sanitas Gym's site. We are a gym situated in the heart of stockholm. 
     - Categories handles different product categories if other product types is added in the future 
 ![picture of product admin](media/products_admin.png)
 ![picture of order admin](media/order_admin.png)
-![picture of subscriptions](media/subscriptions_admin.png)
+![picture of appointments"Sessions" admin](media/admin_appointments.png)
 
 ### Features left to implement
 
@@ -193,8 +193,18 @@ Welcome to Sanitas Gym's site. We are a gym situated in the heart of stockholm. 
 - Newsletter sign up
     - Signup form from mailchimp has been tested that it stores the mail adress on our mailchimp account
 
+### Responsiveness
 
 ### Validator testing
+
+- HTML using 
+
+- Css using
+
+- Python using infoheap
+
+- Lighthouse accessability
+
 
 ### Unfixed bugs
 
@@ -206,6 +216,10 @@ Welcome to Sanitas Gym's site. We are a gym situated in the heart of stockholm. 
 
 - Webhooks did not work
     - Fix: ports where set to private instead of public
+
+### Deployment
+
+
 
 ## Credits
 ---
@@ -326,3 +340,8 @@ Welcome to Sanitas Gym's site. We are a gym situated in the heart of stockholm. 
 
 
 
+# Data models schema
+
+# Mobile images
+
+# Mockups
