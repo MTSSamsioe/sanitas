@@ -340,8 +340,67 @@ Welcome to Sanitas Gym's site. We are a gym situated in the heart of stockholm. 
     - Create a user and pick a name. Put user in group
     - Access the user and click security credentials and click access keys to give programaticall access. Create and download the csv file which will include secret credentials keys
 
-- In gitpod install two new packages 
+- In gitpod install packages boto3 using command "pip install boto3"
+- In gitpod install packages django storages using command "pip install django-storages"
+- Freeze packages to your requirements.txt using command "pip freeze > requirements.txt"
+- Add storages to installed apps in settings.py
+- Add the following code snippet to settings.py
+```
+if 'USE_AWS' in os.environ:
+    # Cache control
+    AWS_S3_OBJECT_PARAMETERS = {
+        'Expires': 'Thu, 31 Dec 2099 20:00:00 GMT',
+        'CacheControl': 'max-age=94608000',
+    }
 
+    # Bucket config 2
+    AWS_STORAGE_BUCKET_NAME = 'sanitas-gym'
+    AWS_S3_REGION_NAME = 'eu-north-1'
+    AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
+    AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
+    AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
+
+    # Static and media files
+    STATICFILES_STORAGE = 'custom_storages.StaticStorage'
+    STATICFILES_LOCATION = 'static'
+    DEFAULT_FILE_STORAGE = 'custom_storages.MediaStorage'
+    MEDIAFILES_LOCATION = 'media'
+
+    # Static and media files
+    STATICFILES_STORAGE = 'custom_storages.StaticStorage'
+    STATICFILES_LOCATION = 'static'
+    DEFAULT_FILE_STORAGE = 'custom_storages.MediaStorage'
+    MEDIAFILES_LOCATION = 'media'
+
+    # Override static and media URLs in production
+    STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{STATICFILES_LOCATION}/'
+    MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{MEDIAFILES_LOCATION}/'
+    
+
+```
+- Add AWS_ACCESS_KEY_ID , AWS_SECRET_ACCESS_KEY to enviromentals variables on heroku settings. Theses can be found in the csv file downloaded from AWS
+
+- Create new file in root level "custom_storages.py" to tell django to fetch static and media files from s3 aswell as uploaded images
+    - Add the following code snippet:
+    ````
+        from django.conf import settings
+    from storages.backends.s3boto3 import S3Boto3Storage
+
+
+    class StaticStorage(S3Boto3Storage):
+        location = settings.STATICFILES_LOCATION
+
+
+    class MediaStorage(S3Boto3Storage):
+        location = settings.MEDIAFILES_LOCATION
+    ```
+- Commit and push to github
+- Top of snippet under comment "# cache controle" is added to handle cashing of files to increase user performance
+- In S3 bucket create folder called "media" with bucket settings
+    - Click upload
+    - Choose all images you need to upload
+    - Grant public access to objects
+    - Click next then upload
 
 
 
