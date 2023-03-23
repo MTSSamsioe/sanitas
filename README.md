@@ -217,7 +217,132 @@ Welcome to Sanitas Gym's site. We are a gym situated in the heart of stockholm. 
 - Webhooks did not work
     - Fix: ports where set to private instead of public
 
-### Deployment
+## Deployment
+
+### Database
+- Create a new database on ElephantSQL
+    - Create a new instance
+    - Give it a name
+    - Select the free plan "Tiny Turtle"
+    - Select region closest to you
+    - Copy data base url from new instance
+
+### Heroku
+- Create a new app  on Heroku 
+    - Pick a name for your app
+    - Choose region
+    - Delete the Heroku postgres add-on under the resource tab which is added automatically. If you don't it will overwrite your database_url from ElephantSQL
+    - Under settings press the button "reveal config vars" add "DATABASE_URL" variabel with key URL from ElephantSQL and all config variables from your env.py file needed to run the app
+
+### Project code preparations and heroku settings
+- Install packages dj_database and psycopg2 using command "pip3 install dj_database_url==0.5.0 psycopg2"
+- Freeze packages to your requirements.txt using command "pip freeze > requirements.txt"
+- Changes to settings.py file
+    - Import os and import dj_database_url at the top of the file
+    - In the DATABASES section
+        - Comment out your default database used in local enviroment like sqlite3
+        - Connect to new database on Elephantsql using snippet below
+            ```
+             DATABASES = {
+                'default': dj_database_url.parse('your-database-url-here')
+                }
+            ```
+        - Run command "python3 manage.py showmigrations" to show migrations that has not yet been migrated to the new database
+        - Run command "python3 manage.py migrate" to migrate to new database
+        - Run command "python3 manage.py createsuperuser" to create a new superuser for the new database on Elephantsql
+        - Add if statement below to use Elephantsql database when running live version on Heroku and sqlite3 database when running app locally
+
+            ```
+            if 'DATABASE_URL' in os.environ:
+                DATABASES = {
+                    'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
+                }
+            else:
+                DATABASES = {
+                    'default': {
+                        'ENGINE': 'django.db.backends.sqlite3',
+                        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+                    }
+                }
+            ```
+        - In ElephantSQL database instance press browse and check that the tables and your new superuser has been added to the data base
+- Preparation for running app on heroku
+    - Run command "Pip install gunicorn" to installl gunicorn which will work as webserver
+    - Freeze packages to your requirements.txt using command "pip freeze > requirements.txt"
+    - Create a procfile which will tell heroku to create a webdyno which will run Gunicorn and serve our django app. The procfile should contain "web: gunicorn sanitas_gym.wsgi:application"
+    - Log in to heroku app using command "heroku login -i" give email adress when prompted and api key fom settings tab in heroku when prompted to enter a password
+    - Disable collect static with command " heroku config:set DISABLE_COLLECTSTATIC=1 --app sanitas-gym"
+    - In settings.py under ALLOWED_HOSTS add ['sanitas-gym.herokuapp.com', 'localhost'] to allow both heroku app and local enviroment to access
+    - Commit changes and push to github
+    - Deploy to Heroku using command "git push heroku main". If you initialize your app on the web site you may have to initialize the app remote using command "heroku git:remote -a sanits-gym" before deploying to heroku
+    - In Heroku app go to deploy tab. Choose deployment method github and find your repository and click connect
+    - Enable automatic deploy so that when a new version is saved the app is deployed automatically
+    - Generate a new django secret key using a key generator. Add new secret key to heroku config vars
+    - Remove any live credentials from settings.py and instead use a enviroment variable like os.environ.get('SECRET_KEY',) from env.py
+    - Add if statement to turn on DEBUG in settings.py if there is an enviroment variable 'DEVELOPMENT'. See example below
+        ````
+            if os.environ.get('DEVELOPMENT'):
+                debug_on = True
+            else:
+                debug_on = False
+
+            DEBUG = debug_on
+        ```
+    - Commit and push to github
+
+
+### Amazon web services and static files
+- Create an account on amazon web services
+- Sign in and enter management console under my account
+- Search for service S3
+- Create a new bucket and allow public access. Enable ACLs enabled and choose Bucket Owner preferred
+- In the new bucket in the properties tab turn on static web site hosting and choose "Use this bucket to host a website". Fill in default values and press save
+- In the permissions tab
+    - Set CORS configuration. which allows access between heroku app and s3 bucket. Add code below to the CORS field
+    ```
+            [
+        {
+            "AllowedHeaders": [
+                "Authorization"
+            ],
+            "AllowedMethods": [
+                "GET"
+            ],
+            "AllowedOrigins": [
+                "*"
+            ],
+            "ExposeHeaders": []
+        }
+    ]
+    ```
+    - Go to bucket policy and select policy generator to create a policy. 
+        - Choose policy type S3 bucket policy 
+        - Allow all principals by ussing a *
+        - Choose action get object
+        - Copy ARN number from policy tab and paste it to arn box at the bottom
+        - Click add statement
+        - Click generate policy
+        - Copy policy in the the pollicy editor on the permissions tab and add a /* after like resource: .. sanitas-gym/* to allow access to all resources in bucket
+        - Choose the following settings in the ACL section: Bucket owner: objects_ [list=x, write=x], BucketACL_ [read=X, write=x] Everyone: Objects_ [list=x ,]
+
+- Go back to services menu and open IAM service
+    - Click User Groups
+        - Create a new group and name it 
+    - Create Policy go to JSON tab and click import managed policy search for S3 and import S3 full access policy
+    - Get the bucket ARN number from S3 bucket
+    - In the JSON field in IAM paste two rows in a list as the resource value like the example below
+    ```
+      Resource: ["arn233242342:::sanitas-gym",
+        "arn233242342:::sanitas-gym"/*]
+    ```
+    - Click next tags are optional until you get to review policy. Give it a name and description and click create policy
+    - Go back to User Groups and click your created user group go to permissions tab open "add permissions" and click attache polecies select the polecy and click add permission. and attache policy. 
+    - Create a user and pick a name. Put user in group
+    - Access the user and click security credentials and click access keys to give programaticall access. Create and download the csv file which will include secret credentials keys
+
+- In gitpod install two new packages 
+
+
 
 
 
