@@ -193,7 +193,20 @@ Welcome to Sanitas Gym's site. We are a gym situated in the heart of stockholm. 
 - Newsletter sign up
     - Signup form from mailchimp has been tested that it stores the mail adress on our mailchimp account
 
-### Responsiveness
+### Light house testing 
+- Lighthouse testing is made on all main pages. All tests passed, however there is a bad testresult on performance on the home page. I think it is because of the hero image. I have already compressed the image two times but I only seam to get it down to 1 mb from 4 md. 
+    - Home page
+        ![picture of lighthouse test home page](media/lighthouse_home_new.png)
+    - Subscriptions page
+        ![picture of lighthouse test subscriptions page](media/Lighthouse_subscription.png)
+    - Personal trainer page
+        ![picture of lighthouse test personal trainer page](media/lighthouse_personal%20trainer.png)
+    - Shopping bag page
+        ![picture of lighthouse test shopping bag page](media/lighthouse_bag.png)
+    - Checkout page
+        ![picture of lighthouse test checkout page](media/lighthouse_checkout.png)
+    - Profile page
+        ![picture of lighthouse test Profile page](media/lighthouse_profile.png)
 
 ### Validator testing
 
@@ -552,7 +565,9 @@ if 'USE_AWS' in os.environ:
 - Below you can find a schema of the all database model relationships
 ![Datamodel schema](media/data_models_schema.png)
 
-# Mobile images
+
+
+# Responsiveness
 - All pages are tested that they are responsive
     - Home
     ![picture of home page mobile](media/home_mobile_top.png)

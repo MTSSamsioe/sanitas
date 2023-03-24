@@ -95,43 +95,49 @@ def stripe_config(request):
 # Function below is taken from https://testdriven.io/blog/django-stripe-subscriptions/
 @csrf_exempt
 def create_checkout_session(request):
-    
-    if request.method == 'GET':
-        if os.environ.get('DEVELOPMENT'):
-            domain_url = 'https://8000-mtssamsioe-sanitas-4vmeom2cqnk.ws-eu92.gitpod.io/subscriptions/'
-        else:
-            domain_url = 'https://sanitas-gym.herokuapp.com/subscriptions/'
-        #domain_url = 'https://8000-mtssamsioe-sanitas-4vmeom2cqnk.ws-eu92.gitpod.io/subscriptions/'
-        stripe.api_key = settings.STRIPE_SECRET_KEY
-        
-        try:
-            checkout_session = stripe.checkout.Session.create(
-                client_reference_id=request.user.id if request.user.is_authenticated else None,
-                success_url=domain_url + 'success?session_id={CHECKOUT_SESSION_ID}',
-                cancel_url=domain_url + 'cancel/',
-                payment_method_types=['card'],
-                mode='subscription',
-                line_items=[
-                    {
-                        'price': settings.STRIPE_PRICE_ID,
-                        'quantity': 1,
-                    }
-                ]
-            )
+    if not StripeCustomer.objects.filter(user=request.user).exists():
+        print('Sant finns inget i databasen')
 
-            return JsonResponse({'sessionId': checkout_session['id']})
-        except Exception as e:
-            return JsonResponse({'error': str(e)})
-
+        if request.method == 'GET':
+            if os.environ.get('DEVELOPMENT'):
+                domain_url = 'https://8000-mtssamsioe-sanitas-4vmeom2cqnk.ws-eu92.gitpod.io/subscriptions/'
+            else:
+                domain_url = 'https://sanitas-gym.herokuapp.com/subscriptions/'
+            #domain_url = 'https://8000-mtssamsioe-sanitas-4vmeom2cqnk.ws-eu92.gitpod.io/subscriptions/'
+            stripe.api_key = settings.STRIPE_SECRET_KEY
+            
+            try:
+                checkout_session = stripe.checkout.Session.create(
+                    client_reference_id=request.user.id if request.user.is_authenticated else None,
+                    success_url=domain_url + 'success?session_id={CHECKOUT_SESSION_ID}',
+                    cancel_url=domain_url + 'cancel/',
+                    payment_method_types=['card'],
+                    mode='subscription',
+                    line_items=[
+                        {
+                            'price': settings.STRIPE_PRICE_ID,
+                            'quantity': 1,
+                        }
+                    ]
+                )
+                
+                return JsonResponse({'sessionId': checkout_session['id']})
+            except Exception as e:
+                return JsonResponse({'error': str(e)})
+    else:
+        messages.error(request, 'Your already have an active subscription')
+        return redirect('/subscriptions/')
 
 # Function below is taken from https://testdriven.io/blog/django-stripe-subscriptions/
 @login_required
 def success(request):
+    messages.success(request, 'Your subscription was created successfully')
     return render(request, 'subscriptions/success.html')
 
 # Function below is taken from https://testdriven.io/blog/django-stripe-subscriptions/
 @login_required
 def cancel(request):
+    messages.success(request, 'Your subscription was aborted')
     return render(request, 'subscriptions/cancel.html')
 
 # Function below is taken from https://testdriven.io/blog/django-stripe-subscriptions/
@@ -185,7 +191,7 @@ def stripe_webhook(request):
         )
         
 
-        messages.success(request, 'Your subscription was created successfully')
+        
         # print(user.username + ' just subscribed.')
 
     return HttpResponse(status=200)
