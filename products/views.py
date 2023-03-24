@@ -83,7 +83,7 @@ def edit_appointment(request, appointment_id):
     }
     return render(request, 'products/edit_session.html', context)
 
-
+@login_required
 def delete_appointment(request, appointment_id):
     user_id = request.user.id
     appointment = get_object_or_404(Appointments, id=appointment_id)

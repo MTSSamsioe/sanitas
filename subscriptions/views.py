@@ -65,8 +65,8 @@ def cancel_sub(request):
             messages.success(request, 'Your subscription is canceled')
         except:
 
-            messages.error(request, 'Unable to cancel subscription from stripe, please try again')
-            return redirect('/')
+            messages.error(request, 'Unable to cancel subscription, please try again')
+            return redirect('/subscriptions/')
         try:
             # Delete subscription info from databases
             user = request.user    
@@ -92,11 +92,12 @@ def stripe_config(request):
         print(JsonResponse(stripe_config, safe=False))
         return JsonResponse(stripe_config, safe=False)
 
-# Function below is taken from https://testdriven.io/blog/django-stripe-subscriptions/
+# Function below is tsaken from https://testdriven.io/blog/django-stripe-subscriptions/
 @csrf_exempt
+@login_required
 def create_checkout_session(request):
     if not StripeCustomer.objects.filter(user=request.user).exists():
-        print('Sant finns inget i databasen')
+        
 
         if request.method == 'GET':
             if os.environ.get('DEVELOPMENT'):

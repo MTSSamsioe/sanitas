@@ -140,7 +140,7 @@ Welcome to Sanitas Gym's site. We are a gym situated in the heart of stockholm. 
 ![picture of logout](media/sign_out_sanitas.png)
 ![picture of register](media/signup_sanitas.png)
 
-#### Admin Site and models
+#### Admin Site
 - Here an admin user can logg in to see an alter orders, prodile, users, memberrships, products and categories
 
     - Products page is tha page that handles the personal trainer session
@@ -165,33 +165,101 @@ Welcome to Sanitas Gym's site. We are a gym situated in the heart of stockholm. 
 
 ## Testing
 
-### Manual testing
+## Manual testing
 
-- Login / Logout and register
-    - A message is shown when successfully logging in and out
-    - A validation error is shown if email has the wrong format
-    - A validation error is shown if email and confirm email field does not match
-    - A validation error is shown if password is to similar to username
-    - A validation error is shown if the password and passwod conifmation field don´t match
+### Navbar and footer
+- All links work and the page you visit get underlined in the navbar
+- Facebook link in footer works and opens up in a new window with rel=noopener atribute
 
-- User is authenticated
-
-    - If you redirected to login page if you try to add an item to cart or try to enter members page if you are not logged in
-
-- Shopping bag
-
-    - Messages show when an item is deleted or updated in the shopping bag
-
-- Checkout 
-
-    - A validation error is shown if any of the fields "Full name", "Adress", "Post code", "City" is left empty
-    - A validation error is shown if the email field has the wrong format.
-    - If checkobox "Save my info to my members page" is unchecked the members page don´t get updated
-    - If an invalig card number is entered an error message is shown below
-    - If you press the "Submit" button an order is created in the database and the a purchase is added to stripe 
+### Home page
 
 - Newsletter sign up
     - Signup form from mailchimp has been tested that it stores the mail adress on our mailchimp account
+- External links work and opens in a new window with rel=noopener atribute
+
+### Login / Logout and register
+- A message is shown when successfully logging in and out
+- A validation error is shown if email has the wrong format
+- A validation error is shown if email and confirm email field does not match
+- A validation error is shown if password is to similar to username
+- A validation error is shown if the password and passwod conifmation field don´t match
+
+### Gym subscriptions
+
+- If you do not have a subscription a button will show in the subscription card that says 'Subscribe' it will take you to a checkout page hosted by stripe. After successful chekout you will be taken back to a sucess page hosted on the santitas site. If you go back to the subscriptions page you will see a new red button that says 'Cancel subscription'
+![picture of stripe hosted checkout](media/stripe_checkout.png) ![picture of cancel subscription](media/subscription_cancel.png) 
+- If you already have an active subscription and try to run the view 'create_checkout_session' from the url you will be redirected back to subscriptions page and shown an error message
+- If don´t have an active subscription and try to run the view 'cancel_sub' from the url you will be redirected back to subscriptions page and shown an error message
+    
+
+### Personal Trainer
+(Please observe that the time zone is set to CET in settinggs.py)
+- Schedule session with personal trainer
+    - Form works to submit and a session is saved to the database
+    - If you have purchased a sesssion with a personal trainer you can see the available sessions you can schedule and also how many you have purchased
+    - Form validation
+        - If you try to schedule a sessions with 0 available you will get a form validation error
+        - You try to schedule an appoint ment before current time plus one hour you will get a form validation error
+        - If you try to schedule an appointment when you already have an appointent you will get a form validation error
+        ![picture of Validation error](media/pt_val_no_sessions.png)![picture of Validation error](media/pt_val_no_time.png)![picture of Validation error](media/pt_val_double_session.png)!
+- Edit Session
+    - Edit button takes you to the edit page. "Save" button updates the database with new time and date. "Back" button takes you back to the personal trainer page
+    - "Cancel session" button shows a modal with the question if you sure. "Cacel" button cancels the session and "Close" button closes the modal
+    - On the edit page all form validations are show in the same way as on the create form
+    - If a scheduled session is closer in time than one hour you can no longer edit or cancel it
+    ![picture of Validation error](media/pt_session_to_close.png)
+    - If you try to edit another users session via the url you will be taken to a page with a message that you are trying to edit another users session.
+    ![picture of Validation error](media/pt_edit_other_user.png)
+    - If you try to delete an other users session via the url get shown a message that you are trying to delete another users session
+
+- Purchase personal trainer session
+    - increment and decrement buttons changes the value in input window
+    - "Add to bag" button works and add the correct quantity to the shopping bag. Adding product again increments the quantity in the shopping bag
+    - A message is shown when a product is added to the shopping bag
+
+
+     
+
+
+### Shopping bag page
+- increment and decrement buttons changes the value in input window
+- "Update bag" and "Delete from bag" links both work as expected
+- A messages show when an item is deleted or updated in the shopping bag
+- "Go to checkout" button takes you to checkout page with the correct shopping bag
+- "Back to home page" link works and takes you back to the home page
+
+### Checkout page
+- The corret product, quantity, price and total is shown
+- A validation error is shown if any of the fields "Full name", "Adress", "Post code", "City" is left empty
+- A validation error is shown if the email field has the wrong format.
+- If checkobox "Save my info to my members page" is unchecked the members page don´t get updated
+- If an invalig card number is entered an error message is shown below
+- If you press the "Submit order" button an order is created in the database, the a purchase is added to stripe and you are taken to the success page
+- "Back to shopping bag" takes you to the shoppingbag
+- "Back to home page" link works and takes you back to the home page
+- "Save my info to my members page" checkbox saves adress to the profile database if it is checked
+
+### Members/Profile page
+- User profile is already populated if save checkbox is checked on checkout
+- Validation on all field works
+- "Update" button works and successfully saves the new user profile
+- Orderhistory is shown in the bottom of the page
+
+
+### If user is not logged in
+
+- Members page
+    - If you try to click members page you get redirected to login page with a message shown that you need to be logged in.
+- Shopping bag page
+    - If you try to click the shoppingbag you get redirected to login page with a message shown that you need to be logged in.
+- Subscriptions page
+    - If you enter the subscription page you will see the subscription information but where the button to subscribe or cancel subscription you will see a link to login page
+    - If you try to run views 'create_checkout_session' and 'cancel_sub' via the url you get redirected to log in page
+    ![picture of Subscriptions not logged in](media/not_auth_subscriptions.png)
+- Personal trainer page
+    - If you enter the personal trainer page you will see a link to the login page that says you need to be logged in to schedule and purchase sessions
+    - If you try to run the views 'edit_appointment' or 'delete_appointment' from url you get redirected to login page
+    ![picture of Personal trainer page not logged in](media/not_auth_personal_trainer.png)
 
 ### Light house testing 
 - Lighthouse testing is made on all main pages. All tests passed, however there is a bad testresult on performance on the home page. I think it is because of the hero image. I have already compressed the image two times but I only seam to get it down to 1 mb from 4 md. 
