@@ -3,7 +3,7 @@ from subscriptions.models import StripeCustomer
 
 
 class StripeCustomerAdmin(admin.ModelAdmin):
-    
+
     fields = ('user', 'stripeCustomerId', 'stripeSubscriptionId'
               )
 
@@ -11,7 +11,4 @@ class StripeCustomerAdmin(admin.ModelAdmin):
                     'stripeCustomerId', 'stripeSubscriptionId')
 
 
-admin.site.register(StripeCustomer,StripeCustomerAdmin )
-
-
-
+admin.site.register(StripeCustomer, StripeCustomerAdmin)

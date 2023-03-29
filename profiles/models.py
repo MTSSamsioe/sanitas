@@ -10,7 +10,7 @@ class Profile(models.Model):
     """ Models that stores user information """
 
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    
+
     preset_full_name = models.CharField(max_length=100, null=True, blank=True)
     preset_email = models.EmailField(max_length=254, null=True, blank=True)
     preset_adress = models.CharField(max_length=100, null=True, blank=True)
@@ -20,7 +20,14 @@ class Profile(models.Model):
     def __str__(self):
         return self.user.username
 
-# Most of the structure, logic are taken from Code institute project lessons Boutique ado
+
+'''
+Code below is taken from boutique ado walk through project
+https://github.com/Code-Institute-Solutions/boutique_ado_v1/blob/
+250e2c2b8e43cccb56b4721cd8a8bd4de6686546/profiles/models.py
+'''
+
+
 @receiver(post_save, sender=User)
 def create_or_update_profile(sender, instance, created, **kwargs):
     """
@@ -30,4 +37,3 @@ def create_or_update_profile(sender, instance, created, **kwargs):
     if created:
         Profile.objects.create(user=instance)
     instance.profile.save()
-

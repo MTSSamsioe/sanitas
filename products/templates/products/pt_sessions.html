@@ -4,16 +4,6 @@
 
 {% block content %}
 
-<!-- <div><h1>{{quantity}}</h1></div>
-  <div><h1>{{appointments}}</h1></div>
-  
-  {% for pt_session in pt_sessions %}
-  <div><h1>{{appointments_time}}</h1></div> -->
-  <!-- {% endfor %} -->
-
-<!-- Css for personal trainers and products page -->
-<!-- <link rel="stylesheet" href="{% static 'products/css/products.css' %}">   -->
-
 <div class="container-fluid">
   <div class="row  ">
     <h1 class="fs-3 my-3 text-center">Personal trainer</h1>
@@ -29,15 +19,12 @@
     
     <div class="col-lg-8 m-auto my-3 ">
       <div class="card my-3 m-auto" style="width: 30rem;">
-        
         <div class="card-body">
-          
           <h5 class="card-title">Schedule a session</h5>
           <h6 class="card-subtitle mb-2 text-muted">You have {{available_appointments}} sessions available</h6>
           <h6 class="card-subtitle mb-2 text-muted">You have {{scheduled_sessions}}  scheduled sessions at the moment</h6>
           <hr>
           <form method="POST" class="form w-50 m-auto my-3 text-center" >
-          
               <br>
               {% csrf_token %}
               {{ form }}
@@ -45,19 +32,16 @@
               <button type="submit" class="btn btn-success my-3" >SUBMIT</button>
           </form>
         </div>
-        
       </div>
     </div>
   </div>
   <hr>
   <div class="row ">
-
     <div class="col-lg-6 d-flex justify-content-center ">
       <div>
         <h3 class="text-center">Available offers from our personal trainers</h3>
         <hr>
           {% for pt_session in pt_sessions %}
-      
           <div class="card p-0 m-3 card-whole card-center" style="width: 30rem; height: 780px;">
             <img class="card-img-top img-fluid rounded-start"
             src="/media/personal_trainer_gym.jpg"
@@ -70,61 +54,43 @@
                 <form class="form" action="{% url 'add_bag_item' pt_session.id %}" method="POST" id="hours">
                   <label for="hours">Number of hours:</label>
                   {% csrf_token %}
-                  
-                  
                   <div class="form-group input-group w-50 d-flex justify-content-center  m-auto ">
-                    
                     <div class="input-group-prepend ">
-                      
-  
-                        <button aria-label="decrement" type="button" class="decrement-qty btn " data-item_id="{{pt_session.id}}"
-                        id="decrement-qty_{{ pt_session.id }}">
-                        <span class="icon">
-                          <i class="fas fa-minus"></i>
-                        </span>
-                        </button>
-                      
+                      <button aria-label="decrement" type="button" class="decrement-qty btn " data-item_id="{{pt_session.id}}"
+                      id="decrement-qty_{{pt_session.id}}">
+                      <span class="icon">
+                        <i class="fas fa-minus"></i>
+                      </span>
+                    </button>
                     </div>
-                    
                     <input aria-label="input hour quantity" class="form-control qty_input text-center" type="number" name="quantity" value="1" min="1"
                     max="99" data-item_id="{{ pt_session.id }}" id="id_qty_{{ pt_session.id }}">
-                    
                     <div class="input-group-append">
-                      <button aria-label="Increment" type="button" class="increment-qty btn" data-item_id="{{ pt_session.id }}"
-                      id="increment-qty_{{ pt_session.id }}">
+                      <button aria-label="Increment" type="button" class="increment-qty btn" data-item_id="{{pt_session.id}}"
+                      id="increment-qty_{{pt_session.id}}">
                       <span class="icon">
                         <i class="fas fa-plus"></i>
                       </span>
                       </button>
                     </div>
                   </div>
-                  
                   <div>
-                    <input type="hidden" name="redirect_url" value="{{ request.path }}">
+                    <input type="hidden" name="redirect_url" value="{{request.path}}">
                     <input type="submit" class="btn btn-success mb-3 text-uppercase mt-5" value="Add to bag">
                   </div>
                 </form>
               </div>
             </div>
-              
-            <!-- card v -->
           </div>  
           {% endfor %}
       </div> 
-      
     </div>
-    <!--A Col-6 slut A -->
-    <!-- Col-6 start v -->
+
     <div class="col-lg-6 d-flex justify-content-center text-center">
-      
-      
-      
       <div>
-        
         <h3 class="text-center">Scheduled sessions</h3>
         <hr>
         {% for appointment in appointments %}
-
         <div class="card my-3 m-auto card-whole card-center" style="width: 30rem;">
           <div class="card-body">
             <h5 class="card-title">Personal trainer session</h5>
@@ -133,7 +99,6 @@
             {% if change_time >= appointment.date_time %}
               <p class="h6">This session can't be edited becauses it has been completed or it is starting soon</p>
             {% else%}
-              
               <button class="btn btn-danger mb-1 " type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
                 CANCEL SESSION</button>
               <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -162,27 +127,15 @@
         <p class="h6">There are no scheduled appointments</p>
         {% endif %}
       </div>
-    <!-- col v -->
     </div>
-  <!-- row v -->
   </div>
   {% endif %}
-<!-- Container v -->
 </div>
-
-
-
-
-    
-  
-
-
 
 {% block postloadjs %}
 {{ block.super }}
 {% include 'products/includes/quantity_input_script.html' %}
 {% endblock %}
-
 
 {% endblock %}
 

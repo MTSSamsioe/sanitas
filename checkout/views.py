@@ -1,5 +1,11 @@
-# Most of the code structure, logic , class names, variable names and logic is taken from Code institute project lessons Boutique ado
-from django.shortcuts import render, reverse, redirect, get_object_or_404, HttpResponse
+'''
+All logic, function and variable names are taken from boutique ado
+walkthrough project:
+https://github.com/Code-Institute-Solutions/boutique_ado_v1/blob/
+250e2c2b8e43cccb56b4721cd8a8bd4de6686546/checkout/views.py
+'''
+from django.shortcuts import (render, reverse, redirect,
+                              get_object_or_404, HttpResponse)
 from django.views.decorators.http import require_POST
 
 from django.contrib import messages
@@ -8,7 +14,6 @@ from django.conf import settings
 from .forms import OrderForm
 from .models import Order, Order_item
 from products.models import Products
-
 
 from bag.contexts import bag_products
 
@@ -19,6 +24,7 @@ from profiles.forms import ProfileForm
 
 import stripe
 import json
+
 
 @require_POST
 def cache_checkout_data(request):
@@ -37,8 +43,8 @@ def cache_checkout_data(request):
         return HttpResponse(content=e, status=400)
 
 
-
 def checkout(request):
+    '''View to process a purchase with stripe'''
     stripe_public_key = settings.STRIPE_PUBLIC_KEY
     stripe_secret_key = settings.STRIPE_SECRET_KEY
 
@@ -55,34 +61,30 @@ def checkout(request):
 
         order_form = OrderForm(form_data)
 
-
         if order_form.is_valid():
             order = order_form.save()
-            
+
             for item_id, item_data in bag.items():
-                
+
                 product = Products.objects.get(id=item_id)
                 order_line_item = Order_item(
-                    user=request.user,  #  Add user to order line item
+                    user=request.user,
                     order=order,
                     product=product,
                     quantity=item_data,
                 )
                 order_line_item.save()
-                
-                #return redirect(reverse('view_bag'))
-
-            # Save the info to the user's profile if all is well
             request.session['save_info'] = 'save-info' in request.POST
-            return redirect(reverse('checkout_success', args=[order.order_number]))
+            return redirect(reverse('checkout_success',
+                                    args=[order.order_number]))
         else:
             messages.error(request, 'There was an error with your form')
     else:
         bag = request.session.get('bag', {})
         if not bag:
-            message.error(request,'There is nothing in your bag')
+            message.error(request, 'There is nothing in your bag')
             return redirect(reverse('products'))
-    
+
         current_bag = bag_products(request)
         total = current_bag['total']
         stripe_total = round(total * 100)
@@ -110,7 +112,6 @@ def checkout(request):
         messages.warning(request, ('Stripe public key is missing. '
                                    ))
 
-
     context = {
         'order_form': order_form,
         'stripe_public_key': stripe_public_key,
@@ -129,7 +130,6 @@ def checkout_success(request, order_number):
     order = get_object_or_404(Order, order_number=order_number)
 
     profile = Profile.objects.get(user=request.user)
-    # Attach the user's profile to the order
     order.user_profile = profile
     order.save()
 
@@ -153,7 +153,6 @@ def checkout_success(request, order_number):
     if 'bag' in request.session:
         del request.session['bag']
 
-    
     context = {
         'order': order,
     }

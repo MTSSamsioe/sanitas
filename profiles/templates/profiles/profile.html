@@ -1,17 +1,10 @@
+<!-- Most structure and logic is taken from boutique ado walk through project
+https://github.com/Code-Institute-Solutions/boutique_ado_v1/blob/
+250e2c2b8e43cccb56b4721cd8a8bd4de6686546/profiles/templates/profiles/profile.html
+-->
 {% extends "base.html" %}
 {% load static %}
-
-
-
-
-
 {% block content %}
-
-<!-- {% block extra_css %}
-    <link rel="stylesheet" href="{% static 'profiles/css/profile.css' %}">
-{% endblock %} -->
-
-
 
 <div class="overlay">
   <div class="container">
@@ -72,11 +65,11 @@
                   </td>
                 </tr>
                 {% endfor %}
-                {% if not orders %}
-                  <h5 class="h5">You have not made any orders</h5>
-                {% endif%}
-            </tbody>
-          </table>
+              </tbody>
+            </table>
+            {% if not orders %}
+              <h5 class="h5">You have not made any orders</h5>
+            {% endif%}
         </div>
       </div>
     </div>

@@ -1,5 +1,12 @@
-# Structure and logic is taken from Code institute project lessons Boutique ado
-from django.shortcuts import render, get_object_or_404, reverse, redirect, HttpResponseRedirect
+'''
+Structure, logic and class name is taken from boutique ado walkthrough project
+https://github.com/Code-Institute-Solutions/boutique_ado_v1/blob/
+250e2c2b8e43cccb56b4721cd8a8bd4de6686546/profiles/views.py
+'''
+from django.shortcuts import (render,
+                              get_object_or_404,
+                              reverse, redirect,
+                              HttpResponseRedirect)
 from .models import Profile
 from checkout.models import Order_item, Order
 from .forms import ProfileForm
@@ -22,13 +29,11 @@ def profile(request):
                 form.save()
                 messages.success(request, 'Your profile is updated')
             else:
-                messages.error(request, 'Something went wrong please try again')
+                messages.error(request, 'Something went wrong  \
+                               please try again')
         else:
             form = ProfileForm(instance=profile)
 
-        # Display available pt_session hours
-        #account_quantity = get_object_or_404(Order_item, user=request.user)
-        #quantity = Order_item.objects.values_list('quantity')
         orders = profile.orders.all()
         context = {
             'form': form,
@@ -37,5 +42,6 @@ def profile(request):
 
         return render(request, 'profiles/profile.html', context)
     else:
-        messages.error(request, 'You must be logged  in to see user  profile. Please log in or create an account.')
+        messages.error(request, 'You must be logged  in to see user  profile. \
+                       Please log in or create an account.')
         return redirect('/accounts/login/')

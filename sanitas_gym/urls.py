@@ -29,10 +29,8 @@ urlpatterns = [
     path('checkout/', include('checkout.urls')),
     path('profiles/', include('profiles.urls')),
     path('subscriptions/', include('subscriptions.urls')),
-    
-    
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 handler404 = 'sanitas_gym.views.page_not_found'
 handler500 = 'sanitas_gym.views.server_error'

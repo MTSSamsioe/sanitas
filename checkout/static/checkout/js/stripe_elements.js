@@ -1,10 +1,12 @@
 /*
-    Core logic/payment flow for this comes from here:
-    https://stripe.com/docs/payments/accept-a-payment
-    CSS from here: 
-    https://stripe.com/docs/stripe-js
-    
-    Variables and other code is taken from Code institute lessons Boutique ado
+Core logic/payment flow for this comes from here:
+https://stripe.com/docs/payments/accept-a-payment
+CSS from here: 
+https://stripe.com/docs/stripe-js
+
+Variables and other code is taken from Code institute lessons Boutique ado
+https://github.com/Code-Institute-Solutions/boutique_ado_v1/
+blob/250e2c2b8e43cccb56b4721cd8a8bd4de6686546/checkout/static/checkout/js/stripe_elements.js
 */
 
 

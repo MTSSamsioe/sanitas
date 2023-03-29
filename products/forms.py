@@ -6,10 +6,8 @@ from django.forms import ValidationError
 from django.contrib.auth.models import User
 
 # time packages
-# from django.core.validators import MinValueValidator, MaxValueValidator
 from datetime import datetime, timedelta
 from django.utils import timezone
-# import pytz
 
 
 class AppointmentsForm(forms.ModelForm):
@@ -25,11 +23,11 @@ class AppointmentsForm(forms.ModelForm):
         }
 
         labels = {
-                
                 'date_time': 'Pick a date',
         }
+
     def __init__(self, *args, **kwargs):
-         
+
         self.user = kwargs.pop('user', None)
         super().__init__(*args, **kwargs)
         # if user:
@@ -41,31 +39,36 @@ class AppointmentsForm(forms.ModelForm):
         date_time = self.cleaned_data.get('date_time')
         date_time_end = date_time + timedelta(minutes=60)
         # Validation not to reserv a time before current time plus one hour
-        
+
         if date_time <= timezone.now() + timedelta(minutes=60):
-            raise ValidationError('Pick a time at least 1 hour after current time')
-        
+            raise ValidationError('Pick \
+                                  a time at least 1 hour after current time')
+
         # Validation to prevent making appoint ment with to few purchased hours
         user = self.user
-        purchased_hours = sum(i[0] for i in Order_item.objects.filter(user=user).values_list('quantity'))
-        appointment_amount = len(Appointments.objects.filter(user=user).values_list())
-        
+        purchased_hours = sum(i[0] for i in
+                              Order_item.objects.filter(user=user)
+                              .values_list('quantity'))
+        appointment_amount = len(Appointments
+                                 .objects.filter(user=user)
+                                 .values_list())
+
         if user:
             if appointment_amount >= purchased_hours:
-                raise ValidationError('No available personal trainer sessions, please purchase more and try again')
+                raise ValidationError('No available personal \
+                                    trainer sessions, please purchase more \
+                                     and try again')
 
-        # Validation to prevent making an appointment when there are already one appointment
-        
-        for tuple in Appointments.objects.filter(user=user).values_list('date_time'):
+        ''' Validation to prevent making an appointment
+         when there are already one appointment'''
+
+        for tuple in (Appointments
+                      .objects.filter(user=user).values_list('date_time')):
             for time in tuple:
                 end_time = time + timedelta(minutes=60)
-                
-                if date_time >= time and date_time <= end_time:
-                    raise ValidationError('You do already have an appointment at this time please pick another time')
-                    
-        return date_time
-   
-    
 
-    
-        
+                if date_time >= time and date_time <= end_time:
+                    raise ValidationError('You do already have an appointment \
+                        at this time please pick another time')
+
+        return date_time

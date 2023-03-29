@@ -1,8 +1,5 @@
 {% extends 'base.html' %}
-
 {% load static %}
-
-
 
 {% block content %}
 <link rel="stylesheet" href="{% static 'home/css/home.css' %}">
@@ -40,7 +37,6 @@
                 <li class="list-group-item"><a href="https://www.nhs.uk/live-well/exercise/running-and-aerobic-exercises/how-to-stretch-after-exercising/" aria-label="Post exercise stretches" target="_blank" rel="noopener"><strong> Post workout stretches</strong></a></li>
              </ul>
         </div>
-        
     </div>
 </div>
 <hr>
@@ -103,61 +99,11 @@
                     </div>
                 </form>
             </div>
-            <script type='text/javascript' src='//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js'></script>
-            <script type='text/javascript'>
-                (function ($) {
-                    window.fnames = new Array();
-                    window.ftypes = new Array();
-                    fnames[0] = 'EMAIL';
-                    ftypes[0] = 'email';
-                    fnames[1] = 'FNAME';
-                    ftypes[1] = 'text';
-                    fnames[2] = 'LNAME';
-                    ftypes[2] = 'text';
-                    fnames[3] = 'ADDRESS';
-                    ftypes[3] = 'address';
-                    fnames[4] = 'PHONE';
-                    ftypes[4] = 'phone';
-                }(jQuery));
-                var $mcj = jQuery.noConflict(true);
-            </script>
-            <!--End mc_embed_signup-->
-            
-            <!-- Google maps script -->
-            <!-- Code in this section is taken from Code institute lesson on Google maps api -->
-            <script>
-                function initMap() {
-                    var map = new google.maps.Map(document.getElementById("map"), {
-                        zoom: 17,
-                        center: {
-                            lat: 59.316707260139665,
-                            lng: 18.054762735582162
-
-                        }
-                    });
-                    var labels = "ABCDEFGHIJKLMNOPQRSTUVXYZÅÄÖ";
-                    var locations = [{lat: 59.316707260139665, lng: 18.054762735582162}]
-                    
-                    var markers = locations.map(function(location, i) {
-                        return new google.maps.Marker({
-                            position: location,
-                            label: labels[i % labels.length]
-                        });
-                    });
-                    var markerCluster = new MarkerClusterer(map, markers, { imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m' });
-                }
-            </script>
-            <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
-            <script async
-        
-            src="https://maps.googleapis.com/maps/api/js?key={{GOOGLEKEY}}&callback=initMap">
-            
-            
-            </script>
-            <!-- End of section -->
         </div>
     </div>
 </div>
 
+<!-- Includes script tags for google maps and mail chimp -->
+{% include "home/home_js.html" %}
 
 {% endblock %}

@@ -2,7 +2,6 @@
 /* Code is taken from https://www.w3schools.com/howto/howto_css_hero_image.asp*/
 .hero-image {
 
-    
     height: 40vh;
     background-color: white;
     background-image: url('/media/sanitas_exercise_min.jpg');
@@ -10,10 +9,9 @@
     position: relative;
     background-size: cover;
     background-position: center;
-    /* display: flex;
-    align-items: center;
-    justify-content: center; */
+
 }
+/* End of borrowed section */
 
 .hero-text {
     height: auto;
@@ -26,13 +24,9 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    /* display: flex;
-    align-items: center;
-    justify-content: center; */
     background-color: rgba(236, 237, 244, 0.7);
     border-radius: 15px;
     box-shadow: 0 0 5px 20px rgba(236, 237, 244, 0.7);
-    
     
     /* Animation for hero text*/
     animation-name: show-hero-text;
@@ -57,11 +51,8 @@
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        
-
     }
 }
-
 
 /* Css for find us section*/
 
@@ -95,7 +86,6 @@
     font-size: 17px !important;
     color: black !important;
 }
-
 
 /* Google map css*/
 #map {min-height: 360px;}

@@ -1,17 +1,15 @@
+<!-- Main structure and variable names taken from  boutique ado projecy
+https://github.com/Code-Institute-Solutions/boutique_ado_v1/blob/
+250e2c2b8e43cccb56b4721cd8a8bd4de6686546/checkout/templates/checkout/checkout.html
+-->
 {% extends "base.html" %}
 {% load static %}
 {% load bag_tools %}
-
-
-
-
 {% block content %}
 
 {% block extra_css %}
     <link rel="stylesheet" href="{% static 'checkout/css/checkout.css' %}">
 {% endblock %}
-
-
 
 <div class="overlay">
     <div class="container">
@@ -29,102 +27,67 @@
                     <th scope="col">Total</th>
                 </tr>
             </thead>
-        {% for item in bag_items %}
-            {% if item.item_id|length < 3 %}
-                <div class="row">
-                    <div class="col-12">
-                        <tr>
-                            <td class="p-3">
-                                <p>{{ item.product.friendly_name}}</p>
-                            </td>
-                            <td class="p-3">
-                                <p>{{ item.quantity }}</p>
-                            </td>
-                            <td class="p-3">
-                                <p>{{ item.product.price}}</p>
-                            </td>
-                            <td class="p-3">
-                                <p>${{ item.product.price | calc_subtotal:item.quantity }}</p>
-                            </td>
-                        </tr>
-                        <hr class="my-0">
+            {% for item in bag_items %}
+
+            <tr>
+                <td class="p-3">
+                    {{ item.product.friendly_name}}
+                </td>
+                <td class="p-3">
+                    {{ item.quantity }}
+                </td>
+                <td class="p-3">
+                    {{ item.product.price}}
+                </td>
+                <td class="p-3">
+                    ${{ item.product.price | calc_subtotal:item.quantity }}
+                </td>
+            </tr>
                         
-                    </div>
-                </div>
-            {% else %}
-                <div class="row">
-                    <div class="col-12">
-                        <tr>
-                            <td class="p-3">
-                                <p>{{item.product.metadata.name}}</p>
-                            </td>
-                            <td class="p-3">
-                                <p>{{ item.quantity }}</p>
-                            </td>
-                            <td class="p-3">
-                                <p>${{ item.product.amount}}</p>
-                            </td>
-                            <td class="p-3">
-                                <p>${{ item.product.amount | calc_subtotal:item.quantity }}</p>
-                            </td>
-                        </tr>
-                        <hr class="my-0">
-            {% endif %}
-                        {% endfor %}
-                    </div>
-                </div>
+            {% endfor %}
         </table>
-        
-            
-            <div class="row">
-                <div class="col-12 col-lg-6">
-                    <p>Please fill out form below</p>
-                
-                    <form class="d-grid" action="{% url 'checkout' %}" method="POST" id="payment-form">
-                        {% csrf_token%}
-                        {{ order_form }}
-                        <hr>
-                        <div class="d-flex">
-                        <span><p class="mx-3">Save my info to my members page</p></span>
-                        <span><input class="form-check-input" type="checkbox" id="id-save-info" name="save-info" checked aria-label="save info to profile"></span>
-                        
-                        
-                        </div>
-                        <hr>
-                        <p>Enter card information below</p>
-                        <!-- A Stripe card element will go here -->
-                        <div class="mb-3 border-3" id="card-element"></div>
-
-                        <!-- Used to display form errors -->
-                        <div class="mb-3 text-danger" id="card-errors" role="alert"></div>
-                        <div class="submit-button text-right mt-5 mb-2">                    
-                            <a href="{% url 'view_bag' %}" class="btn btn-warning ">
-                                <span class="font-weight-bold" aria-label="opens shopping bag page" rel="noopener">BACK TO SHOPPING BAG</span>
-                            </a>
-                            <button id="submit-button" class="btn btn-success">
-                                <span class="font-weight-bold" aria-label="Submits order">SUBMIT ORDER</span>
-                                <span class="icon">
-                                    <i class="fas fa-lock"></i>
-                                </span>
-                            </button>
-                            <p class="text-danger my-0">
-                                <span>Your card will be charged <strong>${{ total|floatformat:2 }}</strong></span>
-                            </p>
-                        </div>
-                        <div>
-                            <a class="navlink" href="{% url 'home' %}" aria-label="opens home page" rel="noopener">Back to home page</a>
-                        </div>
-                    </form>
+        <hr class="my-0">
+        <div class="row">
+            <div class="col-12 col-lg-6">
+                <p>Please fill out form below</p>
+                <form class="d-grid" action="{% url 'checkout' %}" method="POST" id="payment-form">
+                    {% csrf_token%}
+                    {{ order_form }}
+                    <hr>
+                    <div class="d-flex">
+                    <p class="mx-3">Save my info to my members page</p>
+                    <input class="form-check-input" type="checkbox" id="id-save-info" name="save-info" checked aria-label="save info to profile">
                     
-            </div>
-            
-        
-            
-        
-    </div>
-    
-</div>
+                    </div>
+                    <hr>
+                    <p>Enter card information below</p>
+                    <!-- A Stripe card element will go here -->
+                    <div class="mb-3 border-3" id="card-element"></div>
 
+                    <!-- Used to display form errors -->
+                    <div class="mb-3 text-danger" id="card-errors" role="alert"></div>
+                    <div class="submit-button text-right mt-5 mb-2">                    
+                        <a href="{% url 'view_bag' %}" class="btn btn-warning" aria-label="opens shopping bag page" rel="noopener ">
+                            <span class="font-weight-bold" >BACK TO SHOPPING BAG</span>
+                        </a>
+                        <button id="submit-button" class="btn btn-success">
+                            <span class="font-weight-bold">SUBMIT ORDER</span>
+                            <span class="icon">
+                                <i class="fas fa-lock"></i>
+                            </span>
+                        </button>
+                        <p class="text-danger my-0">
+                            <span>Your card will be charged <strong>${{ total|floatformat:2 }}</strong></span>
+                        </p>
+                    </div>
+                    <div>
+                        <a class="navlink" href="{% url 'home' %}" aria-label="opens home page" rel="noopener">Back to home page</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
 {% block postloadjs %}
     {{ block.super }}

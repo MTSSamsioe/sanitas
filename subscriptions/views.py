@@ -2,7 +2,6 @@ from django.conf import settings
 from django.shortcuts import render, redirect, get_object_or_404
 import stripe
 
-
 import json
 from django.contrib.auth.models import User
 from django.http import JsonResponse, HttpResponse
@@ -13,78 +12,85 @@ from subscriptions.models import StripeCustomer
 from django.contrib import messages
 
 
-#from subscriptions.webhook_handler import StripeWH_Handler
-
 import os
 
 if os.path.exists("env.py"):
-  import env 
+    import env
 
-# Some variable names is taken from https://testdriven.io/blog/django-stripe-subscriptions/
+''' Some variable names and logic is taken
+from https://testdriven.io/blog/django-stripe-subscriptions/ '''
+
 
 def stripe_subscriptions(request):
     """ A view to show all stripe gym subscriptions"""
-    #plans = Plan.objects.all()
-    
+
     stripe.api_key = settings.STRIPE_SECRET_KEY
     stripe_product_info = settings.STRIPE_PRODUCT_INFO
     products_stripe = stripe.Product.retrieve(stripe_product_info)
     try:
         # Retrieve the subscription & product
         stripe_customer = StripeCustomer.objects.get(user=request.user)
-        subscription = stripe.Subscription.retrieve(stripe_customer.stripeSubscriptionId)
-        # product = stripe.Product.retrieve(subscription.plan.product)
-        
+        subscription = (stripe.Subscription
+                        .retrieve(stripe_customer.stripeSubscriptionId))
+
         context = {
             'products_stripe': products_stripe,
             'subscription': subscription,
-            # 'product': product,
-            
-        } 
-        return render(request, 'subscriptions/stripe_subscriptions.html', context)
+        }
+        return render(request,
+                      'subscriptions/stripe_subscriptions.html', context)
 
-    except:
-        context = {'products_stripe': products_stripe,}
-        #messages.error(request, 'There are no availeble subscriptions')
-        
+    except products_stripe.DoesNotExist:
 
-    return render(request, 'subscriptions/stripe_subscriptions.html', context)
+        messages.error(request, 'Could not fetch subsciption information')
+
+    return render(request, 'subscriptions/stripe_subscriptions.html')
 
 
+''' Some variable names and logic is taken
+from https://testdriven.io/blog/django-stripe-subscriptions/ '''
 
-# Some variable names and structure are taken from https://testdriven.io/blog/django-stripe-subscriptions/
+
 @csrf_exempt
 def cancel_sub(request):
     if request.user.is_authenticated:
         stripe.api_key = settings.STRIPE_SECRET_KEY
-        
+
         try:
             # Cancel subscription on stripe
-            subscription = StripeCustomer.objects.values_list('stripeSubscriptionId')[0][0]
+            subscription = (StripeCustomer
+                            .objects.values_list('stripeSubscriptionId')[0][0])
             stripe.Subscription.delete(subscription,)
             messages.success(request, 'Your subscription is canceled')
-        except:
-
-            messages.error(request, 'Unable to cancel subscription, please try again')
+        except StripeCustomer.DoesNotExist():
+            messages.error(request, 'Unable to cancel \
+                           subscription, Subscription id was not in database')
             return redirect('/subscriptions/')
         try:
             # Delete subscription info from databases
-            user = request.user    
+            user = request.user
             subscription_django = StripeCustomer.objects.filter(user=user)
             subscription_django.delete()
-            messages.success(request, 'Your subscription is deleted from database')
-            
+            messages.success(request, 'Your subscription \
+                             is deleted from database')
 
-        except:
-            messages.error(request, 'Unable to cancel subscription from database, please try again')
-            
+        except StripeCustomer.DoesNotExist():
+            messages.error(request, 'Unable to delete subscription \
+                           from database, Could not find customer')
+
             return redirect('/')
         return redirect('/')
-   
+
     else:
         return redirect('/accounts/login/')
 
-# Function below is taken from https://testdriven.io/blog/django-stripe-subscriptions/
+
+'''
+Function below is taken
+from https://testdriven.io/blog/django-stripe-subscriptions/
+'''
+
+
 @csrf_exempt
 def stripe_config(request):
     if request.method == 'GET':
@@ -92,25 +98,34 @@ def stripe_config(request):
         print(JsonResponse(stripe_config, safe=False))
         return JsonResponse(stripe_config, safe=False)
 
-# Function below is tsaken from https://testdriven.io/blog/django-stripe-subscriptions/
+
+'''
+Function below is taken
+from https://testdriven.io/blog/django-stripe-subscriptions/
+'''
+
+
 @csrf_exempt
 @login_required
 def create_checkout_session(request):
     if not StripeCustomer.objects.filter(user=request.user).exists():
-        
 
         if request.method == 'GET':
             if os.environ.get('DEVELOPMENT'):
-                domain_url = 'https://8000-mtssamsioe-sanitas-4vmeom2cqnk.ws-eu92.gitpod.io/subscriptions/'
+                domain_url = 'https://8000-mtssamsioe-sanitas\
+                    -4vmeom2cqnk.ws-eu92.gitpod.io/subscriptions/'
             else:
                 domain_url = 'https://sanitas-gym.herokuapp.com/subscriptions/'
-            #domain_url = 'https://8000-mtssamsioe-sanitas-4vmeom2cqnk.ws-eu92.gitpod.io/subscriptions/'
+
             stripe.api_key = settings.STRIPE_SECRET_KEY
-            
+
             try:
                 checkout_session = stripe.checkout.Session.create(
-                    client_reference_id=request.user.id if request.user.is_authenticated else None,
-                    success_url=domain_url + 'success?session_id={CHECKOUT_SESSION_ID}',
+                    client_reference_id=(request.user.id if
+                                         request.user.is_authenticated
+                                         else None),
+                    success_url=domain_url + 'success?session_id=\
+                        {CHECKOUT_SESSION_ID}',
                     cancel_url=domain_url + 'cancel/',
                     payment_method_types=['card'],
                     mode='subscription',
@@ -121,7 +136,7 @@ def create_checkout_session(request):
                         }
                     ]
                 )
-                
+
                 return JsonResponse({'sessionId': checkout_session['id']})
             except Exception as e:
                 return JsonResponse({'error': str(e)})
@@ -129,38 +144,49 @@ def create_checkout_session(request):
         messages.error(request, 'Your already have an active subscription')
         return redirect('/subscriptions/')
 
-# Function below is taken from https://testdriven.io/blog/django-stripe-subscriptions/
+
+'''
+Function below is taken
+from https://testdriven.io/blog/django-stripe-subscriptions/
+'''
+
+
 @login_required
 def success(request):
     messages.success(request, 'Your subscription was created successfully')
     return render(request, 'subscriptions/success.html')
 
-# Function below is taken from https://testdriven.io/blog/django-stripe-subscriptions/
+
+'''
+Function below is taken
+from https://testdriven.io/blog/django-stripe-subscriptions/
+'''
+
+
 @login_required
 def cancel(request):
     messages.success(request, 'Your subscription was aborted')
     return render(request, 'subscriptions/cancel.html')
 
-# Function below is taken from https://testdriven.io/blog/django-stripe-subscriptions/
+
+'''
+Function below is taken
+from https://testdriven.io/blog/django-stripe-subscriptions/
+'''
+
+
 @csrf_exempt
 def stripe_webhook(request):
-    
+
     stripe.api_key = settings.STRIPE_SECRET_KEY
     wh_secret = settings.STRIPE_WH_SECRET_SUB
-    
-    
-
     payload = request.body
-    
     sig_header = request.META['HTTP_STRIPE_SIGNATURE']
-    
     event = None
-
     try:
         event = stripe.Webhook.construct_event(
             payload, sig_header, wh_secret
         )
-        
     except ValueError as e:
         # Invalid payload
         print(e)
@@ -171,28 +197,23 @@ def stripe_webhook(request):
         return HttpResponse(status=400)
 
     # Handle the checkout.session.completed event
-    if event['type'] == 'checkout.session.completed': #payment_intent.succeeded
+    if event['type'] == 'checkout.session.completed':
         session = event['data']['object']
-        
-            # Fetch all the required data from session
+
+        # Fetch all the required data from session
         client_reference_id = session.get('client_reference_id')
-        
+
         stripe_customer_id = session.get('customer')
-        
+
         stripe_subscription_id = session.get('subscription')
-        
 
         # Get the user and create a new StripeCustomer
         user = User.objects.get(id=client_reference_id)
-        
+
         StripeCustomer.objects.create(
             user=user,
             stripeCustomerId=stripe_customer_id,
             stripeSubscriptionId=stripe_subscription_id,
         )
-        
-
-        
-        # print(user.username + ' just subscribed.')
 
     return HttpResponse(status=200)
