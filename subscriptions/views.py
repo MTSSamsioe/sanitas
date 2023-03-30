@@ -115,7 +115,7 @@ def create_checkout_session(request):
                                          request.user.is_authenticated
                                          else None),
                     success_url=domain_url + 'success?session_id=\
-                        {CHECKOUT_SESSION_ID}',
+{CHECKOUT_SESSION_ID}',
                     cancel_url=domain_url + 'cancel/',
                     payment_method_types=['card'],
                     mode='subscription',
