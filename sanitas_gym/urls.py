@@ -23,7 +23,8 @@ from django.contrib.staticfiles.storage import staticfiles_storage
 from django.views.generic.base import RedirectView
 
 urlpatterns = [
-    path('favicon.ico', RedirectView.as_view(url=staticfiles_storage.url('img/favicon_sanitas.png'))),
+    path('favicon.ico', RedirectView
+         .as_view(url=staticfiles_storage.url('img/favicon_sanitas.png'))),
     path('admin/', admin.site.urls),
     path('accounts/', include('allauth.urls')),
     path('', include('home.urls')),
