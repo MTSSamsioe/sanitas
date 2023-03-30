@@ -68,6 +68,11 @@ Welcome to Sanitas Gym's site, sanitas is the latin word for health which is our
 
     ![picture of moto](media/home_text_top.png)
 
+- External links
+    - Here are some useful external links with tips and tricks all customers
+    ![picture of moto](media/home_links.png)
+    
+
 - Find Us
 
     - Here you can find a google map section that shows our location aswell as our adress. This section is located on the ondex page and uses a jump link to scroll down automatically.
@@ -150,6 +155,7 @@ Welcome to Sanitas Gym's site, sanitas is the latin word for health which is our
 ### Page not found
 ---
 - A custom "page not found" page is shown if a page is not found. A short message and a link back to the index page is shown
+![picture of page not found](media/404_page_not_found.png)
 
 ### Login Reggister and logout
 ---
