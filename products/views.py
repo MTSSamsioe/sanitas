@@ -29,7 +29,7 @@ def pt_sessions(request):
         quantity = sum(i[0] for i in
                        Order_item.objects.filter(user=request.user)
                        .values_list('quantity'))
-        pt_sessions = Products.objects.filter(category=2)
+        pt_sessions = Products.objects.all()
         appointments = Appointments.objects.filter(user=request.user)
         available_appointments = quantity - scheduled_sessions
         change_time = timezone.now() + timedelta(minutes=60)

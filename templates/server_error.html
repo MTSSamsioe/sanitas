@@ -3,12 +3,12 @@
 
 {% block content %}
     
-<div class="error-container d-flex justify-content-center align-items-center h-50 my-5">
-    <div class="card my-5">
+<div class="error-container d-flex justify-content-center align-items-center h-50 py-5">
+    <div class="card py-5">
         <div class="card-header"></div>
         <div class="card-body">
             <h5 class="card-title">Whoops! Server error</h5>
-            <p class="card-text">Please press link below to get back to home page</p>
+            <p class="card-text">Please press the link below to get back to home page</p>
             <a href="{% url 'home' %}" aria-label="Opens home page" rel="noopener" class="btn btn-primary">Return to home page</a>
         </div>
     </div>
