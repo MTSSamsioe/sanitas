@@ -844,7 +844,7 @@ if 'USE_AWS' in os.environ:
 # Responsiveness
 ---
 
-- All pages are tested that they are responsive o all modern screens min width 520px 
+- All pages are tested that they are responsive o all modern screens min width 375px 
     - Home
     ![picture of home page mobile](media/home_mobile_top.png)
     ![picture of ](media/home_mobile_find_news.png)

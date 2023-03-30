@@ -17,11 +17,6 @@ body {
     color: black;
     font-size: 35px;
 }
-@media only screen and (max-width: 600px) {
-    .my-logo {
-      font-size: 30px;
-    }
-  }
 
 .my-membersbag {
     font-size: 25px;
@@ -29,12 +24,27 @@ body {
 }
 
 @media only screen and (max-width: 600px) {
+    .my-logo {
+      font-size: 30px;
+    }
     .my-membersbag {
+        font-size: 20px;
+      }
+}
+
+
+
+/* media screens under 500px */
+@media only screen and (max-width: 500px) {
+    .my-logo {
       font-size: 20px;
     }
-  }
+    .my-membersbag {
+        font-size: 10px;
+      }
+}
 
-
+/* Css for navbar */  
 .my-nav-top {
     background-color: rgba(42, 76, 246, 0.7);
     
