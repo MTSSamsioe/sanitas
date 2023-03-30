@@ -111,3 +111,17 @@ input::-webkit-inner-spin-button {
 input[type=number] {
   -moz-appearance: textfield;
 }
+
+/* Tables on Members page, shopping bag and checkout for small screens */
+
+@media only screen and (max-width: 550px) {
+    .my-table-head {
+      font-size: 15px !important;
+    }
+    .my-table-body {
+        font-size: 12px !important;
+      }
+    .my-small-padding {
+        padding: 5px !important;
+    }
+}

@@ -19,7 +19,7 @@ https://github.com/Code-Institute-Solutions/boutique_ado_v1/blob/
             <hr>
         </div>
         <table class="table table-sm">
-            <thead>
+            <thead class="my-table-head">
                 <tr>
                     <th scope="col">Product</th>
                     <th scope="col">Quantity</th>
@@ -28,22 +28,22 @@ https://github.com/Code-Institute-Solutions/boutique_ado_v1/blob/
                 </tr>
             </thead>
             {% for item in bag_items %}
-
-            <tr>
-                <td class="p-3">
-                    {{ item.product.friendly_name}}
-                </td>
-                <td class="p-3">
-                    {{ item.quantity }}
-                </td>
-                <td class="p-3">
-                    {{ item.product.price}}
-                </td>
-                <td class="p-3">
-                    ${{ item.product.price | calc_subtotal:item.quantity }}
-                </td>
-            </tr>
-                        
+            <tbody class="my-table-body">
+                <tr>
+                    <td class="p-3">
+                        {{ item.product.friendly_name}}
+                    </td>
+                    <td class="p-3">
+                        {{ item.quantity }}
+                    </td>
+                    <td class="p-3">
+                        {{ item.product.price}}
+                    </td>
+                    <td class="p-3">
+                        ${{ item.product.price | calc_subtotal:item.quantity }}
+                    </td>
+                </tr>
+            </tbody>    
             {% endfor %}
         </table>
         <hr class="my-0">

@@ -31,40 +31,40 @@ https://github.com/Code-Institute-Solutions/boutique_ado_v1/blob/
         <h5 class="h5">Your order history:</h5>
         <hr>
         <div class="table-responsive">
-          <table class="table">
-            <thead>
-              <tr>
-                <th>Order number</th>
-                <th>Purchase date</th>
-                <th>Personal trainer session</th>
-                <th>Quantity</th>
-                <th>Order amount</th>
-              </tr>
-            </thead>
-            <tbody>
-              {% for order in orders %}
+            <table class="table">
+              <thead class="my-table-head">
                 <tr>
-                  <td>
-                    <p title="{{order.order_number}}">{{order.order_number|truncatechars:3}}</p>
-                  </td>
-                  <td>
-                    {{order.date}}
-                  </td>
-                  <td>
-                      {% for item in order.lineitems.all %}
-                        {{ item.product.friendly_name }}
-                      {% endfor %}
-                  </td>
-                  <td>
-                    {% for item in order.lineitems.all %}
-                        {{ item.quantity }}
-                    {% endfor  %}
-                  </td>
-                  <td>
-                    {{ order.total }}$
-                  </td>
+                  <th>Order number</th>
+                  <th>Purchase date</th>
+                  <th>Personal trainer session</th>
+                  <th>Quantity</th>
+                  <th>Order amount</th>
                 </tr>
-                {% endfor %}
+              </thead>
+              <tbody class="my-table-body">
+                {% for order in orders %}
+                  <tr>
+                    <td>
+                      <p title="{{order.order_number}}">{{order.order_number|truncatechars:3}}</p>
+                    </td>
+                    <td>
+                      {{order.date}}
+                    </td>
+                    <td>
+                        {% for item in order.lineitems.all %}
+                          {{ item.product.friendly_name }}
+                        {% endfor %}
+                    </td>
+                    <td>
+                      {% for item in order.lineitems.all %}
+                          {{ item.quantity }}
+                      {% endfor  %}
+                    </td>
+                    <td>
+                      {{ order.total }}$
+                    </td>
+                  </tr>
+                  {% endfor %}
               </tbody>
             </table>
             {% if not orders %}

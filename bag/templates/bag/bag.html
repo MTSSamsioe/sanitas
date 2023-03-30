@@ -23,7 +23,7 @@ https://github.com/Code-Institute-Solutions/boutique_ado_v1/blob/
                     {% if bag_items %}
                     <div class="table-responsive">
                         <table class="table table-sm">
-                            <thead>
+                            <thead class="my-table-head">
                                 <tr>
                                     <th scope="col">Product</th>
                                     <th scope="col">Quantity</th>
@@ -34,13 +34,13 @@ https://github.com/Code-Institute-Solutions/boutique_ado_v1/blob/
 
                             {% for item in bag_items %}
                             <!-- If it is a regular product in the bag -->
-
-                            <tr>
+                            
+                            <tr class="my-table-body ">
                                 <td class="p-3">
                                     <p>{{ item.product.friendly_name}}</p>
 
                                 </td>
-                                <td class="p-3">
+                                <td class="p-3 my-small-padding">
                                     <form class="form update-form" method="POST"
                                         action="{% url 'adjust_bag' item.item_id %}">
                                         {%csrf_token%}
@@ -83,10 +83,10 @@ https://github.com/Code-Institute-Solutions/boutique_ado_v1/blob/
                                         id="remove_{{ item.item_id }}" aria-label="delete item from bag">Delete from
                                         bag</a>
                                 </td>
-                                <td class="p-3">
+                                <td class="p-3 my-small-padding">
                                     <p>{{ item.product.price}}</p>
                                 </td>
-                                <td class="p-3">
+                                <td class="p-3 my-small-padding">
                                     <p>${{ item.product.price | calc_subtotal:item.quantity }}</p>
                                 </td>
                             </tr>
