@@ -142,7 +142,7 @@ else:
     }
 
 # DATABASES = {
-#      'default': dj_database_url.parse(' Postgres here')
+#      'default': dj_database_url.parse('postgres database url')
 #  }
 
 # Password validation
@@ -151,19 +151,19 @@ else:
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation\
-            .UserAttributeSimilarityValidator',
+.UserAttributeSimilarityValidator',
     },
     {
         'NAME': 'django.contrib.auth.password_validation\
-            .MinimumLengthValidator',
+.MinimumLengthValidator',
     },
     {
         'NAME': 'django.contrib.auth.password_validation\
-            .CommonPasswordValidator',
+.CommonPasswordValidator',
     },
     {
         'NAME': 'django.contrib.auth.password_validation\
-            .NumericPasswordValidator',
+.NumericPasswordValidator',
     },
 ]
 
