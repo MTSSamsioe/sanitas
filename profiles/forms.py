@@ -16,6 +16,7 @@ class ProfileForm(forms.ModelForm):
                 'preset_post_code': 'Post code',
                 'preset_city': 'City',
         }
+    # Method below is taken from boutique ado walk through project
 
     def __init__(self, *args, **kwargs):
         """

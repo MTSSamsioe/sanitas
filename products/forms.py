@@ -30,10 +30,6 @@ class AppointmentsForm(forms.ModelForm):
 
         self.user = kwargs.pop('user', None)
         super().__init__(*args, **kwargs)
-        # if user:
-        # if Appointment_amount > purchased_hours:
-        # raise ValidationError('testing')
-        # print('Slut på init')
 
     def clean_date_time(self, *args, **kwargs):
         date_time = self.cleaned_data.get('date_time')
