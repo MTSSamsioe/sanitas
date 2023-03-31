@@ -1,7 +1,7 @@
 # Sanitas Gym
 ---
-Welcome to Sanitas Gym's site, Sanitas is the latin word for health which is our main focus. We are a gym situated in the heart of one of stockholms islands Södermalm. On our site the you can choose a gym subscription of your choice with recurring payments. And even purchase and schedule personal trainer sessions of one hour each. Our subscriptions include all our facilities and classes. The purpose of this site is to bring dynamic e-commerce functionality to an otherwise static business location. To be abel to reach our customers and future customers with services and offers where evere they are is vital for a business today.
-We have made efforts in marketing such as paid ads and optimized our site for search engines to make it easy or new customers to find us. 
+Welcome to Sanitas Gym's site, Sanitas is the latin word for health which is our main focus. We are a gym situated in the heart of one of Stockholms islands Södermalm. On our site the you can choose or gym subscription with recurring payments. And even purchase and schedule personal trainer sessions of one hour each. Our subscriptions include all our facilities and classes. The purpose of this site is to bring dynamic e-commerce functionality to an otherwise static business location. To be abel to reach our customers and future customers with services and offers where evere they are is vital for any business today.
+We have made efforts in marketing such as paid ads, newslletters and optimized our site for search engines to make it easy or new customers to find us. 
 
 ---
 # Features
@@ -16,18 +16,18 @@ We have made efforts in marketing such as paid ads and optimized our site for se
     - Here you can see our Gym name and if you click it you will get back to our index page.
 
  - Shopping bag
-    - Here you can see a shopping bag symbol. If you press it you will be taken to our shoppingbag page (only if authenticated). Next to the bag icon you will see the total amount in the cart at the moment. This is makes it possible for you to see your total amount o all pages of the site and open it
+    - Here you can see a shopping bag symbol. If you press it you will be taken to our shoppingbag page (only if authenticated). Next to the bag icon you will see the total amount in the cart at the moment. This is makes it possible for you to see your total amount on all pages of the site and open it
 
  - Members page
     - Here you can see your current delivery information if you have done a previous purchase. Otherwise you can fill in your information and press update. You can also see your previous orders here
 
  - Navigation 
-    All active links in the navbar is underlined so you know which page you are currently on. The colors have been tested for visability with contrast and size
+    All active links in the navbar is underlined when active so you know which page you are currently on. The colors have been tested for visability with contrast and size
 
     - Our navigation consist of three main nav-links plus additional options for login and registration.
 
         - "Home" takes you back to our home page
-        - "Gym Subscriptions" takes you to our subscriptions page where you can choose a subscription of your choice.
+        - "Gym Subscription" takes you to our subscriptions page where you can choose a subscription of your choice.
         - "Personal trainer" takes you to our personal trainer session page. Here you can purchase and schedule sessions with one of our trainers.
     - Login logout and registration
         - If you are logged in you will see a link "Logout" otherwise you will see two links "Register and "Login" This will clearly show you if you are logged in or not. Otherwise the different site pages are going to tell you when you need to be logged in
@@ -55,7 +55,7 @@ We have made efforts in marketing such as paid ads and optimized our site for se
     - Here is the content from our different pages loaded. The navbar and footer are shown on all pages
 
 - Footer
-    - Here you ca find a link to our facebook page. The page opens in a new tab
+    - Here you ca find a link to our facebook page. The page opens in a new tab with a noopener atribute
 
 ![picture of footer](media/footer_sanitas_gym.png)
 
@@ -77,13 +77,11 @@ We have made efforts in marketing such as paid ads and optimized our site for se
 
 - Find Us
 
-    - Here you can find a google map section that shows our location aswell as our adress. This section is located on the ondex page and uses a jump link to scroll down automatically.
-
+    - Here you can find a google map section that shows our location aswell as our adress.
     ![picture of Find us section](media/find_us_gym.png)
  
 - Newsletter sign up
     - Here you can leave a your email adress to get our newsletter
-
     ![picture of newsletter signup](media/home_newsletter.png)
 
 
@@ -141,10 +139,10 @@ We have made efforts in marketing such as paid ads and optimized our site for se
     - "Back to shooping bag" button takes you back to the shopping bag page
     - "Submit order" button tries to submit the order to stripe and creates an order instance in the database
      - Validators
-        - If the bag is empty an error message is shown
         - If an card error occurs a message will be shown
     - Under the "Submit order" button a text will show how much your card will be chaged
     - In the bottom of the page you will find a link to get back to the home page
+- If you try to enter the checkou with an empty bag you will get redirected to the home page and an error will be shown
 
 ![picture of checkout page](media/checkout.png)
 
@@ -209,7 +207,7 @@ We have made efforts in marketing such as paid ads and optimized our site for se
 
 - Ability to choose a specific personal trainer for your session
 
-- Add limitations ffor when in the day you can schedule a training session
+- Add limitations for when in the day you can schedule a training session
 
 - Add more tiers on the subscriptions page to cater to all customers specific needs
 
@@ -222,6 +220,8 @@ We have made efforts in marketing such as paid ads and optimized our site for se
 - Past sessions will disapear from the list of sessions
 
 - Add sorting of training sessions
+
+- Have subscriptions checkout in the same checkout as one time purchases
 
 # Testing
 ---
@@ -272,7 +272,7 @@ We have made efforts in marketing such as paid ads and optimized our site for se
 
 - Schedule session with personal trainer
     - Form works to submit and a session is saved to the database
-    - If you have purchased a sesssion with a personal trainer you can see the available sessions. You can also see how many sessions you have purchased
+    - If you have purchased a sesssion with a personal trainer you can see the available sessions. You can also see how many sessions you have scheduled
     - Form validation
         - If you try to schedule a sessions with 0 available sessions you will get a form validation error
         - You try to schedule a session before current time plus one hour you will get a form validation error
@@ -395,7 +395,7 @@ We have made efforts in marketing such as paid ads and optimized our site for se
     - style.css
     - subscriptions.css
     
-- Python using https://pep8ci.herokuapp.com/ All paes passed without errors
+- Python using https://pep8ci.herokuapp.com/ All pages passed without errors
     - bag app
         - admin.py
         - contexts.py
@@ -453,6 +453,9 @@ We have made efforts in marketing such as paid ads and optimized our site for se
 ---
 
 - Affter installing stripe the confirm email function on all auth stopped working. The link for the confirm email page was not apperaring in the console. So email verification was turned of in settings.py
+
+- It is not really a bug but I sometimes had problems with the url for the local enviroment changing. This results in the stripe webhooks stop working. So when you subscribe to gym subscription it applies on stripe but it is not added to the local database until it receives an ok from stripe via webhook. To cancel the subscription on stripe it needs the subscription information from the local database. the only way to fix it is to cancel the subscription manually on stripe and then resubscribe.
+I have only encountered this issue in the local enviroment and I think It is because of the webhook url.
 
 ### Fixed bugs
 ---
@@ -669,6 +672,7 @@ if 'USE_AWS' in os.environ:
 
 ### Borrowed code
 ---
+- Links to the respective boutique ado repositories can be found in the files
 
 #### Bag app
 
@@ -890,3 +894,20 @@ External links are opened in new tab on the browser with a noopener attribute. I
     ![picture of mockup checkout page ](media/mockup_checkout.png)
     - Profile
     ![picture of mockup profile page ](media/mockup_profile.png)
+
+# User stories and progress
+---
+- All user stories have been devided in to epics and milestones with a backlog to start from
+- The progress can be followed via the git hub repository and via the project canban board
+- I originally had two additional user stories about real confirmation emails but concluded that they have to be completed in a later version and was deleted with consultation with my mentor
+
+# Security
+---
+- All secrets have been stored in the enviroment. Secrets that have ended up in version coontrole has been changed such as google maps key
+- Stripe product information has been sent to version controle but stripe is now in test-mode and before live mode product id will be changed
+
+# Final words
+---
+
+It hase been an interesting project. The most difficult part was subscriptions. I initially followed different tutorials and tried to incoroporate the subscriptions in my own checkout. This ended up with me breaking the functionality of several things, spending weeks trying to make it work and some unnecessary packages and database models where added via packages for example the package dj-stripe which is used to sync products from stripe to your local database. I ended up reseting my database and migrations to get rid of the package dependencies and database models. The best solution for now was to have the checkout for subscriptions hosted on stripe instead.
+In the end I think it turned out fine and I look foward to keep working with it
