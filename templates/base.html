@@ -67,7 +67,7 @@
           <div class="collapse navbar-collapse px-1 w-100" id="navbarNavAltMarkup">
             <div class="navbar-nav my-nav-text w-100 d-flex ">
               <a class="nav-link active {% if request.resolver_match.url_name == 'home' %}active text-decoration-underline{% endif %}" aria-current="page" href="{% url 'home' %}"><strong>Home</strong></a>
-              <a class="nav-link {% if request.resolver_match.url_name == 'stripe_subscriptions' %}active text-decoration-underline{% endif %}" href="{% url 'stripe_subscriptions' %}" aria-label="Opens subscriptions page" rel="noopener">Gym subscriptions</a>
+              <a class="nav-link {% if request.resolver_match.url_name == 'stripe_subscriptions' %}active text-decoration-underline{% endif %}" href="{% url 'stripe_subscriptions' %}" aria-label="Opens subscriptions page" rel="noopener">Gym subscription</a>
               <a class="nav-link {% if request.resolver_match.url_name == 'pt_sessions' %}active text-decoration-underline{% endif %}" href="{% url 'pt_sessions' %}" aria-label="Opens personal trainer page" rel="noopener">Personal trainer</a>
 
               {% if user.is_authenticated %}

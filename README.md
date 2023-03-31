@@ -1,6 +1,7 @@
 # Sanitas Gym
 ---
-Welcome to Sanitas Gym's site, sanitas is the latin word for health which is our main focus. We are a gym situated in the heart of one of stockholms islands Södermalm. On our site the you can choose a gym subscription of your choice with recurring payments. And even purchase and schedule personal trainer sessions of 1 hour each. Our subscriptions include all our facilities and classes.
+Welcome to Sanitas Gym's site, Sanitas is the latin word for health which is our main focus. We are a gym situated in the heart of one of stockholms islands Södermalm. On our site the you can choose a gym subscription of your choice with recurring payments. And even purchase and schedule personal trainer sessions of one hour each. Our subscriptions include all our facilities and classes. The purpose of this site is to bring dynamic e-commerce functionality to an otherwise static business location. To be abel to reach our customers and future customers with services and offers where evere they are is vital for a business today.
+We have made efforts in marketing such as paid ads and optimized our site for search engines to make it easy or new customers to find us. 
 
 ---
 # Features
@@ -29,7 +30,8 @@ Welcome to Sanitas Gym's site, sanitas is the latin word for health which is our
         - "Gym Subscriptions" takes you to our subscriptions page where you can choose a subscription of your choice.
         - "Personal trainer" takes you to our personal trainer session page. Here you can purchase and schedule sessions with one of our trainers.
     - Login logout and registration
-        - If you are logged in you will see a link "Logout" otherwise you will see two links "Register and "Login"
+        - If you are logged in you will see a link "Logout" otherwise you will see two links "Register and "Login" This will clearly show you if you are logged in or not. Otherwise the different site pages are going to tell you when you need to be logged in
+    - If you click a link where you need to be logged in you will get redirected to the log in page or shown a link that will take you to the login page. This is to promote a good user flow
 
 ![picture of navbar](media/nav_sanitas_gym.png)
 
@@ -850,7 +852,7 @@ if 'USE_AWS' in os.environ:
 # Responsiveness
 ---
 
-- All pages are tested that they are responsive o all modern screens min width 375px 
+- All pages are tested that they are responsive on all modern screens min width 320px 
     - Home
     ![picture of home page mobile](media/home_mobile_top.png)
     ![picture of ](media/home_mobile_find_news.png)
@@ -866,8 +868,13 @@ if 'USE_AWS' in os.environ:
     ![picture of profile page mobile](media/profile_mobile.png)
 
 
+# Design
+---
+- The design for the site is kept simple with the navbar always showing. The navigation links is turned in to a button on smaller screens.
+The navigation links is underlined so you as a user know where on the site you are. We have picked a blue color palette for the site which represent trust, stability and calmness. Buttons are colored clearly in a geen color to proceed with an action and red to cancel, or reverse an action. We have choosen a black color for all fonts to give sufficient contrast to the background making it easy to read.
+External links are opened in new tab on the browser with a noopener attribute. In the footer we choose to only have our facebookpage link to encourage you to visit out community because it is a vital part of our marketing. Below you can find images of our design mockups.  
 
-# Mockups
+## Mockups
 ---
 
 - This is mockups created on balsamic.com
@@ -876,7 +883,7 @@ if 'USE_AWS' in os.environ:
     - Subscriptions page
     ![picture of mockups subscription page ](media/mockup_sub.png)
     - Personal trainer page
-    ![picture of mockups personall trainer page ](media/mockup_pt.png)
+    ![picture of mockups personal trainer page ](media/mockup_pt.png)
     - Shopping bag page
     ![picture of mockup shopping page ](media/mockup_bag.png)
     - Chechout page

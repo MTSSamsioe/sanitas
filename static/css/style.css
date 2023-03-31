@@ -23,6 +23,7 @@ body {
     color: black;
 }
 
+/* media screens under 600px */
 @media only screen and (max-width: 600px) {
     .my-logo {
       font-size: 30px;
@@ -38,6 +39,16 @@ body {
 @media only screen and (max-width: 500px) {
     .my-logo {
       font-size: 20px;
+    }
+    .my-membersbag {
+        font-size: 12px;
+      }
+}
+
+/* media screens under 350px */
+@media only screen and (max-width: 350px) {
+    .my-logo {
+      font-size: 15px;
     }
     .my-membersbag {
         font-size: 10px;
@@ -112,7 +123,7 @@ input[type=number] {
   -moz-appearance: textfield;
 }
 
-/* Tables on Members page, shopping bag and checkout for small screens */
+/* Tables on Members page, shopping bag and checkout for small screens below 550px */
 
 @media only screen and (max-width: 550px) {
     .my-table-head {
@@ -122,6 +133,22 @@ input[type=number] {
         font-size: 12px !important;
       }
     .my-small-padding {
-        padding: 5px !important;
+        padding: 3px !important;
+    }
+}
+/* Tables on Members page, shopping bag and checkout for small screens below 350px */
+
+@media only screen and (max-width: 350px) {
+    .my-table-head {
+      font-size: 12px !important;
+    }
+    .my-table-body {
+        font-size: 9px !important;
+      }
+    .my-small-padding {
+        padding: 1px !important;
+    }
+    .my-checkout-buttons {
+        font-size: 12px !important;
     }
 }

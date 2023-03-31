@@ -35,19 +35,18 @@ https://github.com/Code-Institute-Solutions/boutique_ado_v1/blob/
                             {% for item in bag_items %}
                             <!-- If it is a regular product in the bag -->
                             
-                            <tr class="my-table-body ">
-                                <td class="p-3">
-                                    <p>{{ item.product.friendly_name}}</p>
-
+                            <tr>
+                                <td class="p-3 my-table-body my-small-padding">
+                                    <p >{{ item.product.friendly_name}}</p>
                                 </td>
-                                <td class="p-3 my-small-padding">
+                                <td class="p-3 my-table-body my-small-padding">
                                     <form class="form update-form" method="POST"
                                         action="{% url 'adjust_bag' item.item_id %}">
                                         {%csrf_token%}
                                         <div class="form-group ">
                                             <div class="input-group ">
                                                 <div class="input-group-prepend">
-                                                    <button type="button" class="decrement-qty btn btn-sm "
+                                                    <button type="button" class="decrement-qty btn btn-sm my-table-body"
                                                         data-item_id="{{item.item_id}}"
                                                         id="decrement-qty_{{ item.item_id }}"
                                                         aria-label="decrement button">
@@ -57,13 +56,13 @@ https://github.com/Code-Institute-Solutions/boutique_ado_v1/blob/
                                                     </button>
                                                 </div>
 
-                                                <input class="form-control form-control-sm qty_input text-center w-15' "
+                                                <input class="form-control form-control-sm qty_input text-center w-15 my-table-body "
                                                     type="number" name="quantity" value="{{ item.quantity }}" min="1"
                                                     max="99" data-item_id="{{ item.item_id }}"
                                                     id="id_qty_{{ item.item_id }}" aria-label="increment button">
 
                                                 <div class="input-group-append">
-                                                    <button type="button" class="increment-qty btn btn-sm"
+                                                    <button type="button" class="increment-qty btn btn-sm my-table-body"
                                                         data-item_id="{{ item.item_id }}"
                                                         id="increment-qty_{{ item.item_id }}"
                                                         aria-label="increment button">
@@ -83,10 +82,10 @@ https://github.com/Code-Institute-Solutions/boutique_ado_v1/blob/
                                         id="remove_{{ item.item_id }}" aria-label="delete item from bag">Delete from
                                         bag</a>
                                 </td>
-                                <td class="p-3 my-small-padding">
+                                <td class="p-3 my-table-body my-small-padding">
                                     <p>{{ item.product.price}}</p>
                                 </td>
-                                <td class="p-3 my-small-padding">
+                                <td class="p-3 my-table-body my-small-padding">
                                     <p>${{ item.product.price | calc_subtotal:item.quantity }}</p>
                                 </td>
                             </tr>
