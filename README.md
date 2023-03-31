@@ -72,16 +72,19 @@ We have made efforts in marketing such as paid ads, newslletters and optimized o
 
 - External links
     - Here are some useful external links with tips and tricks all customers
+    
     ![picture of moto](media/home_links.png)
     
 
 - Find Us
 
     - Here you can find a google map section that shows our location aswell as our adress.
+
     ![picture of Find us section](media/find_us_gym.png)
  
 - Newsletter sign up
     - Here you can leave a your email adress to get our newsletter
+
     ![picture of newsletter signup](media/home_newsletter.png)
 
 
@@ -223,6 +226,8 @@ We have made efforts in marketing such as paid ads, newslletters and optimized o
 
 - Have subscriptions checkout in the same checkout as one time purchases
 
+- A system to prevent descrepencies between active subscription between stripe and local database 
+
 # Testing
 ---
 
@@ -253,7 +258,7 @@ We have made efforts in marketing such as paid ads, newslletters and optimized o
 
 ### Gym subscriptions
 ---
-
+- A message will show if a subscription not can be found in the database. Either because you don´t have one or that you are not authenticated
 - If you do not have a subscription a button will show in the subscription card that says 'Subscribe' it will take you to a checkout page hosted by stripe. After successful chekout you will be taken back to a sucess page hosted on the santitas site. If you go back to the subscriptions page you will see a new red button that says 'Cancel subscription'
 
 ![picture of stripe hosted checkout](media/stripe_checkout.png) 
